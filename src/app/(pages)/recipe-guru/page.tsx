@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import {
   Card,
@@ -9,8 +11,9 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { useState } from 'react';
 
-const moods = ['Calming', 'Crunchy', 'Aromatic', 'Grounding'];
+const moods = ['All', 'Calming', 'Crunchy', 'Aromatic', 'Grounding'];
 
 const recipes = [
   { mood: 'Calming', title: 'Soothing Mung Dal Soup', rasa: 'Sweet, Salty', image: 'https://picsum.photos/400/300?random=1', dataAiHint: 'dal soup' },
@@ -22,6 +25,13 @@ const recipes = [
 ];
 
 export default function RecipeGuruPage() {
+  const [selectedMood, setSelectedMood] = useState('All');
+
+  const filteredRecipes = recipes.filter(recipe => {
+    if (selectedMood === 'All') return true;
+    return recipe.mood === selectedMood;
+  });
+
   return (
     <div className="space-y-8">
       <div>
@@ -34,13 +44,17 @@ export default function RecipeGuruPage() {
       </div>
       <div className="flex flex-wrap gap-2">
         {moods.map((mood) => (
-          <Button key={mood} variant="outline">
+          <Button
+            key={mood}
+            variant={selectedMood === mood ? 'default' : 'outline'}
+            onClick={() => setSelectedMood(mood)}
+          >
             {mood}
           </Button>
         ))}
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {recipes.map((recipe) => (
+        {filteredRecipes.map((recipe) => (
           <Card key={recipe.title} className="flex flex-col">
             <CardHeader className="p-0">
               <div className="relative aspect-video">
