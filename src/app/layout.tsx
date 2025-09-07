@@ -28,7 +28,7 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body className={cn('antialiased')}>
+      <body className={cn('antialiased dark')}>
         <AppLayout>{children}</AppLayout>
         <Toaster />
       </body>

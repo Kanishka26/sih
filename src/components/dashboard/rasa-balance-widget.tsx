@@ -46,7 +46,7 @@ export function RasaBalanceWidget() {
           Today's taste profile. Score: <span className="text-primary font-bold">78/100</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 flex flex-col items-center justify-center pb-4">
+      <CardContent className="flex-1 flex flex-col items-center justify-center pb-0">
         <ChartContainer
           config={chartConfig}
           className="mx-auto aspect-square w-full max-w-[250px]"
@@ -74,7 +74,7 @@ export function RasaBalanceWidget() {
           </PieChart>
         </ChartContainer>
       </CardContent>
-       <CardFooter className="flex-col gap-2 pt-0">
+       <CardFooter className="flex-col gap-2 pt-2">
           <Button asChild className="w-full mt-2" variant="outline">
              <Link href="/rasa-balance">View Detailed Balance</Link>
           </Button>

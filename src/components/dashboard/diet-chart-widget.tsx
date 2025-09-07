@@ -45,7 +45,7 @@ export function DietChartWidget() {
     {
       time: '4:00 PM',
       meal: 'Snack',
-      meal_hindi: 'शाम کا ناشتہ',
+      meal_hindi: 'शाम का नाश्ता',
       details: 'Green tea and a handful of almonds',
       details_hindi: 'ग्रीन टी और मुट्ठी भर बादाम',
       icon: <Apple className="h-5 w-5 text-primary" />,
