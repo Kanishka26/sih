@@ -39,17 +39,17 @@ const chartConfig = {
 
 export function RasaBalanceWidget() {
   return (
-    <Card className="bg-card text-card-foreground">
+    <Card className="h-full flex flex-col">
       <CardHeader>
         <CardTitle>RasaBalance (रस संतुलन)</CardTitle>
         <CardDescription>
           Today's taste profile. Score: <span className="text-primary font-bold">78/100</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex items-center justify-center pb-0">
+      <CardContent className="flex-1 flex flex-col items-center justify-center pb-4">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square h-[180px]"
+          className="mx-auto aspect-square w-full max-w-[250px]"
         >
           <PieChart>
             <ChartTooltip
@@ -67,14 +67,14 @@ export function RasaBalanceWidget() {
                 <Cell key={`cell-${index}`} fill={entry.color} />
               ))}
             </Pie>
-          </PieChart>
-        </ChartContainer>
-      </CardContent>
-       <CardFooter className="flex-col gap-2 pt-2">
             <ChartLegend
               content={<ChartLegendContent nameKey="name" />}
               className="-mt-4"
             />
+          </PieChart>
+        </ChartContainer>
+      </CardContent>
+       <CardFooter className="flex-col gap-2 pt-0">
           <Button asChild className="w-full mt-2" variant="outline">
              <Link href="/rasa-balance">View Detailed Balance</Link>
           </Button>
