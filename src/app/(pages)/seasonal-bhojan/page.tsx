@@ -189,7 +189,7 @@ export default function SeasonalBhojanPage() {
             <CardHeader>
                 <CardTitle>Seasonal Foods</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm max-w-none text-foreground dark:prose-invert">
+            <CardContent className="prose prose-sm max-w-none dark:prose-invert">
                  <div dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>
@@ -197,7 +197,7 @@ export default function SeasonalBhojanPage() {
             <CardHeader>
                 <CardTitle>Dietary Recommendations</CardTitle>
             </CardHeader>
-            <CardContent className="prose prose-sm max-w-none text-foreground dark:prose-invert">
+            <CardContent className="prose prose-sm max-w-none dark:prose-invert">
                  <div dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>

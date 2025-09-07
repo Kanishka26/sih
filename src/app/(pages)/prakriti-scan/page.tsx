@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Leaf } from 'lucide-react';
+import { Leaf, Flame, Wind } from 'lucide-react';
 
 const questions = [
   {
@@ -42,6 +42,21 @@ const questions = [
   },
 ];
 
+const prakritiInfo = {
+    Vata: {
+        icon: <Wind className="w-12 h-12 text-primary" />,
+        description: "Vata is characterized by the energy of movement. People with a dominant Vata dosha are often thin, energetic, and creative. They are known for their quick thinking but can also be prone to anxiety and dry skin."
+    },
+    Pitta: {
+        icon: <Flame className="w-12 h-12 text-primary" />,
+        description: "Pitta represents the energy of digestion and metabolism. Pitta-dominant individuals are often of medium build, with a sharp intellect and strong digestion. They can be ambitious and focused, but also prone to anger and inflammation."
+    },
+    Kapha: {
+        icon: <Leaf className="w-12 h-12 text-primary" />,
+        description: "Kapha is the energy of lubrication and structure. Those with a dominant Kapha dosha tend to have a sturdy build, calm temperament, and good stamina. They are caring and thoughtful but may struggle with weight gain and sluggishness."
+    }
+}
+
 export default function PrakritiScanPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [result, setResult] = useState<string | null>(null);
@@ -68,12 +83,13 @@ export default function PrakritiScanPage() {
   };
 
   if (result) {
+    const info = prakritiInfo[result as keyof typeof prakritiInfo];
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <Card className="w-full max-w-md text-center shadow-xl">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+        <Card className="w-full max-w-md shadow-xl bg-card text-card-foreground">
           <CardHeader>
             <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4">
-                <Leaf className="w-12 h-12 text-primary" />
+                {info.icon}
             </div>
             <CardTitle className="text-2xl">Your Prakriti is {result}!</CardTitle>
             <CardDescription>
@@ -82,8 +98,7 @@ export default function PrakritiScanPage() {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground">
-              Based on your answers, your primary dosha is {result}. We will now
-              personalize your diet and lifestyle suggestions.
+              {info.description}
             </p>
           </CardContent>
           <CardFooter className="flex-col gap-2">
@@ -91,7 +106,6 @@ export default function PrakritiScanPage() {
                 setResult(null);
                 setAnswers({});
             }}>Take the Test Again</Button>
-            <Button variant="ghost">Learn More About {result}</Button>
           </CardFooter>
         </Card>
       </div>
@@ -99,20 +113,20 @@ export default function PrakritiScanPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
-      <Card>
-        <CardHeader>
-          <CardTitle className="text-3xl font-headline">
-            PrakritiScan (प्रकृति स्कैन)
-          </CardTitle>
-          <CardDescription>
+    <div className="max-w-4xl mx-auto space-y-8">
+       <div>
+        <h1 className="text-3xl font-headline font-bold">
+          PrakritiScan (प्रकृति स्कैन)
+        </h1>
+        <p className="text-muted-foreground">
             Answer these questions to discover your Ayurvedic body constitution
             (dosha).
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-8">
+        </p>
+      </div>
+      <Card>
+        <CardContent className="space-y-8 p-6">
           {questions.map((q, index) => (
-            <div key={index} className="space-y-4 p-4 border rounded-lg bg-card">
+            <div key={index} className="space-y-4 p-4 border rounded-lg bg-background">
               <h3 className="font-semibold text-lg">{`${
                 index + 1
               }. ${q.question}`}</h3>

@@ -21,7 +21,7 @@ export function AppHeader() {
       <div className="flex-1" />
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" size="icon">
+          <Button variant="ghost" size="icon">
             <Languages className="h-[1.2rem] w-[1.2rem]" />
             <span className="sr-only">Toggle language</span>
           </Button>
@@ -34,7 +34,7 @@ export function AppHeader() {
 
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary" size="icon" className="rounded-full">
+          <Button variant="ghost" size="icon" className="rounded-full">
             <UserCircle className="h-6 w-6" />
             <span className="sr-only">Toggle user menu</span>
           </Button>

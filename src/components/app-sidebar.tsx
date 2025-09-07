@@ -56,7 +56,7 @@ export function AppSidebar() {
                   className="justify-start"
                 >
                   <item.icon />
-                  <span className="font-medium">
+                  <span className="font-medium text-base">
                     {item.label}{' '}
                     {item.hindi && (
                       <span className="text-muted-foreground/80 text-xs">

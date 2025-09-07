@@ -29,7 +29,7 @@ export function PrakritiProfileWidget() {
   };
 
   return (
-    <Card>
+    <Card className="bg-card text-card-foreground">
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex items-center gap-4">
             <div className='p-3 bg-primary/10 rounded-full'>
@@ -40,7 +40,7 @@ export function PrakritiProfileWidget() {
                 <CardDescription>Your dominant dosha is Pitta.</CardDescription>
             </div>
         </div>
-        <Badge variant="default" className="text-lg">Pitta</Badge>
+        <Badge variant="secondary" className="text-lg bg-primary/20 text-primary">{prakriti}</Badge>
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">

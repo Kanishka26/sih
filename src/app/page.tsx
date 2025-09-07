@@ -6,15 +6,23 @@ import { SeasonalSuggestionsWidget } from '@/components/dashboard/seasonal-sugge
 
 export default function DashboardPage() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      <div className="lg:col-span-2 space-y-6">
-        <PrakritiProfileWidget />
-        <DietChartWidget />
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+          <PrakritiProfileWidget />
+        </div>
+        <div className="space-y-6">
+          <RasaBalanceWidget />
+        </div>
       </div>
-      <div className="space-y-6">
-        <RasaBalanceWidget />
-        <SeasonalSuggestionsWidget />
-        <QuickLogWidget />
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2">
+           <DietChartWidget />
+        </div>
+        <div className="space-y-6">
+          <SeasonalSuggestionsWidget />
+          <QuickLogWidget />
+        </div>
       </div>
     </div>
   );

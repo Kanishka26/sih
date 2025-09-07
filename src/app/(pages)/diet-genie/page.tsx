@@ -195,7 +195,7 @@ export default function DietGeniePage() {
               prakriti.
             </CardDescription>
           </CardHeader>
-          <CardContent className="prose prose-sm max-w-none text-foreground dark:prose-invert prose-headings:font-headline">
+          <CardContent className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline">
             <div
               dangerouslySetInnerHTML={{ __html: result.dietChart.replace(/\n/g, '<br />') }}
             />

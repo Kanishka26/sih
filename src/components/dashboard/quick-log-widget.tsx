@@ -3,12 +3,13 @@ import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Input } from '../ui/input';
+import { Send } from 'lucide-react';
 
 export function QuickLogWidget() {
   return (
-    <Card>
+    <Card className="bg-card text-card-foreground">
       <CardHeader>
-        <CardTitle>Quick HealthLog (स्वास्थ्य लॉग)</CardTitle>
+        <CardTitle>Quick HealthLog</CardTitle>
         <CardDescription>Log your intake for today.</CardDescription>
       </CardHeader>
       <CardContent>
@@ -19,6 +20,7 @@ export function QuickLogWidget() {
               id="food-log"
               placeholder="What did you eat today?"
               rows={3}
+              className="bg-background"
             />
           </div>
           <div className="space-y-2">
@@ -28,9 +30,11 @@ export function QuickLogWidget() {
               type="number"
               placeholder="e.g., 2.5"
               step="0.1"
+              className="bg-background"
             />
           </div>
           <Button type="submit" className="w-full">
+            <Send className="mr-2"/>
             Log Habits
           </Button>
         </form>

@@ -13,7 +13,7 @@ const seasonalFoods = [
 
 export function SeasonalSuggestionsWidget() {
   return (
-    <Card>
+    <Card className="bg-card text-card-foreground">
       <CardHeader>
         <div className="flex items-center gap-2">
             <Sun className="w-6 h-6 text-primary"/>
@@ -24,20 +24,20 @@ export function SeasonalSuggestionsWidget() {
       <CardContent>
         <div className="relative w-full h-32 rounded-lg overflow-hidden mb-4">
           <Image
-            src="https://picsum.photos/600/400"
+            src="https://picsum.photos/600/400?random=10"
             alt="Summer fruits"
             data-ai-hint="summer fruits"
             fill
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
            <p className="absolute bottom-2 left-3 text-white font-bold text-lg">Summer Bounty</p>
         </div>
         <ul className="space-y-3 mb-4">
           {seasonalFoods.slice(0, 3).map((food) => (
             <li key={food.name} className="flex items-center gap-3">
-              <div className="bg-accent/20 p-2 rounded-full">
-                <Leaf className="w-4 h-4 text-accent" />
+              <div className="bg-primary/20 p-2 rounded-full">
+                <Leaf className="w-4 h-4 text-primary" />
               </div>
               <div>
                 <p className="font-semibold">{food.name}</p>
@@ -46,8 +46,8 @@ export function SeasonalSuggestionsWidget() {
             </li>
           ))}
         </ul>
-        <Button asChild className="w-full">
-          <Link href="/seasonal-bhojan">Explore Seasonal Foods</Link>
+        <Button asChild className="w-full" variant="outline">
+          <Link href="/seasonal-bhojan">Explore All Seasonal Foods</Link>
         </Button>
       </CardContent>
     </Card>
