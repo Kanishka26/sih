@@ -5,8 +5,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { AppLayout } from '@/components/app-layout';
 
 export const metadata: Metadata = {
-  title: 'Sentinix – Ayurveda Diet',
-  description: 'A modern, minimal, yet Ayurvedic-inspired web app dashboard.',
+  title: 'AhaarSetu - Your Ayurvedic Diet Companion',
+  description: 'A modern, beautiful, and feature-rich Ayurvedic diet planning web app.',
 };
 
 export default function RootLayout({
@@ -24,11 +24,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
         <link
-          href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Alegreya:ital,wght@0,400..900;1,400..900&display=swap"
           rel="stylesheet"
         />
       </head>
-      <body className={cn('font-body antialiased')}>
+      <body className={cn('antialiased')}>
         <AppLayout>{children}</AppLayout>
         <Toaster />
       </body>
