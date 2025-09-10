@@ -76,6 +76,7 @@ export default function NutriScanPage() {
     return () => {
       stopCameraStream();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [capturedImage]); // Re-run effect when capturedImage changes
 
   const handleCapture = () => {
@@ -151,9 +152,11 @@ export default function NutriScanPage() {
               />
             )}
              {hasCameraPermission === false && !capturedImage && (
-                <div className="text-center p-4">
-                    <Camera className="w-12 h-12 mx-auto text-muted-foreground" />
-                    <p className="mt-2 text-muted-foreground">Camera access is required. Please allow camera access in your browser or upload a file.</p>
+                <div className="absolute inset-0 flex items-center justify-center bg-muted/50">
+                    <div className="text-center p-4">
+                        <Camera className="w-12 h-12 mx-auto text-muted-foreground" />
+                        <p className="mt-2 text-muted-foreground">Camera access is required. Please allow camera access in your browser or upload a file.</p>
+                    </div>
                 </div>
              )}
           </div>
