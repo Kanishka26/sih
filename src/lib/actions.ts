@@ -78,5 +78,6 @@ export async function analyzeFoodImageAction(input: AnalyzeFoodImageInput) {
     if (!parsedInput.success) {
         throw new Error('Invalid input: ' + parsedInput.error.message);
     }
+    // Pass the validated data correctly to the AI flow
     return await analyzeFoodImage(parsedInput.data);
 }
