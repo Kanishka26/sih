@@ -32,6 +32,14 @@ export type Patient = {
     allergies: string[];
 };
 
+export type DietChart = {
+    id: string;
+    patientId: string;
+    healthGoals: string;
+    chartContent: string;
+    createdAt: string;
+};
+
 
 export let foodDatabase: Food[] = [
     { id: 'apple', name: 'Apple', calories: 95, rasa: 'Sweet, Astringent', guna: 'Light, Cool', category: 'Fruit', virya: 'Cold', vipaka: 'Sweet' },
@@ -204,5 +212,15 @@ export let patients: Patient[] = [
         dietaryHabits: 'Skips meals often, drinks a lot of coffee.',
         bowelHabits: 'loose',
         allergies: ['Gluten']
+    }
+];
+
+export let dietCharts: DietChart[] = [
+    {
+        id: 'chart1',
+        patientId: 'pat1',
+        healthGoals: 'Pitta balance and improved digestion.',
+        chartContent: 'Detailed diet chart for Riya Sharma focusing on cooling foods...',
+        createdAt: new Date().toISOString()
     }
 ];
