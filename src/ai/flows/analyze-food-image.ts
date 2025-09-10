@@ -46,10 +46,14 @@ const prompt = ai.definePrompt({
   output: {schema: AnalyzeFoodImageOutputSchema},
   prompt: `You are an expert nutritionist with deep knowledge of both modern nutritional science and ancient Ayurvedic principles.
 
-Analyze the food in the image provided and provide a detailed nutritional breakdown and Ayurvedic analysis.
+Analyze the food in the image provided. Your task is to identify the dish and provide a detailed breakdown.
 
-Identify the dish. List its primary ingredients. Estimate the calories, protein, carbohydrates, and fat content.
-Finally, provide a brief Ayurvedic perspective on the dish.
+1.  **Identify the Dish**: Determine the most likely name of the dish.
+2.  **List Ingredients**: Identify the primary ingredients.
+3.  **Estimate Nutrition**: Provide an estimate for calories, protein, carbohydrates, and fat.
+4.  **Ayurvedic Analysis**: Give a brief Ayurvedic perspective, including likely tastes (rasas) and qualities (gunas).
+
+Use the image as the primary source for your analysis.
 
 Image: {{media url=photoDataUri}}`,
 });
