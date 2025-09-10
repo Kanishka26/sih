@@ -19,6 +19,7 @@ import {
   ClipboardList,
   SunSnow,
   BookOpen,
+  Stethoscope,
 } from 'lucide-react';
 import { Logo } from './logo';
 
@@ -31,6 +32,7 @@ const menuItems = [
   { href: '/nutrient-vault', label: 'NutrientVault', hindi: 'पोषण भंडार', icon: BookOpen },
   { href: '/health-log', label: 'HealthLog', hindi: 'स्वास्थ्य लॉग', icon: ClipboardList },
   { href: '/seasonal-bhojan', label: 'SeasonalBhojan', hindi: 'ऋतु आहार', icon: SunSnow },
+  { href: '/dietician-connect', label: 'Dietician Connect', hindi: 'आहार विशेषज्ञ से जुड़ें', icon: Stethoscope },
 ];
 
 export function AppSidebar() {
