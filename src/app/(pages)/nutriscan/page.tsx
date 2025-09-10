@@ -13,7 +13,6 @@ import {
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
 import { Camera, Loader2, RefreshCw, Sparkles, Upload } from 'lucide-react';
-import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import Image from 'next/image';
 import { analyzeFoodImageAction } from '@/lib/actions';
 import { type AnalyzeFoodImageOutput } from '@/ai/flows/analyze-food-image';
