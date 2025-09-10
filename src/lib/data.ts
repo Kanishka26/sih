@@ -40,6 +40,14 @@ export type DietChart = {
     createdAt: string;
 };
 
+export type User = {
+    id: string;
+    name: string;
+    email: string;
+    password?: string;
+    role: 'doctor' | 'dietitian' | 'staff' | 'patient';
+    prakriti?: 'Vata' | 'Pitta' | 'Kapha' | 'Vata-Pitta' | 'Pitta-Kapha' | 'Vata-Kapha' | 'Tridoshic';
+}
 
 export let foodDatabase: Food[] = [
     { id: 'apple', name: 'Apple', calories: 95, rasa: 'Sweet, Astringent', guna: 'Light, Cool', category: 'Fruit', virya: 'Cold', vipaka: 'Sweet' },
@@ -224,3 +232,14 @@ export let dietCharts: DietChart[] = [
         createdAt: new Date().toISOString()
     }
 ];
+
+export let users: User[] = [
+  {
+    id: 'user1',
+    name: 'Dr. Mehta',
+    email: 'doctor@ahaarsetu.com',
+    password: 'password',
+    role: 'doctor',
+    prakriti: 'Pitta'
+  }
+]
