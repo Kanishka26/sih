@@ -50,9 +50,8 @@ const chatWithDieticianFlow = ai.defineFlow(
     Keep your responses concise and easy to understand. You are talking to a user in a real-time chat.
     `;
 
-    const model = ai.getModel('googleai/gemini-2.5-flash');
-
     const request: GenerateRequest = {
+        model: 'googleai/gemini-2.5-flash',
         history: history as {role: string, parts: Part[]}[],
         prompt: message,
         system: systemPrompt,
