@@ -1,3 +1,5 @@
+
+'use client';
 import Link from 'next/link';
 import {
   Card,
@@ -10,9 +12,12 @@ import {
 import { Button } from '@/components/ui/button';
 import { Flame, Leaf, Wind } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import { useAuth } from '@/context/auth-context';
 
 export function PrakritiProfileWidget() {
-  const prakriti = "Pitta";
+  // In a real app, this would come from the user's profile
+  const { user } = useAuth();
+  const prakriti = user ? (user as any).prakriti || "Pitta" : "Pitta"; 
   const recommendation = "Focus on cooling foods like cucumber, milk, and rice. Avoid spicy and oily foods.";
 
   const getPrakritiIcon = () => {
@@ -37,10 +42,10 @@ export function PrakritiProfileWidget() {
             </div>
             <div>
                 <CardTitle>Your Prakriti Profile</CardTitle>
-                <CardDescription>Your dominant dosha is Pitta.</CardDescription>
+                <CardDescription>Your dominant dosha is {prakriti}.</CardDescription>
             </div>
         </div>
-        <Badge variant="secondary" className="text-lg bg-primary/20 text-primary">{prakriti}</Badge>
+        <Badge variant="secondary" className="text-lg bg-primary/20 text-primary capitalize">{prakriti}</Badge>
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">
