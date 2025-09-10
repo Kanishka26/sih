@@ -103,32 +103,37 @@ export default function DieticianConnectPage() {
     const scrollAreaRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
-        socket.current = io();
-  
-        socket.current.on('connect', () => {
-          console.log('connected');
-        });
-  
-        socket.current.on('chunk', ({ chunk }) => {
-          setIsTyping(true);
-          setChatHistory((prev) => {
-            const lastMessage = prev[prev.length - 1];
-            if (lastMessage && lastMessage.role === 'model') {
-              const updatedMessage = {
-                ...lastMessage,
-                parts: [{ text: lastMessage.parts[0].text + chunk }],
-              };
-              return [...prev.slice(0, -1), updatedMessage];
-            } else {
-              return [...prev, { role: 'model', parts: [{ text: chunk }] }];
-            }
+        // Initialize socket connection
+        const initSocket = async () => {
+          await fetch('/api/socket');
+          socket.current = io({ path: '/api/socket_io' });
+    
+          socket.current.on('connect', () => {
+            console.log('connected');
           });
-        });
-        
-        socket.current.on('chunkEnd', () => {
-            setIsTyping(false);
-        });
-  
+    
+          socket.current.on('chunk', ({ chunk }) => {
+            setIsTyping(true);
+            setChatHistory((prev) => {
+              const lastMessage = prev[prev.length - 1];
+              if (lastMessage && lastMessage.role === 'model') {
+                const updatedMessage = {
+                  ...lastMessage,
+                  parts: [{ text: lastMessage.parts[0].text + chunk }],
+                };
+                return [...prev.slice(0, -1), updatedMessage];
+              } else {
+                return [...prev, { role: 'model', parts: [{ text: chunk }] }];
+              }
+            });
+          });
+          
+          socket.current.on('chunkEnd', () => {
+              setIsTyping(false);
+          });
+        };
+        initSocket();
+    
       return () => {
         socket.current?.disconnect();
       };
