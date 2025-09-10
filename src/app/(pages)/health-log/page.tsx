@@ -19,7 +19,43 @@ import {
 } from '@/components/ui/select';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { Save } from 'lucide-react';
+import { Save, History, Calendar, Droplets, Bed, Smile, Pizza } from 'lucide-react';
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion';
+
+const pastLogs = [
+  {
+    date: '2024-07-20',
+    foodIntake: 'Oats with berries for breakfast, lentil soup for lunch, grilled vegetables for dinner.',
+    symptoms: 'Felt energetic and clear-headed.',
+    waterIntake: '2.5',
+    sleepHours: '8',
+    bowelMovement: 'normal',
+    energyLevel: '5',
+  },
+  {
+    date: '2024-07-19',
+    foodIntake: 'Rice with yogurt for lunch, kichdi for dinner.',
+    symptoms: 'A bit of bloating in the evening.',
+    waterIntake: '2',
+    sleepHours: '6.5',
+    bowelMovement: 'normal',
+    energyLevel: '3',
+  },
+  {
+    date: '2024-07-18',
+    foodIntake: 'Skipped breakfast. Had a heavy lunch with fried food.',
+    symptoms: 'Felt sluggish and sleepy after lunch.',
+    waterIntake: '1.5',
+    sleepHours: '7',
+    bowelMovement: 'constipated',
+    energyLevel: '2',
+  },
+];
 
 export default function HealthLogPage() {
     const { toast } = useToast();
@@ -114,6 +150,65 @@ export default function HealthLogPage() {
             </Button>
             </CardFooter>
         </form>
+      </Card>
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <History className="w-6 h-6 text-primary" />
+            Past Health Logs
+          </CardTitle>
+          <CardDescription>
+            Review your previously saved logs.
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Accordion type="single" collapsible className="w-full">
+            {pastLogs.map((log) => (
+              <AccordionItem value={log.date} key={log.date}>
+                <AccordionTrigger>
+                    <div className="flex items-center gap-2">
+                        <Calendar className="w-4 h-4 text-muted-foreground" />
+                        <span className="font-semibold">{new Date(log.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', timeZone: 'UTC' })}</span>
+                    </div>
+                </AccordionTrigger>
+                <AccordionContent>
+                  <div className="space-y-4 text-sm text-foreground/90">
+                    <div className="flex items-start gap-3">
+                      <Pizza className="w-4 h-4 mt-1 text-primary" />
+                      <div>
+                        <p className="font-semibold">Food Intake</p>
+                        <p className="text-muted-foreground">{log.foodIntake}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <Smile className="w-4 h-4 mt-1 text-primary" />
+                      <div>
+                        <p className="font-semibold">Symptoms/Feelings</p>
+                        <p className="text-muted-foreground">{log.symptoms}</p>
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                        <div className="flex items-center gap-3">
+                            <Droplets className="w-4 h-4 text-primary" />
+                            <p><span className="font-semibold">Water:</span> {log.waterIntake}L</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <Bed className="w-4 h-4 text-primary" />
+                            <p><span className="font-semibold">Sleep:</span> {log.sleepHours} hrs</p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                             <p><span className="font-semibold">Bowel Movement:</span> <span className="capitalize">{log.bowelMovement}</span></p>
+                        </div>
+                        <div className="flex items-center gap-3">
+                            <p><span className="font-semibold">Energy Level:</span> {log.energyLevel}/5</p>
+                        </div>
+                    </div>
+                  </div>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </CardContent>
       </Card>
     </div>
   );
