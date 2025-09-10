@@ -54,7 +54,7 @@ const recipes: Recipe[] = [
     mood: 'Calming',
     title: 'Soothing Mung Dal Soup',
     rasa: 'Sweet, Salty',
-    image: 'https://picsum.photos/seed/dal-soup/400/300',
+    image: 'https://picsum.photos/seed/mung-dal-soup/400/300',
     dataAiHint: 'dal soup',
     description:
       'A light and nourishing soup, perfect for calming the digestive system and promoting a sense of well-being.',
@@ -77,7 +77,7 @@ const recipes: Recipe[] = [
     mood: 'Grounding',
     title: 'Hearty Root Vegetable Stew',
     rasa: 'Sweet, Astringent',
-    image: 'https://picsum.photos/seed/veg-stew/400/300',
+    image: 'https://picsum.photos/seed/root-vegetable-stew/400/300',
     dataAiHint: 'vegetable stew',
     description:
       'A warm and substantial stew made with root vegetables to help you feel centered and grounded.',
@@ -99,7 +99,7 @@ const recipes: Recipe[] = [
     mood: 'Aromatic',
     title: 'Spiced Turmeric-Ginger Tea',
     rasa: 'Pungent, Bitter',
-    image: 'https://picsum.photos/seed/herbal-tea/400/300',
+    image: 'https://picsum.photos/seed/turmeric-ginger-tea/400/300',
     dataAiHint: 'herbal tea',
     description:
       'An aromatic and invigorating tea that stimulates digestion and warms the body.',
@@ -119,7 +119,7 @@ const recipes: Recipe[] = [
     mood: 'Crunchy',
     title: 'Quinoa and Toasted Almond Salad',
     rasa: 'Astringent, Sweet',
-    image: 'https://picsum.photos/seed/quinoa-salad/400/300',
+    image: 'https://picsum.photos/seed/quinoa-almond-salad/400/300',
     dataAiHint: 'quinoa salad',
     description: 'A refreshing and crunchy salad that is both satisfying and light.',
     ingredients: [
@@ -139,7 +139,7 @@ const recipes: Recipe[] = [
     mood: 'Calming',
     title: 'Warm Spiced Milk',
     rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/spiced-milk/400/300',
+    image: 'https://picsum.photos/seed/golden-milk-turmeric/400/300',
     dataAiHint: 'spiced milk',
     description:
       'A comforting and easy-to-digest drink that promotes restful sleep.',
@@ -159,7 +159,7 @@ const recipes: Recipe[] = [
     mood: 'Grounding',
     title: 'Baked Sweet Potato with Ghee',
     rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/sweet-potato/400/300',
+    image: 'https://picsum.photos/seed/baked-sweet-potato/400/300',
     dataAiHint: 'sweet potato',
     description:
       'A simple, sweet, and satisfying dish that is nourishing and grounding for Vata dosha.',
