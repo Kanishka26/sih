@@ -11,17 +11,19 @@ import {
   CardFooter,
 } from '@/components/ui/card';
 import { useToast } from '@/hooks/use-toast';
-import { Camera, Loader2, RefreshCw, Send, Sparkles } from 'lucide-react';
+import { Camera, Loader2, RefreshCw, Sparkles, Upload } from 'lucide-react';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import Image from 'next/image';
 import { analyzeFoodImageAction } from '@/lib/actions';
 import { type AnalyzeFoodImageOutput } from '@/ai/flows/analyze-food-image';
 import { Badge } from '@/components/ui/badge';
+import { Input } from '@/components/ui/input';
 
 export default function NutriScanPage() {
   const { toast } = useToast();
   const videoRef = useRef<HTMLVideoElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
   const [hasCameraPermission, setHasCameraPermission] = useState<boolean | null>(null);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
@@ -88,6 +90,22 @@ export default function NutriScanPage() {
     }
   };
 
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const dataUri = e.target?.result as string;
+        setCapturedImage(dataUri);
+        setResult(null);
+        if (streamRef.current) {
+          streamRef.current.getTracks().forEach(track => track.stop());
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleRetake = () => {
     setCapturedImage(null);
     setResult(null);
@@ -114,7 +132,7 @@ export default function NutriScanPage() {
       <div>
         <h1 className="text-3xl font-headline font-bold">NutriScan (पोषण स्कैन)</h1>
         <p className="text-muted-foreground">
-          Capture an image of your meal to get instant nutritional analysis.
+          Capture or upload an image of your meal to get instant nutritional analysis.
         </p>
       </div>
 
@@ -124,10 +142,10 @@ export default function NutriScanPage() {
             {!capturedImage && (
                 <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
             )}
-             {hasCameraPermission === false && (
+             {hasCameraPermission === false && !capturedImage && (
                 <div className="text-center p-4">
                     <Camera className="w-12 h-12 mx-auto text-muted-foreground" />
-                    <p className="mt-2 text-muted-foreground">Camera access is required to scan your food.</p>
+                    <p className="mt-2 text-muted-foreground">Camera access is required to scan your food. You can also upload a file.</p>
                 </div>
              )}
             {capturedImage && (
@@ -140,13 +158,26 @@ export default function NutriScanPage() {
             )}
           </div>
           <canvas ref={canvasRef} className="hidden" />
+          <Input 
+            type="file"
+            ref={fileInputRef}
+            className="hidden"
+            accept="image/*"
+            onChange={handleFileUpload}
+          />
         </CardContent>
         <CardFooter className="flex justify-center gap-4">
           {!capturedImage ? (
-            <Button onClick={handleCapture} disabled={!hasCameraPermission}>
-              <Camera className="mr-2" />
-              Capture Image
-            </Button>
+            <>
+              <Button onClick={handleCapture} disabled={hasCameraPermission === false}>
+                <Camera className="mr-2" />
+                Capture Image
+              </Button>
+              <Button variant="outline" onClick={() => fileInputRef.current?.click()}>
+                <Upload className="mr-2" />
+                Upload Image
+              </Button>
+            </>
           ) : (
             <>
               <Button onClick={handleRetake} variant="outline">
