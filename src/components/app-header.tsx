@@ -4,11 +4,7 @@
 import {
   Languages,
   UserCircle,
-  LogOut,
-  LogIn,
-  UserPlus,
 } from 'lucide-react';
-import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -21,11 +17,9 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useLanguage } from '@/context/language-context';
-import { useAuth } from '@/context/auth-context';
 
 export function AppHeader() {
   const { toggleLanguage } = useLanguage();
-  const { user, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:h-16 sm:px-6">
@@ -44,36 +38,10 @@ export function AppHeader() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          {user ? (
-            <>
-              <DropdownMenuLabel>Welcome, {user.name}</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem>Profile</DropdownMenuItem>
-              <DropdownMenuItem>Settings</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem onClick={logout}>
-                <LogOut className="mr-2 h-4 w-4" />
-                <span>Logout</span>
-              </DropdownMenuItem>
-            </>
-          ) : (
-            <>
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/login">
-                  <LogIn className="mr-2 h-4 w-4" />
-                  <span>Login</span>
-                </Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/register">
-                  <UserPlus className="mr-2 h-4 w-4" />
-                  <span>Register</span>
-                </Link>
-              </DropdownMenuItem>
-            </>
-          )}
+          <DropdownMenuLabel>My Account</DropdownMenuLabel>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem>Profile</DropdownMenuItem>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>

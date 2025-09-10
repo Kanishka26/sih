@@ -17,7 +17,6 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Soup, GlassWater, Utensils, Apple, Sunset } from 'lucide-react';
-import { useAuth } from '@/context/auth-context';
 import { useEffect, useState } from 'react';
 import { Skeleton } from '../ui/skeleton';
 
@@ -47,20 +46,15 @@ const kaphaDietPlan = [
 ];
 
 export function DietChartWidget() {
-  const { user } = useAuth();
   const [dietPlan, setDietPlan] = useState<any[] | null>(null);
 
   useEffect(() => {
-      if(user) {
-        // In a real app, you'd fetch the specific chart. Here we mock it.
-        const prakriti = (user as any).prakriti || 'Pitta';
-        if (prakriti === 'Vata') setDietPlan(vataDietPlan);
-        else if (prakriti === 'Kapha') setDietPlan(kaphaDietPlan);
-        else setDietPlan(pittaDietPlan);
-      } else {
-        setDietPlan(null);
-      }
-  }, [user]);
+    // In a real app, you'd fetch the specific chart. Here we mock it based on a default.
+    const prakriti = 'Pitta'; 
+    if (prakriti === 'Vata') setDietPlan(vataDietPlan);
+    else if (prakriti === 'Kapha') setDietPlan(kaphaDietPlan);
+    else setDietPlan(pittaDietPlan);
+  }, []);
 
 
   return (
@@ -68,7 +62,7 @@ export function DietChartWidget() {
       <CardHeader>
         <CardTitle>Today's Diet Chart</CardTitle>
         <CardDescription>
-          A balanced plan for your {user ? `${(user as any).prakriti}-dominant` : ''} prakriti.
+          A balanced plan for your Pitta-dominant prakriti.
         </CardDescription>
       </CardHeader>
       <CardContent>

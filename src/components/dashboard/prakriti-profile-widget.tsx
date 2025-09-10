@@ -12,12 +12,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { Flame, Leaf, Wind } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
-import { useAuth } from '@/context/auth-context';
 
 export function PrakritiProfileWidget() {
   // In a real app, this would come from the user's profile
-  const { user } = useAuth();
-  const prakriti = user ? (user as any).prakriti || "Pitta" : "Pitta"; 
+  const prakriti = "Pitta"; 
   const recommendation = "Focus on cooling foods like cucumber, milk, and rice. Avoid spicy and oily foods.";
 
   const getPrakritiIcon = () => {

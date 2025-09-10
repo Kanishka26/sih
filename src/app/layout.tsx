@@ -4,7 +4,6 @@ import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
 import { AppLayout } from '@/components/app-layout';
 import { LanguageProvider } from '@/context/language-context';
-import { AuthProvider } from '@/context/auth-context';
 
 export const metadata: Metadata = {
   title: 'AhaarSetu - Your Ayurvedic Diet Companion',
@@ -31,11 +30,9 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('antialiased')}>
-        <AuthProvider>
-          <LanguageProvider>
-            <AppLayout>{children}</AppLayout>
-          </LanguageProvider>
-        </AuthProvider>
+        <LanguageProvider>
+          <AppLayout>{children}</AppLayout>
+        </LanguageProvider>
         <Toaster />
       </body>
     </html>
