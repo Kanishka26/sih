@@ -7,7 +7,7 @@ import { chatWithDietician, type ChatWithDieticianInput } from './ai/flows/chat-
 
 const dev = process.env.NODE_ENV !== 'production';
 const hostname = 'localhost';
-const port = 9002;
+const port = 3000;
 
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();

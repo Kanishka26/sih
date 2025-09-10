@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -102,8 +103,6 @@ export default function DieticianConnectPage() {
     const scrollAreaRef = useRef<HTMLDivElement>(null);
   
     useEffect(() => {
-      const initSocket = async () => {
-        await fetch('/api/socket');
         socket.current = io();
   
         socket.current.on('connect', () => {
@@ -129,9 +128,6 @@ export default function DieticianConnectPage() {
         socket.current.on('chunkEnd', () => {
             setIsTyping(false);
         });
-  
-      };
-      initSocket();
   
       return () => {
         socket.current?.disconnect();
