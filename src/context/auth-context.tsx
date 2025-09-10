@@ -1,15 +1,17 @@
 
 'use client';
 
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import { useRouter } from 'next/navigation';
+import { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import { useToast } from '@/hooks/use-toast';
+import { Skeleton } from '@/components/ui/skeleton';
 
 type User = {
   id: string;
   email: string;
   name: string;
   role: string;
+  prakriti?: 'Vata' | 'Pitta' | 'Kapha' | 'Vata-Pitta' | 'Pitta-Kapha' | 'Vata-Kapha' | 'Tridoshic';
 };
 
 type AuthContextType = {
@@ -26,9 +28,9 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
   const { toast } = useToast();
+  const pathname = usePathname();
 
-  const fetchProfile = async () => {
-    setIsLoading(true);
+  const fetchProfile = useCallback(async () => {
     try {
       const res = await fetch('/api/auth/profile');
       if (res.ok) {
@@ -36,17 +38,22 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         setUser(data.user);
       } else {
         setUser(null);
+        // If we are on a protected route and fail to fetch profile, redirect to login
+        if(pathname !== '/login' && pathname !== '/register') {
+           router.push('/login');
+        }
       }
     } catch (error) {
       setUser(null);
     } finally {
       setIsLoading(false);
     }
-  };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   useEffect(() => {
     fetchProfile();
-  }, []);
+  }, [fetchProfile]);
 
   const login = async (token: string) => {
     // The token is set as a cookie by the login API endpoint
@@ -60,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = async () => {
     try {
-      await fetch('/api/auth/logout');
+      await fetch('/api/auth/logout', { method: 'POST' });
       setUser(null);
       router.push('/login');
        toast({
@@ -76,6 +83,18 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
     }
   };
+
+  if(isLoading){
+      return (
+        <div className="p-8">
+            <div className="space-y-4">
+                <Skeleton className="h-12 w-1/2" />
+                <Skeleton className="h-24 w-full" />
+                <Skeleton className="h-48 w-full" />
+            </div>
+        </div>
+      )
+  }
 
   return (
     <AuthContext.Provider value={{ user, login, logout, isLoading }}>
