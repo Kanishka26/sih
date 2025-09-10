@@ -17,26 +17,23 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Search } from 'lucide-react';
-import { useState } from 'react';
-
-const foodDatabase = [
-  { name: 'Apple', calories: 95, rasa: 'Sweet, Astringent', guna: 'Light, Cool', category: 'Fruit', potency: 'Cold' },
-  { name: 'Lentils (Dal)', calories: 230, rasa: 'Sweet, Astringent', guna: 'Light, Dry', category: 'Legume', potency: 'Cold' },
-  { name: 'Brown Rice', calories: 215, rasa: 'Sweet', guna: 'Heavy, Warm', category: 'Grain', potency: 'Hot' },
-  { name: 'Spinach', calories: 7, rasa: 'Astringent, Bitter', guna: 'Light, Cool', category: 'Vegetable', potency: 'Cold' },
-  { name: 'Almonds', calories: 164, rasa: 'Sweet', guna: 'Heavy, Oily, Hot', category: 'Nut', potency: 'Hot' },
-  { name: 'Ghee', calories: 112, rasa: 'Sweet', guna: 'Oily, Heavy, Cool', category: 'Dairy', potency: 'Cold' },
-  { name: 'Turmeric', calories: 9, rasa: 'Pungent, Bitter, Astringent', guna: 'Light, Dry, Hot', category: 'Spice', potency: 'Hot' },
-  { name: 'Moong Dal', calories: 147, rasa: 'Sweet, Astringent', guna: 'Light, Dry', category: 'Legume', potency: 'Cold'},
-  { name: 'Cucumber', calories: 16, rasa: 'Sweet, Astringent', guna: 'Light, Cool', category: 'Vegetable', potency: 'Cold' },
-  { name: 'Milk', calories: 103, rasa: 'Sweet', guna: 'Heavy, Oily, Cool', category: 'Dairy', potency: 'Cold' },
-  { name: 'Ginger', calories: 4, rasa: 'Pungent, Sweet', guna: 'Light, Oily, Hot', category: 'Spice', potency: 'Hot' },
-];
+import { useState, useEffect } from 'react';
+import { type Food } from '@/lib/data';
 
 export default function NutrientVaultPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [foods, setFoods] = useState<Food[]>([]);
+
+  useEffect(() => {
+    async function fetchFoods() {
+      const res = await fetch('/api/foods');
+      const data = await res.json();
+      setFoods(data);
+    }
+    fetchFoods();
+  }, []);
   
-  const filteredFoods = foodDatabase.filter((food) =>
+  const filteredFoods = foods.filter((food) =>
     food.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
@@ -75,12 +72,12 @@ export default function NutrientVaultPage() {
                 <TableHead>Calories (per serving)</TableHead>
                 <TableHead>Rasa (Taste)</TableHead>
                 <TableHead>Guna (Qualities)</TableHead>
-                <TableHead>Potency</TableHead>
+                <TableHead>Virya (Potency)</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {filteredFoods.map((food) => (
-                <TableRow key={food.name}>
+                <TableRow key={food.id}>
                   <TableCell className="font-medium flex items-center gap-2">
                     {food.name} <Badge variant="secondary">{food.category}</Badge>
                   </TableCell>
@@ -88,8 +85,8 @@ export default function NutrientVaultPage() {
                   <TableCell>{food.rasa}</TableCell>
                   <TableCell>{food.guna}</TableCell>
                   <TableCell>
-                    <Badge variant={food.potency === 'Hot' ? 'destructive' : 'default'} className={food.potency === 'Cold' ? 'bg-blue-500 hover:bg-blue-600' : ''}>
-                      {food.potency}
+                    <Badge variant={food.virya === 'Hot' ? 'destructive' : 'default'} className={food.virya === 'Cold' ? 'bg-blue-500 hover:bg-blue-600' : ''}>
+                      {food.virya}
                     </Badge>
                   </TableCell>
                 </TableRow>
