@@ -16,23 +16,23 @@ import {
   Scale,
   ClipboardEdit,
   ChefHat,
+  BookOpen,
   ClipboardList,
   SunSnow,
-  BookOpen,
   Stethoscope,
 } from 'lucide-react';
 import { Logo } from './logo';
 
 const menuItems = [
   { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/prakriti-scan', label: 'PrakritiScan', hindi: 'प्रकृति स्कैन', icon: HeartPulse },
-  { href: '/rasa-balance', label: 'RasaBalance', hindi: 'रस संतुलन', icon: Scale },
-  { href: '/diet-genie', label: 'DietGenie', hindi: 'आहार चार्ट', icon: ClipboardEdit },
-  { href: '/recipe-guru', label: 'RecipeGuru', hindi: 'विधान गुरु', icon: ChefHat },
-  { href: '/nutrient-vault', label: 'NutrientVault', hindi: 'पोषण भंडार', icon: BookOpen },
-  { href: '/health-log', label: 'HealthLog', hindi: 'स्वास्थ्य लॉग', icon: ClipboardList },
-  { href: '/seasonal-bhojan', label: 'SeasonalBhojan', hindi: 'ऋतु आहार', icon: SunSnow },
-  { href: '/dietician-connect', label: 'Dietician Connect', hindi: 'आहार विशेषज्ञ से जुड़ें', icon: Stethoscope },
+  { href: '/prakriti-scan', label: 'PrakritiScan', icon: HeartPulse },
+  { href: '/rasa-balance', label: 'RasaBalance', icon: Scale },
+  { href: '/diet-genie', label: 'DietGenie', icon: ClipboardEdit },
+  { href: '/recipe-guru', label: 'RecipeGuru', icon: ChefHat },
+  { href: '/nutrient-vault', label: 'NutrientVault', icon: BookOpen },
+  { href: '/health-log', label: 'HealthLog', icon: ClipboardList },
+  { href: '/seasonal-bhojan', label: 'SeasonalBhojan', icon: SunSnow },
+  { href: '/dietician-connect', label: 'Dietician Connect', icon: Stethoscope },
 ];
 
 export function AppSidebar() {
@@ -59,12 +59,7 @@ export function AppSidebar() {
                 <Link href={item.href}>
                   <item.icon />
                   <span className="font-medium text-base">
-                    {item.label}{' '}
-                    {item.hindi && (
-                      <span className="text-muted-foreground/80 text-xs">
-                        ({item.hindi})
-                      </span>
-                    )}
+                    {item.label}
                   </span>
                 </Link>
               </SidebarMenuButton>
