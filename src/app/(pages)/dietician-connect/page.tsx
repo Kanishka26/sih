@@ -19,6 +19,7 @@ const dieticians = [
     name: 'Dr. Anjali Sharma',
     hospital: 'Apollo Hospital, Delhi',
     specialization: 'Clinical Nutrition',
+    qualifications: 'M.Sc. (Food & Nutrition), RD',
     image: 'https://picsum.photos/seed/doc1/400/400',
     dataAiHint: 'female doctor portrait',
   },
@@ -26,6 +27,7 @@ const dieticians = [
     name: 'Dr. Rohan Verma',
     hospital: 'Fortis Hospital, Mumbai',
     specialization: 'Pediatric Nutrition',
+    qualifications: 'M.Sc. (Pediatric Nutrition), RD',
     image: 'https://picsum.photos/seed/doc2/400/400',
     dataAiHint: 'male doctor portrait',
   },
@@ -33,6 +35,7 @@ const dieticians = [
     name: 'Dr. Priya Singh',
     hospital: 'Max Healthcare, Bangalore',
     specialization: 'Sports Nutrition',
+    qualifications: 'PG Diploma (Sports Nutrition), RD',
     image: 'https://picsum.photos/seed/doc3/400/400',
     dataAiHint: 'female doctor smiling',
   },
@@ -40,6 +43,7 @@ const dieticians = [
     name: 'Dr. Sameer Patel',
     hospital: 'Artemis Hospital, Gurgaon',
     specialization: 'Ayurvedic Dietetics',
+    qualifications: 'BAMS, M.Sc. (Ayurvedic Dietetics)',
     image: 'https://picsum.photos/seed/doc4/400/400',
     dataAiHint: 'male doctor smiling',
   },
@@ -47,6 +51,7 @@ const dieticians = [
     name: 'Dr. Meera Desai',
     hospital: 'Narayana Health, Kolkata',
     specialization: 'Geriatric Nutrition',
+    qualifications: 'M.Sc. (Geriatric Nutrition), CDE',
     image: 'https://picsum.photos/seed/doc5/400/400',
     dataAiHint: 'doctor portrait',
   },
@@ -54,6 +59,7 @@ const dieticians = [
     name: 'Dr. Vikram Rathore',
     hospital: 'Medanta, Lucknow',
     specialization: 'Weight Management',
+    qualifications: 'M.Sc. (Nutrition), CWC',
     image: 'https://picsum.photos/seed/doc6/400/400',
     dataAiHint: 'doctor face',
   },
@@ -96,8 +102,9 @@ export default function DieticianConnectPage() {
               <CardTitle className="text-xl">{dietician.name}</CardTitle>
               <CardDescription>{dietician.hospital}</CardDescription>
             </CardHeader>
-            <CardContent className="text-center flex-1">
+            <CardContent className="text-center flex-1 space-y-2">
               <Badge variant="secondary">{dietician.specialization}</Badge>
+              <p className="text-xs text-muted-foreground">{dietician.qualifications}</p>
             </CardContent>
             <CardFooter>
               <Button
