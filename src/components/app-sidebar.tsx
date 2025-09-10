@@ -22,21 +22,23 @@ import {
   Stethoscope,
 } from 'lucide-react';
 import { Logo } from './logo';
+import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
-  { href: '/', label: 'Dashboard', icon: LayoutDashboard },
-  { href: '/prakriti-scan', label: 'PrakritiScan', icon: HeartPulse },
-  { href: '/rasa-balance', label: 'RasaBalance', icon: Scale },
-  { href: '/diet-genie', label: 'DietGenie', icon: ClipboardEdit },
-  { href: '/recipe-guru', label: 'RecipeGuru', icon: ChefHat },
-  { href: '/nutrient-vault', label: 'NutrientVault', icon: BookOpen },
-  { href: '/health-log', label: 'HealthLog', icon: ClipboardList },
-  { href: '/seasonal-bhojan', label: 'SeasonalBhojan', icon: SunSnow },
-  { href: '/dietician-connect', label: 'Dietician Connect', icon: Stethoscope },
+  { href: '/', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
+  { href: '/prakriti-scan', label: {en: 'PrakritiScan', hi: 'प्रकृति स्कैन'}, icon: HeartPulse },
+  { href: '/rasa-balance', label: {en: 'RasaBalance', hi: 'रस संतुलन'}, icon: Scale },
+  { href: '/diet-genie', label: {en: 'DietGenie', hi: 'आहार जिन्न'}, icon: ClipboardEdit },
+  { href: '/recipe-guru', label: {en: 'RecipeGuru', hi: 'विधान गुरु'}, icon: ChefHat },
+  { href: '/nutrient-vault', label: {en: 'NutrientVault', hi: 'पोषण भंडार'}, icon: BookOpen },
+  { href: '/health-log', label: {en: 'HealthLog', hi: 'स्वास्थ्य लॉग'}, icon: ClipboardList },
+  { href: '/seasonal-bhojan', label: {en: 'SeasonalBhojan', hi: 'ऋतु आहार'}, icon: SunSnow },
+  { href: '/dietician-connect', label: {en: 'Dietician Connect', hi: 'आहार विशेषज्ञ से जुड़ें'}, icon: Stethoscope },
 ];
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { t } = useLanguage();
 
   return (
     <>
@@ -53,13 +55,13 @@ export function AppSidebar() {
               <SidebarMenuButton
                 asChild
                 isActive={pathname === item.href}
-                tooltip={item.label}
+                tooltip={t(item.label)}
                 className="justify-start"
               >
                 <Link href={item.href}>
                   <item.icon />
                   <span className="font-medium text-base">
-                    {item.label}
+                    {t(item.label)}
                   </span>
                 </Link>
               </SidebarMenuButton>
