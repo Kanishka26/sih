@@ -1,9 +1,12 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
-import { useState, useTransition } from 'react';
+import { useState, useTransition, useRef } from 'react';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -27,12 +30,13 @@ import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { generateDietChartAction } from '@/lib/actions';
 import { type GenerateAyurvedaDietChartOutput } from '@/ai/flows/generate-ayurveda-diet-chart';
-import { Loader2, Wand2 } from 'lucide-react';
+import { Download, Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
 const formSchema = z.object({
@@ -51,6 +55,7 @@ export default function DietGeniePage() {
     null
   );
   const { toast } = useToast();
+  const dietChartRef = useRef<HTMLDivElement>(null);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -58,6 +63,18 @@ export default function DietGeniePage() {
       age: 30,
     },
   });
+
+  const handleDownload = () => {
+    if (!dietChartRef.current) return;
+    html2canvas(dietChartRef.current).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('diet-chart.pdf');
+    });
+  };
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
@@ -195,11 +212,22 @@ export default function DietGeniePage() {
               prakriti.
             </CardDescription>
           </CardHeader>
-          <CardContent className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline">
+          <CardContent
+            ref={dietChartRef}
+            className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline"
+          >
             <div
-              dangerouslySetInnerHTML={{ __html: result.dietChart.replace(/\n/g, '<br />') }}
+              dangerouslySetInnerHTML={{
+                __html: result.dietChart.replace(/\\n/g, '<br />'),
+              }}
             />
           </CardContent>
+          <CardFooter>
+            <Button onClick={handleDownload} className="ml-auto">
+              <Download className="mr-2 h-4 w-4" />
+              Download as PDF
+            </Button>
+          </CardFooter>
         </Card>
       )}
     </div>
