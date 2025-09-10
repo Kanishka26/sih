@@ -19,7 +19,7 @@ import {
   DialogTitle,
   DialogDescription,
 } from '@/components/ui/dialog';
-import { X } from 'lucide-react';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 type Recipe = {
   mood: string;
@@ -154,7 +154,7 @@ export default function RecipeGuruPage() {
       </div>
 
       <Dialog open={!!selectedRecipe} onOpenChange={() => setSelectedRecipe(null)}>
-        <DialogContent className="sm:max-w-[625px] bg-card text-card-foreground">
+        <DialogContent className="sm:max-w-[625px] h-[90vh] flex flex-col bg-card text-card-foreground">
             {selectedRecipe && (
                 <>
                     <DialogHeader>
@@ -170,20 +170,22 @@ export default function RecipeGuruPage() {
                         <DialogTitle className="text-2xl font-headline">{selectedRecipe.title}</DialogTitle>
                         <DialogDescription>{selectedRecipe.description}</DialogDescription>
                     </DialogHeader>
-                    <div className="grid gap-4 py-4">
-                        <div>
-                            <h4 className="font-semibold mb-2">Ingredients</h4>
-                            <ul className="list-disc list-inside text-muted-foreground">
-                                {selectedRecipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
-                            </ul>
+                    <ScrollArea className="flex-1 pr-6">
+                        <div className="grid gap-4 py-4">
+                            <div>
+                                <h4 className="font-semibold mb-2">Ingredients</h4>
+                                <ul className="list-disc list-inside text-muted-foreground">
+                                    {selectedRecipe.ingredients.map(ing => <li key={ing}>{ing}</li>)}
+                                </ul>
+                            </div>
+                            <div>
+                                <h4 className="font-semibold mb-2">Instructions</h4>
+                                 <ol className="list-decimal list-inside text-muted-foreground space-y-1">
+                                    {selectedRecipe.instructions.map(inst => <li key={inst}>{inst}</li>)}
+                                </ol>
+                            </div>
                         </div>
-                        <div>
-                            <h4 className="font-semibold mb-2">Instructions</h4>
-                             <ol className="list-decimal list-inside text-muted-foreground space-y-1">
-                                {selectedRecipe.instructions.map(inst => <li key={inst}>{inst}</li>)}
-                            </ol>
-                        </div>
-                    </div>
+                    </ScrollArea>
                 </>
             )}
         </DialogContent>
