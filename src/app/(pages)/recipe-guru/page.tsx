@@ -54,8 +54,8 @@ const recipes: Recipe[] = [
     mood: 'Calming',
     title: 'Soothing Mung Dal Soup',
     rasa: 'Sweet, Salty',
-    image: 'https://picsum.photos/seed/mung-dal-soup/400/300',
-    dataAiHint: 'dal soup',
+    image: 'https://picsum.photos/seed/moong-dal-soup/400/300',
+    dataAiHint: 'mung dal soup',
     description:
       'A light and nourishing soup, perfect for calming the digestive system and promoting a sense of well-being.',
     ingredients: [
@@ -74,10 +74,30 @@ const recipes: Recipe[] = [
     ],
   },
   {
+    mood: 'Calming',
+    title: 'Warm Spiced Milk',
+    rasa: 'Sweet',
+    image: 'https://picsum.photos/seed/warm-spiced-milk/400/300',
+    dataAiHint: 'spiced milk',
+    description:
+      'A comforting and easy-to-digest drink that promotes restful sleep.',
+    ingredients: [
+      '1 cup Milk (dairy or non-dairy)',
+      'Pinch of Cardamom',
+      'Pinch of Nutmeg',
+      '1 tsp Maple Syrup (optional)',
+    ],
+    instructions: [
+      'Gently warm the milk.',
+      'Stir in the spices and sweetener.',
+      'Serve warm before bedtime.',
+    ],
+  },
+  {
     mood: 'Grounding',
     title: 'Hearty Root Vegetable Stew',
     rasa: 'Sweet, Astringent',
-    image: 'https://picsum.photos/seed/vegetable-stew/400/300',
+    image: 'https://picsum.photos/seed/root-vegetable-stew/400/300',
     dataAiHint: 'vegetable stew',
     description:
       'A warm and substantial stew made with root vegetables to help you feel centered and grounded.',
@@ -95,12 +115,31 @@ const recipes: Recipe[] = [
       'Pour in broth and simmer until vegetables are tender.',
     ],
   },
+    {
+    mood: 'Grounding',
+    title: 'Baked Sweet Potato with Ghee',
+    rasa: 'Sweet',
+    image: 'https://picsum.photos/seed/baked-sweet-potato/400/300',
+    dataAiHint: 'sweet potato ghee',
+    description:
+      'A simple, sweet, and satisfying dish that is nourishing and grounding for Vata dosha.',
+    ingredients: [
+      '1 large Sweet Potato',
+      '1 tbsp Ghee',
+      'Pinch of Cinnamon',
+    ],
+    instructions: [
+      'Preheat oven to 400°F (200°C).',
+      'Pierce the sweet potato and bake for 45-60 minutes.',
+      'Slice open, drizzle with ghee, and sprinkle with cinnamon.',
+    ],
+  },
   {
     mood: 'Aromatic',
     title: 'Spiced Turmeric-Ginger Tea',
     rasa: 'Pungent, Bitter',
-    image: 'https://picsum.photos/seed/herbal-tea/400/300',
-    dataAiHint: 'herbal tea',
+    image: 'https://picsum.photos/seed/turmeric-ginger-tea/400/300',
+    dataAiHint: 'ginger tea',
     description:
       'An aromatic and invigorating tea that stimulates digestion and warms the body.',
     ingredients: [
@@ -119,7 +158,7 @@ const recipes: Recipe[] = [
     mood: 'Crunchy',
     title: 'Quinoa and Toasted Almond Salad',
     rasa: 'Astringent, Sweet',
-    image: 'https://picsum.photos/seed/quinoa-salad/400/300',
+    image: 'https://picsum.photos/seed/quinoa-almond-salad/400/300',
     dataAiHint: 'quinoa salad',
     description: 'A refreshing and crunchy salad that is both satisfying and light.',
     ingredients: [
@@ -133,45 +172,6 @@ const recipes: Recipe[] = [
       'Combine all ingredients in a bowl.',
       'Dress with lemon juice and olive oil.',
       'Toss well and serve.',
-    ],
-  },
-  {
-    mood: 'Calming',
-    title: 'Warm Spiced Milk',
-    rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/spiced-milk/400/300',
-    dataAiHint: 'spiced milk',
-    description:
-      'A comforting and easy-to-digest drink that promotes restful sleep.',
-    ingredients: [
-      '1 cup Milk (dairy or non-dairy)',
-      'Pinch of Cardamom',
-      'Pinch of Nutmeg',
-      '1 tsp Maple Syrup (optional)',
-    ],
-    instructions: [
-      'Gently warm the milk.',
-      'Stir in the spices and sweetener.',
-      'Serve warm before bedtime.',
-    ],
-  },
-  {
-    mood: 'Grounding',
-    title: 'Baked Sweet Potato with Ghee',
-    rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/sweet-potato/400/300',
-    dataAiHint: 'sweet potato',
-    description:
-      'A simple, sweet, and satisfying dish that is nourishing and grounding for Vata dosha.',
-    ingredients: [
-      '1 large Sweet Potato',
-      '1 tbsp Ghee',
-      'Pinch of Cinnamon',
-    ],
-    instructions: [
-      'Preheat oven to 400°F (200°C).',
-      'Pierce the sweet potato and bake for 45-60 minutes.',
-      'Slice open, drizzle with ghee, and sprinkle with cinnamon.',
     ],
   },
 ];
