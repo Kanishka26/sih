@@ -37,20 +37,20 @@ export default function NutriScanPage() {
       streamRef.current = null;
     }
   };
-
+  
   useEffect(() => {
     const getCameraPermission = async () => {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
-          toast({
-              variant: 'destructive',
-              title: 'Camera Not Supported',
-              description: 'Your browser does not support camera access.',
-          });
-          setHasCameraPermission(false);
-          return;
+        toast({
+          variant: 'destructive',
+          title: 'Camera Not Supported',
+          description: 'Your browser does not support camera access.',
+        });
+        setHasCameraPermission(false);
+        return;
       }
       try {
-        const stream = await navigator.mediaDevices.getUserMedia({video: true});
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         setHasCameraPermission(true);
         streamRef.current = stream;
 
@@ -60,25 +60,19 @@ export default function NutriScanPage() {
       } catch (error) {
         console.error('Error accessing camera:', error);
         setHasCameraPermission(false);
-        toast({
-          variant: 'destructive',
-          title: 'Camera Access Denied',
-          description: 'Please enable camera permissions in your browser settings to use this app.',
-        });
       }
     };
 
     if (!capturedImage) {
-        getCameraPermission();
+      getCameraPermission();
     } else {
-        stopCameraStream();
+      stopCameraStream();
     }
   
     return () => {
       stopCameraStream();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [capturedImage]);
+  }, [capturedImage, toast]);
 
   const handleCapture = () => {
     if (videoRef.current && canvasRef.current) {
@@ -150,16 +144,21 @@ export default function NutriScanPage() {
                 className="object-cover"
               />
             ) : (
-              <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
-            )}
-             {hasCameraPermission === false && !capturedImage && (
-                <div className="absolute inset-0 flex items-center justify-center bg-muted/80">
-                    <div className="text-center p-4">
-                        <Camera className="w-12 h-12 mx-auto text-muted-foreground" />
-                        <p className="mt-2 text-muted-foreground max-w-sm">Camera access is denied. Please enable camera permissions in your browser settings or upload a file instead.</p>
+              <>
+                <video ref={videoRef} className="w-full h-full object-cover" autoPlay muted playsInline />
+                {hasCameraPermission === false && (
+                    <div className="absolute inset-0 flex items-center justify-center bg-muted/80 p-4">
+                        <Alert variant="destructive" className="max-w-md">
+                          <Camera className="h-4 w-4"/>
+                          <AlertTitle>Camera Access Denied</AlertTitle>
+                          <AlertDescription>
+                            Please enable camera permissions in your browser settings to use this feature, or upload a file instead.
+                          </AlertDescription>
+                        </Alert>
                     </div>
-                </div>
-             )}
+                )}
+              </>
+            )}
           </div>
           <canvas ref={canvasRef} className="hidden" />
           <Input 
@@ -256,5 +255,3 @@ export default function NutriScanPage() {
     </div>
   );
 }
-
-    
