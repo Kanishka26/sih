@@ -12,6 +12,10 @@ import {
     chatWithDietician,
     type ChatWithDieticianInput,
 } from '@/ai/flows/chat-with-dietician';
+import {
+    analyzeFoodImage,
+    type AnalyzeFoodImageInput,
+} from '@/ai/flows/analyze-food-image';
 import { z } from 'zod';
 
 const dietChartSchema = z.object({
@@ -62,4 +66,16 @@ export async function chatWithDieticianAction(input: ChatWithDieticianInput) {
         throw new Error('Invalid input: ' + parsedInput.error.message);
     }
     return await chatWithDietician(parsedInput.data);
+}
+
+const analyzeFoodImageSchema = z.object({
+    photoDataUri: z.string(),
+});
+
+export async function analyzeFoodImageAction(input: AnalyzeFoodImageInput) {
+    const parsedInput = analyzeFoodImageSchema.safeParse(input);
+    if (!parsedInput.success) {
+        throw new Error('Invalid input: ' + parsedInput.error.message);
+    }
+    return await analyzeFoodImage(parsedInput.data);
 }

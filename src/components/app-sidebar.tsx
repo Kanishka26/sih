@@ -20,6 +20,7 @@ import {
   ClipboardList,
   SunSnow,
   Stethoscope,
+  Camera
 } from 'lucide-react';
 import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
@@ -34,6 +35,7 @@ const menuItems = [
   { href: '/health-log', label: {en: 'HealthLog', hi: 'स्वास्थ्य लॉग'}, icon: ClipboardList },
   { href: '/seasonal-bhojan', label: {en: 'SeasonalBhojan', hi: 'ऋतु आहार'}, icon: SunSnow },
   { href: '/dietician-connect', label: {en: 'Dietician Connect', hi: 'आहार विशेषज्ञ से जुड़ें'}, icon: Stethoscope },
+  { href: '/nutriscan', label: {en: 'NutriScan', hi: 'पोषण स्कैन'}, icon: Camera },
 ];
 
 export function AppSidebar() {
