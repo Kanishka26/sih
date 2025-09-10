@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -190,7 +191,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Seasonal Foods</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/\\n/g, '<br />') }} />
+                 <div dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>
             <Card>
@@ -198,7 +199,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Dietary Recommendations</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations.replace(/\\n/g, '<br />') }} />
+                 <div dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>
         </div>

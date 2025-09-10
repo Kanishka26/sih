@@ -1,3 +1,4 @@
+
 'use server';
 
 import {
@@ -21,7 +22,7 @@ import { z } from 'zod';
 const dietChartSchema = z.object({
   age: z.coerce.number().min(1).max(120),
   gender: z.enum(['male', 'female']),
-  prakriti: z.string().min(2),
+  prakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
 });
 
 export async function generateDietChartAction(input: GenerateAyurvedaDietChartInput) {
@@ -33,9 +34,9 @@ export async function generateDietChartAction(input: GenerateAyurvedaDietChartIn
 }
 
 const seasonalFoodsSchema = z.object({
-  currentSeason: z.string().min(2),
-  userPrakriti: z.string().min(2),
-  location: z.string().min(2),
+  currentSeason: z.enum(['spring', 'summer', 'fall', 'winter']),
+  userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
+  location: z.string().min(2, 'Please enter a location.'),
 });
 
 export async function suggestSeasonalFoodsAction(
