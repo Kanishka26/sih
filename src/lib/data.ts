@@ -21,6 +21,18 @@ export type Recipe = {
   instructions: string[];
 };
 
+export type Patient = {
+    id: string;
+    name: string;
+    age: number;
+    gender: 'male' | 'female' | 'other';
+    prakriti: 'Vata' | 'Pitta' | 'Kapha' | 'Vata-Pitta' | 'Pitta-Kapha' | 'Vata-Kapha' | 'Tridoshic';
+    dietaryHabits: string;
+    bowelHabits: 'normal' | 'constipated' | 'loose';
+    allergies: string[];
+};
+
+
 export let foodDatabase: Food[] = [
     { id: 'apple', name: 'Apple', calories: 95, rasa: 'Sweet, Astringent', guna: 'Light, Cool', category: 'Fruit', virya: 'Cold', vipaka: 'Sweet' },
     { id: 'lentils', name: 'Lentils (Dal)', calories: 230, rasa: 'Sweet, Astringent', guna: 'Light, Dry', category: 'Legume', virya: 'Cold', vipaka: 'Sweet' },
@@ -160,4 +172,37 @@ export let recipes: Recipe[] = [
       'Toss well and serve.',
     ],
   },
+];
+
+export let patients: Patient[] = [
+    {
+        id: 'pat1',
+        name: 'Riya Sharma',
+        age: 34,
+        gender: 'female',
+        prakriti: 'Pitta',
+        dietaryHabits: 'Vegetarian, prefers spicy food.',
+        bowelHabits: 'normal',
+        allergies: ['Peanuts']
+    },
+    {
+        id: 'pat2',
+        name: 'Amit Singh',
+        age: 45,
+        gender: 'male',
+        prakriti: 'Kapha',
+        dietaryHabits: 'Non-vegetarian, eats late at night.',
+        bowelHabits: 'constipated',
+        allergies: []
+    },
+     {
+        id: 'pat3',
+        name: 'Sunita Joshi',
+        age: 28,
+        gender: 'female',
+        prakriti: 'Vata',
+        dietaryHabits: 'Skips meals often, drinks a lot of coffee.',
+        bowelHabits: 'loose',
+        allergies: ['Gluten']
+    }
 ];
