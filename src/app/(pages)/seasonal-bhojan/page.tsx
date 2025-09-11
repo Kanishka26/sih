@@ -39,27 +39,32 @@ import { useToast } from '@/hooks/use-toast';
 // A simple markdown to HTML converter
 const markdownToHtml = (markdown: string): string => {
   if (!markdown) return '';
-  const lines = markdown.split('\n').filter(line => line.trim().length > 0);
+  
+  const lines = markdown
+    .split('\n')
+    .filter(line => line.trim() !== '');
+  
   let html = '';
   let inList = false;
 
   lines.forEach(line => {
-    const trimmedLine = line.trim();
-    const isListItem = trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ') || /^\d+\./.test(trimmedLine);
+    line = line.trim();
+    const isListItem = line.startsWith('- ') || line.startsWith('* ') || /^\d+\./.test(line);
 
     if (isListItem && !inList) {
       html += '<ul>';
       inList = true;
     }
+    
     if (!isListItem && inList) {
       html += '</ul>';
       inList = false;
     }
 
     if (isListItem) {
-      html += `<li>${trimmedLine.replace(/^(- |\* |^\d+\.\s*)/, '')}</li>`;
+      html += `<li>${line.substring(line.indexOf(' ') + 1)}</li>`;
     } else {
-      html += `<p>${trimmedLine}</p>`;
+      html += `<p>${line}</p>`;
     }
   });
 
