@@ -46,9 +46,6 @@ export function SeasonalSuggestionsWidget() {
             </li>
           ))}
         </ul>
-        <Button asChild className="w-full" variant="outline">
-          <Link href="/seasonal-bhojan">Explore All Seasonal Foods</Link>
-        </Button>
       </CardContent>
     </Card>
   );
