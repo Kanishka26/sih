@@ -20,15 +20,10 @@ import {
   DialogDescription,
 } from '@/components/ui/dialog';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from '@/components/ui/carousel';
 import { type Recipe } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
+
+const VEGETARIAN_CATEGORIES = ['Vegetarian', 'Side', 'Dessert', 'Miscellaneous'];
 
 export default function RecipeGuruPage() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
@@ -41,15 +36,22 @@ export default function RecipeGuruPage() {
       try {
         const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian');
         const listData = await listRes.json();
-        const mealList = listData.meals.slice(0, 9); // Take first 9 recipes
-
-        const recipePromises = mealList.map((meal: { idMeal: string }) =>
+        
+        // Fetch details for all meals to get their categories
+        const recipePromises = listData.meals.map((meal: { idMeal: string }) =>
           fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`).then(res => res.json())
         );
         
         const results = await Promise.all(recipePromises);
-        const extractedRecipes = results.map(result => result.meals[0]).filter(Boolean);
-        setRecipes(extractedRecipes);
+        const allRecipes = results.map(result => result.meals[0]).filter(Boolean);
+
+        // Filter for vegetarian recipes
+        const vegetarianRecipes = allRecipes.filter(recipe => 
+            VEGETARIAN_CATEGORIES.includes(recipe.strCategory)
+        );
+
+        setRecipes(vegetarianRecipes);
+
       } catch (error) {
         console.error("Failed to fetch recipes:", error);
       } finally {
@@ -128,36 +130,27 @@ export default function RecipeGuruPage() {
             <h2 className="text-2xl font-headline font-semibold mb-4 capitalize">
               Featured Recipes
             </h2>
-            <Carousel
-              opts={{
-                align: 'start',
-              }}
-              className="w-full"
-            >
-              <CarouselContent>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {loading ? (
                     Array.from({length: 9}).map((_, index) => (
-                        <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                            <div className="p-1 h-full">
-                                <Card className="flex flex-col h-full">
-                                     <CardHeader className="p-0">
-                                        <Skeleton className="aspect-video w-full rounded-t-lg" />
-                                     </CardHeader>
-                                     <CardContent className="p-4 flex-1">
-                                        <Skeleton className="h-4 w-1/4 mb-2"/>
-                                        <Skeleton className="h-6 w-3/4"/>
-                                     </CardContent>
-                                     <CardFooter className="p-4 pt-0">
-                                        <Skeleton className="h-4 w-1/2"/>
-                                     </CardFooter>
-                                </Card>
-                            </div>
-                        </CarouselItem>
+                        <div key={index} className="h-full">
+                            <Card className="flex flex-col h-full">
+                                 <CardHeader className="p-0">
+                                    <Skeleton className="aspect-video w-full rounded-t-lg" />
+                                 </CardHeader>
+                                 <CardContent className="p-4 flex-1">
+                                    <Skeleton className="h-4 w-1/4 mb-2"/>
+                                    <Skeleton className="h-6 w-3/4"/>
+                                 </CardContent>
+                                 <CardFooter className="p-4 pt-0">
+                                    <Skeleton className="h-4 w-1/2"/>
+                                 </CardFooter>
+                            </Card>
+                        </div>
                     ))
                 ) : (
-                    recipes.map((recipe, index) => (
-                    <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                        <div className="p-1 h-full">
+                    recipes.map((recipe) => (
+                    <div key={recipe.idMeal} className="h-full">
                         <Card
                             className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full"
                             onClick={() => setSelectedRecipe(recipe)}
@@ -191,13 +184,9 @@ export default function RecipeGuruPage() {
                             </CardFooter>
                         </Card>
                         </div>
-                    </CarouselItem>
                     ))
                 )}
-              </CarouselContent>
-              <CarouselPrevious />
-              <CarouselNext />
-            </Carousel>
+            </div>
           </div>
       </div>
 
