@@ -96,44 +96,47 @@ export default function RecipeGuruPage() {
   }
 
   const recipeDialogContent = selectedRecipe && (
-     <>
-        <DialogHeader>
-            <div className="relative aspect-video mb-4">
-            <Image
-                src={selectedRecipe.strMealThumb}
-                alt={selectedRecipe.strMeal}
-                data-ai-hint={`${selectedRecipe.strCategory} dish`}
-                fill
-                className="object-cover rounded-md"
-            />
-            </div>
-            <DialogTitle className="text-2xl font-headline">
-            {selectedRecipe.strMeal}
-            </DialogTitle>
-            <DialogDescription>
-                {selectedRecipe.strArea && <Badge variant="secondary" className="mr-2">{selectedRecipe.strArea}</Badge>}
-                {selectedRecipe.strCategory && <Badge variant="outline">{selectedRecipe.strCategory}</Badge>}
-            </DialogDescription>
-        </DialogHeader>
-        <ScrollArea className="flex-1 pr-6">
-            <div className="grid gap-4 py-4">
-                <div>
-                    <h4 className="font-semibold mb-2">Ingredients</h4>
-                    <ul className="list-disc list-inside text-muted-foreground">
-                      {getIngredients(selectedRecipe).map((ing, i) => (
-                        <li key={i}>{ing}</li>
-                      ))}
-                    </ul>
+     <ScrollArea className="max-h-[90vh]">
+        <div className="p-6">
+            <DialogHeader className="mb-4">
+                <DialogTitle className="text-3xl font-headline">
+                    {selectedRecipe.strMeal}
+                </DialogTitle>
+                <DialogDescription>
+                    {selectedRecipe.strArea && <Badge variant="secondary" className="mr-2">{selectedRecipe.strArea}</Badge>}
+                    {selectedRecipe.strCategory && <Badge variant="outline">{selectedRecipe.strCategory}</Badge>}
+                </DialogDescription>
+            </DialogHeader>
+
+            <div className="grid md:grid-cols-2 gap-8">
+                <div className="space-y-4">
+                    <div className="relative aspect-video">
+                        <Image
+                            src={selectedRecipe.strMealThumb}
+                            alt={selectedRecipe.strMeal}
+                            data-ai-hint={`${selectedRecipe.strCategory} dish`}
+                            fill
+                            className="object-cover rounded-md"
+                        />
+                    </div>
+                    <div>
+                        <h4 className="font-semibold text-lg mb-2">Ingredients</h4>
+                        <ul className="list-disc list-inside text-muted-foreground space-y-1">
+                          {getIngredients(selectedRecipe).map((ing, i) => (
+                            <li key={i}>{ing}</li>
+                          ))}
+                        </ul>
+                    </div>
                 </div>
-                <div>
-                    <h4 className="font-semibold mb-2">Instructions</h4>
+                <div className="space-y-4">
+                    <h4 className="font-semibold text-lg mb-2">Instructions</h4>
                     <div className="text-muted-foreground space-y-3 whitespace-pre-wrap">
                       {selectedRecipe.strInstructions}
                     </div>
                 </div>
             </div>
-        </ScrollArea>
-        </>
+        </div>
+      </ScrollArea>
   );
 
   return (
@@ -252,12 +255,10 @@ export default function RecipeGuruPage() {
         open={!!selectedRecipe}
         onOpenChange={() => setSelectedRecipe(null)}
       >
-        <DialogContent className="sm:max-w-[625px] h-[90vh] flex flex-col bg-card text-card-foreground">
+        <DialogContent className="sm:max-w-4xl p-0 bg-card text-card-foreground">
           {recipeDialogContent}
         </DialogContent>
       </Dialog>
     </div>
   );
 }
-
-    
