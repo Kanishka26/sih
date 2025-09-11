@@ -36,16 +36,6 @@ import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foo
 import { Loader2, SunSnow } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-// Helper function to convert markdown lists to HTML
-const markdownToHtml = (markdown: string): string => {
-  if (!markdown) return '';
-  return markdown
-    .split('\n')
-    .filter(line => line.trim().startsWith('-') || line.trim().startsWith('*') || /^\d+\./.test(line.trim()))
-    .map(line => `<li>${line.replace(/^[-*]\s*|^\d+\.\s*/, '').trim()}</li>`)
-    .join('');
-};
-
 const formSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter']),
   userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
@@ -206,7 +196,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Seasonal Foods</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <ul dangerouslySetInnerHTML={{ __html: markdownToHtml(result.seasonalFoods) }} />
+                 <div dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>
             <Card>
@@ -214,7 +204,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Dietary Recommendations</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <ul dangerouslySetInnerHTML={{ __html: markdownToHtml(result.dietaryRecommendations) }} />
+                 <div dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations.replace(/\n/g, '<br />') }} />
             </CardContent>
             </Card>
         </div>
