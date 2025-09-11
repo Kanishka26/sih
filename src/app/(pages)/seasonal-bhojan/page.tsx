@@ -40,16 +40,14 @@ import { useToast } from '@/hooks/use-toast';
 const markdownToHtml = (markdown: string): string => {
   if (!markdown) return '';
   
-  const lines = markdown
-    .split('\n')
-    .filter(line => line.trim() !== '');
-  
+  const lines = markdown.split('\n');
   let html = '';
   let inList = false;
 
   lines.forEach(line => {
     line = line.trim();
-    const isListItem = line.startsWith('- ') || line.startsWith('* ') || /^\d+\./.test(line);
+    // Regex to identify list items starting with -, *, or number.
+    const isListItem = line.startsWith('- ') || line.startsWith('* ') || /^\d+\.\s/.test(line);
 
     if (isListItem && !inList) {
       html += '<ul>';
@@ -62,8 +60,9 @@ const markdownToHtml = (markdown: string): string => {
     }
 
     if (isListItem) {
-      html += `<li>${line.substring(line.indexOf(' ') + 1)}</li>`;
-    } else {
+      // Remove the list marker (e.g., '- ', '* ', '1. ')
+      html += `<li>${line.replace(/^(\* | - | \d+\.\s)/, '')}</li>`;
+    } else if (line) {
       html += `<p>${line}</p>`;
     }
   });
