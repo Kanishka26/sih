@@ -10,7 +10,6 @@ import { Button } from '@/components/ui/button';
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -28,13 +27,12 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
 import { suggestSeasonalFoodsAction } from '@/lib/actions';
 import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foods';
-import { Loader2, Wand2, Leaf, Utensils } from 'lucide-react';
+import { Loader2, Wand2, Leaf, Utensils, CheckCircle2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
 
@@ -51,15 +49,8 @@ const formSchema = z.object({
     .max(50),
 });
 
-function markdownToHtml(text: string) {
-  return text
-    .replace(/^### (.*$)/gim, '<h3>$1</h3>')
-    .replace(/^## (.*$)/gim, '<h2>$1</h2>')
-    .replace(/^# (.*$)/gim, '<h1>$1</h1>')
-    .replace(/^\* (.*$)/gim, '<li>$1</li>')
-    .replace(/^\- (.*$)/gim, '<li>$1</li>')
-    .replace(/<\/li><li>/g, '</li><li>') // handle consecutive list items
-    .replace(/\n/g, '<br />'); // handle newlines
+const parseMarkdownList = (text: string) => {
+    return text.split('\n').map(item => item.replace(/^[*-]\s*/, '').replace(/\*\*(.*?)\*\*/g, '$1')).filter(item => item.trim() !== '');
 }
 
 export default function SeasonalBhojanPage() {
@@ -217,20 +208,28 @@ export default function SeasonalBhojanPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
-            <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline">
-                <div
-                dangerouslySetInnerHTML={{
-                    __html: markdownToHtml(result.seasonalFoods),
-                }}
-                />
+            <div className='p-4 border rounded-lg bg-background'>
+                <h4 className="font-semibold text-lg mb-3 flex items-center gap-2"><Leaf className="w-5 h-5 text-primary"/> Seasonal Foods</h4>
+                <ul className="space-y-2">
+                    {parseMarkdownList(result.seasonalFoods).map((food, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                            <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                            <span className='text-muted-foreground'>{food}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
             <Separator />
-            <div className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline">
-                <div
-                dangerouslySetInnerHTML={{
-                    __html: markdownToHtml(result.dietaryRecommendations),
-                }}
-                />
+            <div className='p-4 border rounded-lg bg-background'>
+                <h4 className="font-semibold text-lg mb-3 flex items-center gap-2"><Utensils className="w-5 h-5 text-primary"/> Dietary Recommendations</h4>
+                 <ul className="space-y-2">
+                    {parseMarkdownList(result.dietaryRecommendations).map((rec, i) => (
+                        <li key={i} className="flex items-start gap-3">
+                             <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
+                             <span className='text-muted-foreground'>{rec}</span>
+                        </li>
+                    ))}
+                </ul>
             </div>
           </CardContent>
         </Card>
