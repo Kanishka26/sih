@@ -73,6 +73,36 @@ export default function SeasonalBhojanPage() {
     });
   }
 
+  // A simple markdown to HTML converter
+  const markdownToHtml = (markdown: string) => {
+    return markdown
+      .split('\n')
+      .map(line => {
+        line = line.trim();
+        if (line.startsWith('* ')) {
+          return `<li>${line.substring(2)}</li>`;
+        }
+        if (line.startsWith('- ')) {
+           return `<li>${line.substring(2)}</li>`;
+        }
+        if (line.startsWith('1. ')) {
+            return `<li>${line.substring(3)}</li>`;
+        }
+        if (line.trim() === '') {
+            return '<br />';
+        }
+        return `<p>${line}</p>`;
+      })
+      .join('')
+      .replace(/<\/li><li>/g, '</li><li>') // fix list spacing
+      .replace(/<\/li><p>/g, '</li></ul><p>')
+      .replace(/<p><\/p>/g, '')
+      .replace(/<li>/g, '<ul><li>')
+      .replace(/<\/li>/g, '</li></ul>')
+      .replace(/<\/ul><ul>/g, '');
+  };
+
+
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
       <div className="text-center">
@@ -191,7 +221,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Seasonal Foods</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/\n/g, '<br />') }} />
+                 <div dangerouslySetInnerHTML={{ __html: markdownToHtml(result.seasonalFoods) }} />
             </CardContent>
             </Card>
             <Card>
@@ -199,7 +229,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Dietary Recommendations</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations.replace(/\n/g, '<br />') }} />
+                 <div dangerouslySetInnerHTML={{ __html: markdownToHtml(result.dietaryRecommendations) }} />
             </CardContent>
             </Card>
         </div>
