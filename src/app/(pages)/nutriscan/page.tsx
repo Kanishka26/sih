@@ -14,7 +14,6 @@ import {
 import { useToast } from '@/hooks/use-toast';
 import { Camera, Loader2, RefreshCw, Sparkles, Upload } from 'lucide-react';
 import Image from 'next/image';
-import { analyzeFoodImageAction } from '@/lib/actions';
 import { type AnalyzeFoodImageOutput } from '@/ai/flows/analyze-food-image';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
@@ -112,12 +111,25 @@ export default function NutriScanPage() {
     if (!capturedImage) return;
     startTransition(async () => {
       try {
-        const res = await analyzeFoodImageAction({ photoDataUri: capturedImage });
+        const response = await fetch('/api/analysis/food-image', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ photoDataUri: capturedImage }),
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'Analysis failed');
+        }
+
+        const res = await response.json();
         setResult(res);
-      } catch (error) {
+      } catch (error: any) {
         toast({
           title: 'Analysis Failed',
-          description: 'Could not analyze the image. Please try again.',
+          description: error.message || 'Could not analyze the image. Please try again.',
           variant: 'destructive',
         });
       }
@@ -255,3 +267,5 @@ export default function NutriScanPage() {
     </div>
   );
 }
+
+    

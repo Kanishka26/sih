@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview Analyzes an image of food to determine its nutritional content.
@@ -14,7 +15,7 @@ const AnalyzeFoodImageInputSchema = z.object({
   photoDataUri: z
     .string()
     .describe(
-      "A photo of a food dish, as a data URI that must include a MIME type and use Base64 encoding. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+      "A photo of a food dish, as a data URI. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
     ),
 });
 export type AnalyzeFoodImageInput = z.infer<
@@ -40,25 +41,23 @@ export async function analyzeFoodImage(
   return analyzeFoodImageFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'analyzeFoodImagePrompt',
-  input: {schema: AnalyzeFoodImageInputSchema},
-  output: {schema: AnalyzeFoodImageOutputSchema},
-  prompt: `You are an expert nutritionist with deep knowledge of both modern nutritional science and ancient Ayurvedic principles. Your task is to analyze the food in the provided image.
-
-Analyze the image and return a JSON object with the following fields: dishName, ingredients, calories, protein, carbs, fat, and ayurvedicPerspective.
-
-Image: {{media url=photoDataUri}}`,
-});
-
 const analyzeFoodImageFlow = ai.defineFlow(
   {
     name: 'analyzeFoodImageFlow',
     inputSchema: AnalyzeFoodImageInputSchema,
     outputSchema: AnalyzeFoodImageOutputSchema,
   },
-  async input => {
-    const {output} = await prompt(input);
+  async ({ photoDataUri }) => {
+    const { output } = await ai.generate({
+      prompt: `You are an expert nutritionist with deep knowledge of both modern nutritional science and ancient Ayurvedic principles. Your task is to analyze the food in the provided image. Analyze the image and return a JSON object with the specified fields.
+      
+      Image: ${photoDataUri}`,
+      output: {
+        schema: AnalyzeFoodImageOutputSchema,
+      },
+    });
     return output!;
   }
 );
+
+    
