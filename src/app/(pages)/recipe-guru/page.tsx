@@ -39,12 +39,16 @@ export default function RecipeGuruPage() {
     async function fetchRecipes() {
       setLoading(true);
       try {
-        const recipePromises = Array.from({ length: 9 }, () =>
-          fetch('https://indian-food-db.herokuapp.com/api/getrandommeal').then(res => res.json())
+        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian');
+        const listData = await listRes.json();
+        const mealList = listData.meals.slice(0, 9); // Take first 9 recipes
+
+        const recipePromises = mealList.map((meal: { idMeal: string }) =>
+          fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`).then(res => res.json())
         );
+        
         const results = await Promise.all(recipePromises);
-        // The API returns an object with a 'recipe' property which is an array of one
-        const extractedRecipes = results.map(result => result.recipe[0]).filter(Boolean);
+        const extractedRecipes = results.map(result => result.meals[0]).filter(Boolean);
         setRecipes(extractedRecipes);
       } catch (error) {
         console.error("Failed to fetch recipes:", error);
@@ -58,8 +62,8 @@ export default function RecipeGuruPage() {
   const getIngredients = (recipe: Recipe) => {
     const ingredients = [];
     for (let i = 1; i <= 20; i++) {
-        const ingredient = recipe[`strIngredient${i}` as keyof Recipe];
-        const measure = recipe[`strMeasure${i}` as keyof Recipe];
+        const ingredient = recipe[`strIngredient${i}`];
+        const measure = recipe[`strMeasure${i}`];
         if (ingredient && ingredient.trim() !== '') {
             ingredients.push(`${measure ? measure.trim() : ''} ${ingredient.trim()}`.trim());
         }
@@ -132,7 +136,7 @@ export default function RecipeGuruPage() {
             >
               <CarouselContent>
                 {loading ? (
-                    Array.from({length: 3}).map((_, index) => (
+                    Array.from({length: 9}).map((_, index) => (
                         <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
                             <div className="p-1 h-full">
                                 <Card className="flex flex-col h-full">

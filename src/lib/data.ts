@@ -19,8 +19,7 @@ export type Recipe = {
     strMealThumb: string;
     strTags: string | null;
     strYoutube: string;
-    [key: `strIngredient${number}`]: string | null;
-    [key: `strMeasure${number}`]: string | null;
+    [key: string]: string | null; // For strIngredient and strMeasure
 };
 
 export type Patient = {
