@@ -82,7 +82,7 @@ export default function NutriScanPage() {
       const context = canvas.getContext('2d');
       if (context) {
         context.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
-        const dataUri = canvas.toDataURL('image/jpeg');
+        const dataUri = canvas.toDataURL('image/jpeg', 0.7);
         setCapturedImage(dataUri);
         setResult(null);
       }
@@ -267,5 +267,3 @@ export default function NutriScanPage() {
     </div>
   );
 }
-
-    
