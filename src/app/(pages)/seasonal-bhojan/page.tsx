@@ -36,42 +36,14 @@ import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foo
 import { Loader2, SunSnow } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
-// A simple markdown to HTML converter
+// Helper function to convert markdown lists to HTML
 const markdownToHtml = (markdown: string): string => {
   if (!markdown) return '';
-  
-  const lines = markdown.split('\n');
-  let html = '';
-  let inList = false;
-
-  lines.forEach(line => {
-    line = line.trim();
-    // Regex to identify list items starting with -, *, or number.
-    const isListItem = line.startsWith('- ') || line.startsWith('* ') || /^\d+\.\s/.test(line);
-
-    if (isListItem && !inList) {
-      html += '<ul>';
-      inList = true;
-    }
-    
-    if (!isListItem && inList) {
-      html += '</ul>';
-      inList = false;
-    }
-
-    if (isListItem) {
-      // Remove the list marker (e.g., '- ', '* ', '1. ')
-      html += `<li>${line.replace(/^(\* | - | \d+\.\s)/, '')}</li>`;
-    } else if (line) {
-      html += `<p>${line}</p>`;
-    }
-  });
-
-  if (inList) {
-    html += '</ul>';
-  }
-
-  return html;
+  return markdown
+    .split('\n')
+    .filter(line => line.trim().startsWith('-') || line.trim().startsWith('*') || /^\d+\./.test(line.trim()))
+    .map(line => `<li>${line.replace(/^[-*]\s*|^\d+\.\s*/, '').trim()}</li>`)
+    .join('');
 };
 
 const formSchema = z.object({
@@ -191,7 +163,7 @@ export default function SeasonalBhojanPage() {
                   name="location"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location (City or State)</FormLabel>
+                      <FormLabel>Location</FormLabel>
                       <FormControl>
                         <Input placeholder="e.g., Mumbai or California" {...field} />
                       </FormControl>
@@ -234,7 +206,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Seasonal Foods</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: markdownToHtml(result.seasonalFoods) }} />
+                 <ul dangerouslySetInnerHTML={{ __html: markdownToHtml(result.seasonalFoods) }} />
             </CardContent>
             </Card>
             <Card>
@@ -242,7 +214,7 @@ export default function SeasonalBhojanPage() {
                 <CardTitle>Dietary Recommendations</CardTitle>
             </CardHeader>
             <CardContent className="prose prose-sm max-w-none dark:prose-invert">
-                 <div dangerouslySetInnerHTML={{ __html: markdownToHtml(result.dietaryRecommendations) }} />
+                 <ul dangerouslySetInnerHTML={{ __html: markdownToHtml(result.dietaryRecommendations) }} />
             </CardContent>
             </Card>
         </div>
