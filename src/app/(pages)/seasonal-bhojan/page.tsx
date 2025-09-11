@@ -75,6 +75,7 @@ export default function SeasonalBhojanPage() {
 
   // A simple markdown to HTML converter
   const markdownToHtml = (markdown: string) => {
+    if (!markdown) return '';
     return markdown
       .split('\n')
       .map(line => {
@@ -85,21 +86,27 @@ export default function SeasonalBhojanPage() {
         if (line.startsWith('- ')) {
            return `<li>${line.substring(2)}</li>`;
         }
-        if (line.startsWith('1. ')) {
-            return `<li>${line.substring(3)}</li>`;
+        if (/^\d+\.\s/.test(line)) {
+            return `<li>${line.replace(/^\d+\.\s/, '')}</li>`;
         }
         if (line.trim() === '') {
-            return '<br />';
+            return ''; // Don't create <p> for empty lines
         }
-        return `<p>${line}</p>`;
+        // Wrap lines that are not list items in <p> tags
+        if (!line.startsWith('<')) {
+          return `<p>${line}</p>`;
+        }
+        return line;
       })
+      .filter(line => line !== '')
       .join('')
       .replace(/<\/li><li>/g, '</li><li>') // fix list spacing
-      .replace(/<\/li><p>/g, '</li></ul><p>')
-      .replace(/<p><\/p>/g, '')
-      .replace(/<li>/g, '<ul><li>')
-      .replace(/<\/li>/g, '</li></ul>')
-      .replace(/<\/ul><ul>/g, '');
+      .replace(/(<\/li>)(<p>)/g, '$1</ul>$2') // Close UL before a P
+      .replace(/<p>(<li>)/g, '<p><ul>$1') // Open UL if a LI is inside a P
+      .replace(/<\/p>/g, '') // Remove all closing p, we rely on block nature
+      .replace(/<li>/g, '<ul><li>') // Wrap LIs in UL
+      .replace(/<\/li>/g, '</li></ul>') // Close ULs
+      .replace(/<\/ul><ul>/g, ''); // Clean up adjacent ULs
   };
 
 
@@ -164,7 +171,7 @@ export default function SeasonalBhojanPage() {
                         <FormControl>
                           <SelectTrigger>
                             <SelectValue placeholder="Select your prakriti" />
-                          </SelectTrigger>
+                          </Trigger>
                         </FormControl>
                         <SelectContent>
                           <SelectItem value="Vata">Vata</SelectItem>
@@ -181,10 +188,13 @@ export default function SeasonalBhojanPage() {
                   name="location"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Location</FormLabel>
+                      <FormLabel>Location (City or State)</FormLabel>
                       <FormControl>
-                        <Input placeholder="e.g., California" {...field} />
+                        <Input placeholder="e.g., Mumbai or California" {...field} />
                       </FormControl>
+                      <FormDescription>
+                        Enter a city or state for better results.
+                      </FormDescription>
                       <FormMessage />
                     </FormItem>
                   )}
