@@ -11,7 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   Dialog,
   DialogContent,
@@ -22,13 +22,19 @@ import {
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { type Recipe } from '@/lib/data';
 import { Skeleton } from '@/components/ui/skeleton';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const VEGETARIAN_CATEGORIES = ['Vegetarian', 'Side', 'Dessert', 'Miscellaneous'];
+const RECIPES_PER_PAGE = 9;
 
 export default function RecipeGuruPage() {
   const [selectedRecipe, setSelectedRecipe] = useState<Recipe | null>(null);
-  const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [allRecipes, setAllRecipes] = useState<Recipe[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     async function fetchRecipes() {
@@ -43,14 +49,14 @@ export default function RecipeGuruPage() {
         );
         
         const results = await Promise.all(recipePromises);
-        const allRecipes = results.map(result => result.meals[0]).filter(Boolean);
+        const recipesFromApi = results.map(result => result.meals[0]).filter(Boolean);
 
         // Filter for vegetarian recipes
-        const vegetarianRecipes = allRecipes.filter(recipe => 
+        const vegetarianRecipes = recipesFromApi.filter(recipe => 
             VEGETARIAN_CATEGORIES.includes(recipe.strCategory)
         );
 
-        setRecipes(vegetarianRecipes);
+        setAllRecipes(vegetarianRecipes);
 
       } catch (error) {
         console.error("Failed to fetch recipes:", error);
@@ -60,6 +66,24 @@ export default function RecipeGuruPage() {
     }
     fetchRecipes();
   }, []);
+
+  const filteredRecipes = useMemo(() => {
+    return allRecipes.filter(recipe =>
+        recipe.strMeal.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }, [allRecipes, searchTerm]);
+
+  const totalPages = Math.ceil(filteredRecipes.length / RECIPES_PER_PAGE);
+
+  const currentRecipes = useMemo(() => {
+    const startIndex = (currentPage - 1) * RECIPES_PER_PAGE;
+    const endIndex = startIndex + RECIPES_PER_PAGE;
+    return filteredRecipes.slice(startIndex, endIndex);
+  }, [filteredRecipes, currentPage]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm]);
   
   const getIngredients = (recipe: Recipe) => {
     const ingredients = [];
@@ -125,70 +149,104 @@ export default function RecipeGuruPage() {
         </p>
       </div>
 
-      <div className="space-y-12">
-        <div>
-            <h2 className="text-2xl font-headline font-semibold mb-4 capitalize">
-              Featured Recipes
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {loading ? (
-                    Array.from({length: 9}).map((_, index) => (
-                        <div key={index} className="h-full">
-                            <Card className="flex flex-col h-full">
-                                 <CardHeader className="p-0">
-                                    <Skeleton className="aspect-video w-full rounded-t-lg" />
-                                 </CardHeader>
-                                 <CardContent className="p-4 flex-1">
-                                    <Skeleton className="h-4 w-1/4 mb-2"/>
-                                    <Skeleton className="h-6 w-3/4"/>
-                                 </CardContent>
-                                 <CardFooter className="p-4 pt-0">
-                                    <Skeleton className="h-4 w-1/2"/>
-                                 </CardFooter>
-                            </Card>
-                        </div>
-                    ))
-                ) : (
-                    recipes.map((recipe) => (
-                    <div key={recipe.idMeal} className="h-full">
-                        <Card
-                            className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full"
-                            onClick={() => setSelectedRecipe(recipe)}
-                        >
-                            <CardHeader className="p-0">
-                            <div className="relative aspect-video">
-                                <Image
-                                src={recipe.strMealThumb}
-                                alt={recipe.strMeal}
-                                data-ai-hint={`${recipe.strCategory} food`}
-                                fill
-                                className="object-cover rounded-t-lg"
-                                />
-                            </div>
-                            </CardHeader>
-                            <CardContent className="p-4 flex-1">
-                            <Badge
-                                variant="secondary"
-                                className="mb-2 capitalize"
-                            >
-                                {recipe.strCategory}
-                            </Badge>
-                            <h3 className="font-semibold text-lg">
-                                {recipe.strMeal}
-                            </h3>
-                            </CardContent>
-                            <CardFooter className="p-4 pt-0">
-                            <p className="text-sm text-muted-foreground">
-                                Area: {recipe.strArea}
-                            </p>
-                            </CardFooter>
-                        </Card>
-                        </div>
-                    ))
-                )}
-            </div>
-          </div>
+      <div className="relative max-w-lg">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
+          <Input
+            placeholder="Search for recipes..."
+            className="pl-10"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
       </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {loading ? (
+              Array.from({length: 9}).map((_, index) => (
+                  <div key={index} className="h-full">
+                      <Card className="flex flex-col h-full">
+                           <CardHeader className="p-0">
+                              <Skeleton className="aspect-video w-full rounded-t-lg" />
+                           </CardHeader>
+                           <CardContent className="p-4 flex-1">
+                              <Skeleton className="h-4 w-1/4 mb-2"/>
+                              <Skeleton className="h-6 w-3/4"/>
+                           </CardContent>
+                           <CardFooter className="p-4 pt-0">
+                              <Skeleton className="h-4 w-1/2"/>
+                           </CardFooter>
+                      </Card>
+                  </div>
+              ))
+          ) : (
+            currentRecipes.map((recipe) => (
+              <div key={recipe.idMeal} className="h-full">
+                  <Card
+                      className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow h-full"
+                      onClick={() => setSelectedRecipe(recipe)}
+                  >
+                      <CardHeader className="p-0">
+                      <div className="relative aspect-video">
+                          <Image
+                          src={recipe.strMealThumb}
+                          alt={recipe.strMeal}
+                          data-ai-hint={`${recipe.strCategory} food`}
+                          fill
+                          className="object-cover rounded-t-lg"
+                          />
+                      </div>
+                      </CardHeader>
+                      <CardContent className="p-4 flex-1">
+                      <Badge
+                          variant="secondary"
+                          className="mb-2 capitalize"
+                      >
+                          {recipe.strCategory}
+                      </Badge>
+                      <h3 className="font-semibold text-lg">
+                          {recipe.strMeal}
+                      </h3>
+                      </CardContent>
+                      <CardFooter className="p-4 pt-0">
+                      <p className="text-sm text-muted-foreground">
+                          Area: {recipe.strArea}
+                      </p>
+                      </CardFooter>
+                  </Card>
+                  </div>
+              ))
+          )}
+      </div>
+      {!loading && filteredRecipes.length === 0 && (
+          <div className="text-center text-muted-foreground py-12">
+              <p className="text-lg font-semibold">No Recipes Found</p>
+              <p>Try adjusting your search term.</p>
+          </div>
+      )}
+
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center space-x-2 pt-4">
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+            disabled={currentPage === 1}
+          >
+            <ChevronLeft className="mr-2" />
+            Previous
+          </Button>
+          <span className="text-sm text-muted-foreground">
+            Page {currentPage} of {totalPages}
+          </span>
+          <Button
+            variant="outline"
+            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={currentPage === totalPages}
+          >
+            Next
+            <ChevronRight className="ml-2" />
+          </Button>
+        </div>
+      )}
+
 
       <Dialog
         open={!!selectedRecipe}
