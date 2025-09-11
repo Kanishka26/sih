@@ -33,6 +33,7 @@ const menuItems = [
   { href: '/recipe-guru', label: {en: 'RecipeGuru', hi: 'विधान गुरु'}, icon: ChefHat },
   { href: '/nutrient-vault', label: {en: 'NutrientVault', hi: 'पोषण भंडार'}, icon: BookOpen },
   { href: '/health-log', label: {en: 'HealthLog', hi: 'स्वास्थ्य लॉग'}, icon: ClipboardList },
+  { href: '/seasonal-bhojan', label: {en: 'SeasonalBhojan', hi: 'ऋतु आहार'}, icon: SunSnow },
   { href: '/dietician-connect', label: {en: 'Dietician Connect', hi: 'आहार विशेषज्ञ से जुड़ें'}, icon: Stethoscope },
   { href: '/nutriscan', label: {en: 'NutriScan', hi: 'पोषण स्कैन'}, icon: Camera },
 ];
