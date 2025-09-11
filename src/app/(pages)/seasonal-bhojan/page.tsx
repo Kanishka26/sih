@@ -42,6 +42,29 @@ const formSchema = z.object({
   location: z.string().min(2, 'Please enter a location.'),
 });
 
+// A simple markdown to HTML converter
+const markdownToHtml = (markdown: string) => {
+  if (!markdown) return '';
+  // Convert markdown-style lists to HTML lists
+  const html = markdown
+    .replace(/^\s*-\s/gm, '<li>')
+    .replace(/^\s*\*\s/gm, '<li>')
+    .replace(/^\s*\d+\.\s/gm, '<li>')
+    .replace(/<\/li>\n/g, '</li>')
+    .replace(/<li>/g, '<li>')
+    .replace(/$/gm, '</li>')
+    .replace(/<li>/g, '<ul><li>')
+    .replace(/<\/li>$/g, '</li></ul>')
+    .replace(/<\/li>\n<ul>/g, '</li></ul>\n<ul>')
+    .replace(/\n/g, '<br />')
+    .replace(/<ul><br \/>/g, '<ul>')
+    .replace(/<br \/><li>/g, '<li>')
+    .replace(/<\/li><br \/>/g, '</li>')
+    .replace(/<\/ul><br \/>/g, '</ul>');
+  
+  return html.replace(/<li>/g, '<li class="list-disc ml-4">');
+};
+
 export default function SeasonalBhojanPage() {
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<SuggestSeasonalFoodsOutput | null>(null);
@@ -72,42 +95,6 @@ export default function SeasonalBhojanPage() {
       }
     });
   }
-
-  // A simple markdown to HTML converter
-  const markdownToHtml = (markdown: string) => {
-    if (!markdown) return '';
-    return markdown
-      .split('\n')
-      .map(line => {
-        line = line.trim();
-        if (line.startsWith('* ')) {
-          return `<li>${line.substring(2)}</li>`;
-        }
-        if (line.startsWith('- ')) {
-           return `<li>${line.substring(2)}</li>`;
-        }
-        if (/^\d+\.\s/.test(line)) {
-            return `<li>${line.replace(/^\d+\.\s/, '')}</li>`;
-        }
-        if (line.trim() === '') {
-            return ''; // Don't create <p> for empty lines
-        }
-        // Wrap lines that are not list items in <p> tags
-        if (!line.startsWith('<')) {
-          return `<p>${line}</p>`;
-        }
-        return line;
-      })
-      .filter(line => line !== '')
-      .join('')
-      .replace(/<\/li><li>/g, '</li><li>') // fix list spacing
-      .replace(/(<\/li>)(<p>)/g, '$1</ul>$2') // Close UL before a P
-      .replace(/<p>(<li>)/g, '<p><ul>$1') // Open UL if a LI is inside a P
-      .replace(/<\/p>/g, '') // Remove all closing p, we rely on block nature
-      .replace(/<li>/g, '<ul><li>') // Wrap LIs in UL
-      .replace(/<\/li>/g, '</li></ul>') // Close ULs
-      .replace(/<\/ul><ul>/g, ''); // Clean up adjacent ULs
-  };
 
 
   return (
