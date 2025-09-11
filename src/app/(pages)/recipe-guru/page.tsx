@@ -26,7 +26,6 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
 
-const VEGETARIAN_CATEGORIES = ['Vegetarian', 'Side', 'Dessert', 'Miscellaneous'];
 const RECIPES_PER_PAGE = 9;
 
 export default function RecipeGuruPage() {
@@ -40,23 +39,20 @@ export default function RecipeGuruPage() {
     async function fetchRecipes() {
       setLoading(true);
       try {
-        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian');
+        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian');
         const listData = await listRes.json();
         
-        // Fetch details for all meals to get their categories
-        const recipePromises = listData.meals.map((meal: { idMeal: string }) =>
+        const recipeStubs = listData.meals || [];
+
+        // Fetch details for all meals
+        const recipePromises = recipeStubs.map((meal: { idMeal: string }) =>
           fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal.idMeal}`).then(res => res.json())
         );
         
         const results = await Promise.all(recipePromises);
         const recipesFromApi = results.map(result => result.meals[0]).filter(Boolean);
 
-        // Filter for vegetarian recipes
-        const vegetarianRecipes = recipesFromApi.filter(recipe => 
-            VEGETARIAN_CATEGORIES.includes(recipe.strCategory)
-        );
-
-        setAllRecipes(vegetarianRecipes);
+        setAllRecipes(recipesFromApi);
 
       } catch (error) {
         console.error("Failed to fetch recipes:", error);
@@ -88,8 +84,10 @@ export default function RecipeGuruPage() {
   const getIngredients = (recipe: Recipe) => {
     const ingredients = [];
     for (let i = 1; i <= 20; i++) {
-        const ingredient = recipe[`strIngredient${i}`];
-        const measure = recipe[`strMeasure${i}`];
+        const ingredientKey = `strIngredient${i}` as keyof Recipe;
+        const measureKey = `strMeasure${i}` as keyof Recipe;
+        const ingredient = recipe[ingredientKey];
+        const measure = recipe[measureKey];
         if (ingredient && ingredient.trim() !== '') {
             ingredients.push(`${measure ? measure.trim() : ''} ${ingredient.trim()}`.trim());
         }
@@ -113,8 +111,8 @@ export default function RecipeGuruPage() {
             {selectedRecipe.strMeal}
             </DialogTitle>
             <DialogDescription>
-                <Badge variant="secondary" className="mr-2">{selectedRecipe.strArea}</Badge>
-                <Badge variant="outline">{selectedRecipe.strCategory}</Badge>
+                {selectedRecipe.strArea && <Badge variant="secondary" className="mr-2">{selectedRecipe.strArea}</Badge>}
+                {selectedRecipe.strCategory && <Badge variant="outline">{selectedRecipe.strCategory}</Badge>}
             </DialogDescription>
         </DialogHeader>
         <ScrollArea className="flex-1 pr-6">
@@ -196,19 +194,19 @@ export default function RecipeGuruPage() {
                       </div>
                       </CardHeader>
                       <CardContent className="p-4 flex-1">
-                      <Badge
+                      {recipe.strCategory && <Badge
                           variant="secondary"
                           className="mb-2 capitalize"
                       >
                           {recipe.strCategory}
-                      </Badge>
+                      </Badge>}
                       <h3 className="font-semibold text-lg">
                           {recipe.strMeal}
                       </h3>
                       </CardContent>
                       <CardFooter className="p-4 pt-0">
                       <p className="text-sm text-muted-foreground">
-                          Area: {recipe.strArea}
+                          {recipe.strArea}
                       </p>
                       </CardFooter>
                   </Card>
@@ -227,10 +225,11 @@ export default function RecipeGuruPage() {
         <div className="flex items-center justify-center space-x-2 pt-4">
           <Button
             variant="outline"
+            size="sm"
             onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
             disabled={currentPage === 1}
           >
-            <ChevronLeft className="mr-2" />
+            <ChevronLeft className="mr-2 h-4 w-4" />
             Previous
           </Button>
           <span className="text-sm text-muted-foreground">
@@ -238,11 +237,12 @@ export default function RecipeGuruPage() {
           </span>
           <Button
             variant="outline"
+            size="sm"
             onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={currentPage === totalPages}
           >
             Next
-            <ChevronRight className="ml-2" />
+            <ChevronRight className="ml-2 h-4 w-4" />
           </Button>
         </div>
       )}
@@ -259,3 +259,5 @@ export default function RecipeGuruPage() {
     </div>
   );
 }
+
+    
