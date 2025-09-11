@@ -36,34 +36,46 @@ import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foo
 import { Loader2, SunSnow } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 
+// A simple markdown to HTML converter
+const markdownToHtml = (markdown: string): string => {
+  if (!markdown) return '';
+  const lines = markdown.split('\n').filter(line => line.trim().length > 0);
+  let html = '';
+  let inList = false;
+
+  lines.forEach(line => {
+    const trimmedLine = line.trim();
+    const isListItem = trimmedLine.startsWith('- ') || trimmedLine.startsWith('* ') || /^\d+\./.test(trimmedLine);
+
+    if (isListItem && !inList) {
+      html += '<ul>';
+      inList = true;
+    }
+    if (!isListItem && inList) {
+      html += '</ul>';
+      inList = false;
+    }
+
+    if (isListItem) {
+      html += `<li>${trimmedLine.replace(/^(- |\* |^\d+\.\s*)/, '')}</li>`;
+    } else {
+      html += `<p>${trimmedLine}</p>`;
+    }
+  });
+
+  if (inList) {
+    html += '</ul>';
+  }
+
+  return html;
+};
+
 const formSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter']),
   userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
   location: z.string().min(2, 'Please enter a location.'),
 });
 
-// A simple markdown to HTML converter
-const markdownToHtml = (markdown: string) => {
-  if (!markdown) return '';
-  // Convert markdown-style lists to HTML lists
-  const html = markdown
-    .replace(/^\s*-\s/gm, '<li>')
-    .replace(/^\s*\*\s/gm, '<li>')
-    .replace(/^\s*\d+\.\s/gm, '<li>')
-    .replace(/<\/li>\n/g, '</li>')
-    .replace(/<li>/g, '<li>')
-    .replace(/$/gm, '</li>')
-    .replace(/<li>/g, '<ul><li>')
-    .replace(/<\/li>$/g, '</li></ul>')
-    .replace(/<\/li>\n<ul>/g, '</li></ul>\n<ul>')
-    .replace(/\n/g, '<br />')
-    .replace(/<ul><br \/>/g, '<ul>')
-    .replace(/<br \/><li>/g, '<li>')
-    .replace(/<\/li><br \/>/g, '</li>')
-    .replace(/<\/ul><br \/>/g, '</ul>');
-  
-  return html.replace(/<li>/g, '<li class="list-disc ml-4">');
-};
 
 export default function SeasonalBhojanPage() {
   const [isPending, startTransition] = useTransition();
