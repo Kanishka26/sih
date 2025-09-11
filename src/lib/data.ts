@@ -11,14 +11,16 @@ export type Food = {
 };
 
 export type Recipe = {
-  mood: string;
-  title: string;
-  rasa: string;
-  image: string;
-  dataAiHint: string;
-  description: string;
-  ingredients: string[];
-  instructions: string[];
+    idMeal: string;
+    strMeal: string;
+    strCategory: string;
+    strArea: string;
+    strInstructions: string;
+    strMealThumb: string;
+    strTags: string | null;
+    strYoutube: string;
+    [key: `strIngredient${number}`]: string | null;
+    [key: `strMeasure${number}`]: string | null;
 };
 
 export type Patient = {
@@ -63,132 +65,7 @@ export let foodDatabase: Food[] = [
     { id: 'ginger', name: 'Ginger', calories: 4, rasa: 'Pungent, Sweet', guna: 'Light, Oily, Hot', category: 'Spice', virya: 'Hot', vipaka: 'Sweet' },
 ];
 
-export let recipes: Recipe[] = [
-  {
-    mood: 'Calming',
-    title: 'Soothing Mung Dal Soup',
-    rasa: 'Sweet, Salty',
-    image: 'https://picsum.photos/seed/mung-dal-soup/400/300',
-    dataAiHint: 'bowl of yellow mung dal soup',
-    description:
-      'A light and nourishing soup, perfect for calming the digestive system and promoting a sense of well-being.',
-    ingredients: [
-      '1 cup Yellow Mung Dal',
-      '4 cups Water',
-      '1 tsp Ghee',
-      '1/2 tsp Turmeric',
-      'Pinch of Asafoetida (Hing)',
-      'Salt to taste',
-    ],
-    instructions: [
-      'Rinse dal and soak for 30 minutes.',
-      'In a pot, heat ghee and add hing and turmeric.',
-      'Add dal and water, bring to a boil.',
-      'Simmer until dal is soft, then add salt.',
-    ],
-  },
-  {
-    mood: 'Calming',
-    title: 'Warm Spiced Milk',
-    rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/spiced-milk-glass/400/300',
-    dataAiHint: 'warm milk in a glass with spices',
-    description:
-      'A comforting and easy-to-digest drink that promotes restful sleep.',
-    ingredients: [
-      '1 cup Milk (dairy or non-dairy)',
-      'Pinch of Cardamom',
-      'Pinch of Nutmeg',
-      '1 tsp Maple Syrup (optional)',
-    ],
-    instructions: [
-      'Gently warm the milk.',
-      'Stir in the spices and sweetener.',
-      'Serve warm before bedtime.',
-    ],
-  },
-  {
-    mood: 'Grounding',
-    title: 'Hearty Root Vegetable Stew',
-    rasa: 'Sweet, Astringent',
-    image: 'https://picsum.photos/seed/vegetable-stew-bowl/400/300',
-    dataAiHint: 'bowl of hearty vegetable stew',
-    description:
-      'A warm and substantial stew made with root vegetables to help you feel centered and grounded.',
-    ingredients: [
-      '1 cup cubed Carrots',
-      '1 cup cubed Sweet Potatoes',
-      '1/2 cup Green Beans',
-      '1 tsp Ginger, grated',
-      'Cumin seeds, Coriander powder',
-      '4 cups Vegetable Broth',
-    ],
-    instructions: [
-      'Sauté spices in a little oil.',
-      'Add vegetables and stir for a few minutes.',
-      'Pour in broth and simmer until vegetables are tender.',
-    ],
-  },
-  {
-    mood: 'Grounding',
-    title: 'Baked Sweet Potato with Ghee',
-    rasa: 'Sweet',
-    image: 'https://picsum.photos/seed/baked-sweet-potato/400/300',
-    dataAiHint: 'baked sweet potato with butter',
-    description:
-      'A simple, sweet, and satisfying dish that is nourishing and grounding for Vata dosha.',
-    ingredients: [
-      '1 large Sweet Potato',
-      '1 tbsp Ghee',
-      'Pinch of Cinnamon',
-    ],
-    instructions: [
-      'Preheat oven to 400°F (200°C).',
-      'Pierce the sweet potato and bake for 45-60 minutes.',
-      'Slice open, drizzle with ghee, and sprinkle with cinnamon.',
-    ],
-  },
-  {
-    mood: 'Aromatic',
-    title: 'Spiced Turmeric-Ginger Tea',
-    rasa: 'Pungent, Bitter',
-    image: 'https://picsum.photos/seed/turmeric-ginger-tea/400/300',
-    dataAiHint: 'cup of ginger tea with lemon',
-    description:
-      'An aromatic and invigorating tea that stimulates digestion and warms the body.',
-    ingredients: [
-      '1 inch Ginger, sliced',
-      '1/2 tsp Turmeric powder',
-      '1 Cinnamon stick',
-      '2 cups Water',
-      'Honey to taste',
-    ],
-    instructions: [
-      'Boil all ingredients (except honey) for 10 minutes.',
-      'Strain and add honey before serving.',
-    ],
-  },
-  {
-    mood: 'Crunchy',
-    title: 'Quinoa and Toasted Almond Salad',
-    rasa: 'Astringent, Sweet',
-    image: 'https://picsum.photos/seed/quinoa-salad-bowl/400/300',
-    dataAiHint: 'quinoa salad in a bowl',
-    description: 'A refreshing and crunchy salad that is both satisfying and light.',
-    ingredients: [
-      '1 cup cooked Quinoa',
-      '1/4 cup Toasted Almonds',
-      '1/4 cup chopped Cucumber',
-      'Lemon juice, Olive oil',
-      'Fresh parsley',
-    ],
-    instructions: [
-      'Combine all ingredients in a bowl.',
-      'Dress with lemon juice and olive oil.',
-      'Toss well and serve.',
-    ],
-  },
-];
+export let recipes: any[] = [];
 
 export let patients: Patient[] = [
     {
