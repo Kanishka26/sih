@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -56,23 +57,15 @@ const prompt = ai.definePrompt({
   name: 'suggestSeasonalFoodsPrompt',
   input: {schema: SuggestSeasonalFoodsInputSchema},
   output: {schema: SuggestSeasonalFoodsOutputSchema},
-  prompt: `You are an Ayurvedic expert who provides seasonal food suggestions and dietary recommendations based on the current season, the user’s prakriti, and Ayurvedic principles.
+  prompt: `You are an Ayurvedic expert. Provide seasonal food suggestions and dietary recommendations based on the user's location, the current season, and their prakriti.
 
 Current Season: {{{currentSeason}}}
 User Prakriti: {{{userPrakriti}}}
 User Location: {{{location}}}
 
-Suggest seasonal foods and dietary recommendations:
-
-Foods for the season:
-
-{{#each (split seasonalFoods)}}
-- {{this}}
-{{/each}}
-
-Dietary recommendations:
-
-{{dietaryRecommendations}}`,
+Based on the above information, provide:
+1.  A markdown list of seasonal foods that are ideal.
+2.  A markdown list of general dietary recommendations for this season and prakriti.`,
 });
 
 const suggestSeasonalFoodsFlow = ai.defineFlow(
