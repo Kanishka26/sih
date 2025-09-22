@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Leaf, Sun } from 'lucide-react';
@@ -8,7 +8,6 @@ const seasonalFoods = [
   { name: 'Mango', reason: 'Cools the body' },
   { name: 'Cucumber', reason: 'Hydrating' },
   { name: 'Watermelon', reason: 'Rich in water content' },
-  { name: 'Mint', reason: 'Refreshing' },
 ];
 
 export function SeasonalSuggestionsWidget() {
@@ -24,7 +23,7 @@ export function SeasonalSuggestionsWidget() {
       <CardContent>
         <div className="relative w-full h-32 rounded-lg overflow-hidden mb-4">
           <Image
-            src="https://picsum.photos/600/400?random=10"
+            src="https://picsum.photos/seed/summer/600/400"
             alt="Summer fruits"
             data-ai-hint="summer fruits"
             fill
@@ -36,8 +35,8 @@ export function SeasonalSuggestionsWidget() {
         <ul className="space-y-3 mb-4">
           {seasonalFoods.slice(0, 3).map((food) => (
             <li key={food.name} className="flex items-center gap-3">
-              <div className="bg-primary/20 p-2 rounded-full">
-                <Leaf className="w-4 h-4 text-primary" />
+              <div className="bg-accent/50 p-2 rounded-full">
+                <Leaf className="w-4 h-4 text-accent-foreground" />
               </div>
               <div>
                 <p className="font-semibold">{food.name}</p>
@@ -47,6 +46,11 @@ export function SeasonalSuggestionsWidget() {
           ))}
         </ul>
       </CardContent>
+      <CardFooter>
+          <Button asChild className="w-full" variant="outline">
+              <Link href="/seasonal-bhojan">Get More Suggestions</Link>
+          </Button>
+      </CardFooter>
     </Card>
   );
 }

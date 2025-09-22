@@ -4,6 +4,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
 import { Input } from '../ui/input';
 import { Send } from 'lucide-react';
+import Link from 'next/link';
 
 export function QuickLogWidget() {
   return (
@@ -33,9 +34,11 @@ export function QuickLogWidget() {
               className="bg-background"
             />
           </div>
-          <Button type="submit" className="w-full">
-            <Send className="mr-2"/>
-            Log Habits
+          <Button asChild type="submit" className="w-full">
+            <Link href="/health-log">
+              <Send className="mr-2"/>
+              Log Habits
+            </Link>
           </Button>
         </form>
       </CardContent>

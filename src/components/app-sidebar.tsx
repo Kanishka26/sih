@@ -47,7 +47,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <div className="flex items-center gap-2">
           <Logo className="w-9 h-9 text-primary" />
-          <span className="font-headline text-2xl font-bold tracking-tight">AhaarSetu</span>
+          <span className="font-headline text-2xl font-bold tracking-tight">Sentinix</span>
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
@@ -72,7 +72,7 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-4 text-center text-xs text-muted-foreground/80">
-        <p>© 2024 AhaarSetu. All rights reserved.</p>
+        <p>🌿 Powered by Ayurveda + Modern Nutrition</p>
       </SidebarFooter>
     </>
   );

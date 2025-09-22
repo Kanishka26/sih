@@ -1,4 +1,3 @@
-
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -32,9 +31,8 @@ import {
 } from '@/components/ui/card';
 import { suggestSeasonalFoodsAction } from '@/lib/actions';
 import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foods';
-import { Loader2, Wand2, Leaf, Utensils, CheckCircle2 } from 'lucide-react';
+import { Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter'], {
@@ -49,10 +47,6 @@ const formSchema = z.object({
     .max(50),
 });
 
-const parseMarkdownList = (text: string) => {
-    return text.split('\n').map(item => item.replace(/^[*-]\s*/, '').replace(/\*\*(.*?)\*\*/g, '$1')).filter(item => item.trim() !== '');
-}
-
 export default function SeasonalBhojanPage() {
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<SuggestSeasonalFoodsOutput | null>(
@@ -64,8 +58,6 @@ export default function SeasonalBhojanPage() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       location: 'Mumbai, India',
-      currentSeason: 'summer',
-      userPrakriti: 'Pitta',
     },
   });
 
@@ -207,29 +199,14 @@ export default function SeasonalBhojanPage() {
               {form.getValues('currentSeason')}.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-6">
-            <div className='p-4 border rounded-lg bg-background'>
-                <h4 className="font-semibold text-lg mb-3 flex items-center gap-2"><Leaf className="w-5 h-5 text-primary"/> Seasonal Foods</h4>
-                <ul className="space-y-2">
-                    {parseMarkdownList(result.seasonalFoods).map((food, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                            <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
-                            <span className='text-muted-foreground'>{food}</span>
-                        </li>
-                    ))}
-                </ul>
+          <CardContent className="space-y-4">
+            <div>
+                <h4 className="font-semibold text-lg mb-2">Seasonal Foods</h4>
+                <p className="text-sm text-muted-foreground">{result.seasonalFoods}</p>
             </div>
-            <Separator />
-            <div className='p-4 border rounded-lg bg-background'>
-                <h4 className="font-semibold text-lg mb-3 flex items-center gap-2"><Utensils className="w-5 h-5 text-primary"/> Dietary Recommendations</h4>
-                 <ul className="space-y-2">
-                    {parseMarkdownList(result.dietaryRecommendations).map((rec, i) => (
-                        <li key={i} className="flex items-start gap-3">
-                             <CheckCircle2 className="w-5 h-5 text-green-500 mt-0.5 shrink-0" />
-                             <span className='text-muted-foreground'>{rec}</span>
-                        </li>
-                    ))}
-                </ul>
+             <div>
+                <h4 className="font-semibold text-lg mb-2">Dietary Recommendations</h4>
+                <p className="text-sm text-muted-foreground">{result.dietaryRecommendations}</p>
             </div>
           </CardContent>
         </Card>

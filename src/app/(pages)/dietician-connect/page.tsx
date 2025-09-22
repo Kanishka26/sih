@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -12,7 +11,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Phone, Send,Bot, User } from 'lucide-react';
+import { Phone, Send, Bot, User } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import {
@@ -20,12 +19,12 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
-  DialogDescription,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import {io, Socket} from 'socket.io-client';
+import { chatWithDieticianAction } from '@/lib/actions';
+import { type ChatWithDieticianInput } from '@/ai/flows/chat-with-dietician';
 
 type Dietician = {
   name: string;
@@ -99,45 +98,7 @@ export default function DieticianConnectPage() {
     const [chatHistory, setChatHistory] = useState<Message[]>([]);
     const [currentMessage, setCurrentMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
-    const socket = useRef<Socket | null>(null);
     const scrollAreaRef = useRef<HTMLDivElement>(null);
-  
-    useEffect(() => {
-        // Initialize socket connection
-        const initSocket = async () => {
-          await fetch('/api/socket');
-          socket.current = io({ path: '/api/socket_io' });
-    
-          socket.current.on('connect', () => {
-            console.log('connected');
-          });
-    
-          socket.current.on('chunk', ({ chunk }) => {
-            setIsTyping(true);
-            setChatHistory((prev) => {
-              const lastMessage = prev[prev.length - 1];
-              if (lastMessage && lastMessage.role === 'model') {
-                const updatedMessage = {
-                  ...lastMessage,
-                  parts: [{ text: lastMessage.parts[0].text + chunk }],
-                };
-                return [...prev.slice(0, -1), updatedMessage];
-              } else {
-                return [...prev, { role: 'model', parts: [{ text: chunk }] }];
-              }
-            });
-          });
-          
-          socket.current.on('chunkEnd', () => {
-              setIsTyping(false);
-          });
-        };
-        initSocket();
-    
-      return () => {
-        socket.current?.disconnect();
-      };
-    }, []);
   
     useEffect(() => {
         if(scrollAreaRef.current) {
@@ -158,7 +119,7 @@ export default function DieticianConnectPage() {
       ]);
     };
   
-    const handleSendMessage = () => {
+    const handleSendMessage = async () => {
       if (!currentMessage.trim() || !selectedDietician) return;
   
       const userMessage: Message = {
@@ -169,13 +130,33 @@ export default function DieticianConnectPage() {
       const newHistory = [...chatHistory, userMessage];
       setChatHistory(newHistory);
       setCurrentMessage('');
-      
-      socket.current?.emit('sendMessage', {
-        dieticianName: selectedDietician.name,
-        dieticianSpecialization: selectedDietician.specialization,
-        message: currentMessage,
-        history: chatHistory,
-      });
+      setIsTyping(true);
+
+      try {
+        const stream = await chatWithDieticianAction({
+            dieticianName: selectedDietician.name,
+            dieticianSpecialization: selectedDietician.specialization,
+            message: currentMessage,
+            history: chatHistory,
+        });
+
+        let fullResponse = '';
+        for await (const chunk of stream) {
+            fullResponse += chunk;
+            setChatHistory([
+                ...newHistory,
+                { role: 'model', parts: [{ text: fullResponse }] }
+            ]);
+        }
+      } catch (error) {
+          toast({
+              title: "Error sending message",
+              description: "There was a problem with the chat service. Please try again.",
+              variant: "destructive"
+          })
+      } finally {
+          setIsTyping(false);
+      }
     };
 
   return (

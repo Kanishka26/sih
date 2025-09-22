@@ -17,23 +17,13 @@ import {
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Search } from 'lucide-react';
-import { useState, useEffect } from 'react';
-import { type Food } from '@/lib/data';
+import { useState } from 'react';
+import { foodDatabase, type Food } from '@/lib/data';
 
 export default function NutrientVaultPage() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [foods, setFoods] = useState<Food[]>([]);
-
-  useEffect(() => {
-    async function fetchFoods() {
-      const res = await fetch('/api/foods');
-      const data = await res.json();
-      setFoods(data);
-    }
-    fetchFoods();
-  }, []);
   
-  const filteredFoods = foods.filter((food) =>
+  const filteredFoods = foodDatabase.filter((food) =>
     food.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 

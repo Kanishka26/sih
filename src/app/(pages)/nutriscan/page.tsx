@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useRef, useEffect, useTransition } from 'react';
@@ -16,10 +15,9 @@ import { Camera, Loader2, RefreshCw, Sparkles, Upload } from 'lucide-react';
 import Image from 'next/image';
 import { type AnalyzeFoodImageOutput } from '@/ai/flows/analyze-food-image';
 import { Badge } from '@/components/ui/badge';
+import { analyzeFoodImage } from '@/ai/flows/analyze-food-image';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-
-const MAX_IMAGE_SIZE = 1024; // Max width or height of 1024px
 
 export default function NutriScanPage() {
   const { toast } = useToast();
@@ -30,15 +28,7 @@ export default function NutriScanPage() {
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<AnalyzeFoodImageOutput | null>(null);
-  const streamRef = useRef<MediaStream | null>(null);
 
-  const stopCameraStream = () => {
-    if (streamRef.current) {
-      streamRef.current.getTracks().forEach(track => track.stop());
-      streamRef.current = null;
-    }
-  };
-  
   useEffect(() => {
     const getCameraPermission = async () => {
       if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
@@ -53,8 +43,6 @@ export default function NutriScanPage() {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: true });
         setHasCameraPermission(true);
-        streamRef.current = stream;
-
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
         }
@@ -64,57 +52,25 @@ export default function NutriScanPage() {
       }
     };
 
-    if (!capturedImage) {
-      getCameraPermission();
-    } else {
-      stopCameraStream();
-    }
+    getCameraPermission();
   
     return () => {
-      stopCameraStream();
+      if (videoRef.current && videoRef.current.srcObject) {
+        (videoRef.current.srcObject as MediaStream).getTracks().forEach(track => track.stop());
+      }
     };
-  }, [capturedImage, toast]);
-
-  const processAndSetImage = (imageSource: HTMLVideoElement | HTMLImageElement) => {
-    if (canvasRef.current) {
-      const canvas = canvasRef.current;
-      const context = canvas.getContext('2d');
-      if (!context) return;
-      
-      let width, height;
-      if (imageSource instanceof HTMLVideoElement) {
-        width = imageSource.videoWidth;
-        height = imageSource.videoHeight;
-      } else {
-        width = imageSource.naturalWidth;
-        height = imageSource.naturalHeight;
-      }
-
-      if (width > height) {
-        if (width > MAX_IMAGE_SIZE) {
-          height = Math.round(height * (MAX_IMAGE_SIZE / width));
-          width = MAX_IMAGE_SIZE;
-        }
-      } else {
-        if (height > MAX_IMAGE_SIZE) {
-          width = Math.round(width * (MAX_IMAGE_SIZE / height));
-          height = MAX_IMAGE_SIZE;
-        }
-      }
-
-      canvas.width = width;
-      canvas.height = height;
-      context.drawImage(imageSource, 0, 0, width, height);
-
-      const dataUri = canvas.toDataURL('image/jpeg', 0.8); // Use 80% quality
-      setCapturedImage(dataUri);
-      setResult(null);
-    }
-  };
+  }, [toast]);
 
   const handleCapture = () => {
-    if (videoRef.current) {
-      processAndSetImage(videoRef.current);
+    if (videoRef.current && canvasRef.current) {
+      const canvas = canvasRef.current;
+      const video = videoRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      canvas.getContext('2d')?.drawImage(video, 0, 0, video.videoWidth, video.videoHeight);
+      const dataUri = canvas.toDataURL('image/png');
+      setCapturedImage(dataUri);
+      setResult(null);
     }
   };
 
@@ -123,9 +79,8 @@ export default function NutriScanPage() {
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        const img = document.createElement('img');
-        img.onload = () => processAndSetImage(img);
-        img.src = e.target?.result as string;
+        setCapturedImage(e.target?.result as string);
+        setResult(null);
       };
       reader.readAsDataURL(file);
     }
@@ -141,25 +96,12 @@ export default function NutriScanPage() {
     if (!capturedImage) return;
     startTransition(async () => {
       try {
-        const response = await fetch('/api/analysis/food-image', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ photoDataUri: capturedImage }),
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'Analysis failed');
-        }
-
-        const res = await response.json();
+        const res = await analyzeFoodImage({ photoDataUri: capturedImage });
         setResult(res);
-      } catch (error: any) {
+      } catch (error) {
         toast({
           title: 'Analysis Failed',
-          description: error.message || 'Could not analyze the image. Please try again.',
+          description: 'Could not analyze the image. Please try again.',
           variant: 'destructive',
         });
       }
@@ -297,5 +239,3 @@ export default function NutriScanPage() {
     </div>
   );
 }
-
-    

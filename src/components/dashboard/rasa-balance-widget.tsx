@@ -11,12 +11,10 @@ import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
-  ChartLegend,
-  ChartLegendContent,
 } from '@/components/ui/chart';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { PieChart, Pie, Cell } from 'recharts';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const chartData = [
   { name: 'Sweet', value: 400, color: 'hsl(var(--chart-1))' },
@@ -51,32 +49,30 @@ export function RasaBalanceWidget() {
           config={chartConfig}
           className="mx-auto aspect-square w-full max-w-[250px]"
         >
-          <PieChart>
-            <ChartTooltip
-              content={<ChartTooltipContent nameKey="name" hideLabel />}
-            />
-            <Pie
-              data={chartData}
-              dataKey="value"
-              nameKey="name"
-              innerRadius={50}
-              outerRadius={80}
-              strokeWidth={2}
-            >
-              {chartData.map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={entry.color} />
-              ))}
-            </Pie>
-            <ChartLegend
-              content={<ChartLegendContent nameKey="name" />}
-              className="-mt-4"
-            />
-          </PieChart>
+          <ResponsiveContainer width="100%" height={150}>
+            <PieChart>
+                <ChartTooltip
+                content={<ChartTooltipContent nameKey="name" hideLabel />}
+                />
+                <Pie
+                data={chartData}
+                dataKey="value"
+                nameKey="name"
+                innerRadius={40}
+                outerRadius={60}
+                strokeWidth={2}
+                >
+                {chartData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                ))}
+                </Pie>
+            </PieChart>
+          </ResponsiveContainer>
         </ChartContainer>
       </CardContent>
        <CardFooter className="flex-col gap-2 pt-2">
           <Button asChild className="w-full mt-2" variant="outline">
-             <Link href="/rasa-balance">View Detailed Balance</Link>
+             <Link href="/rasa-balance">Log Meal & View Balance</Link>
           </Button>
       </CardFooter>
     </Card>

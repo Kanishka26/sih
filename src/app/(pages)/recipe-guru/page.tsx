@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -39,7 +38,7 @@ export default function RecipeGuruPage() {
     async function fetchRecipes() {
       setLoading(true);
       try {
-        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian');
+        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian');
         const listData = await listRes.json();
         
         const recipeStubs = listData.meals || [];

@@ -1,4 +1,3 @@
-
 'use client';
 import Link from 'next/link';
 import {
@@ -43,7 +42,7 @@ export function PrakritiProfileWidget() {
                 <CardDescription>Your dominant dosha is {prakriti}.</CardDescription>
             </div>
         </div>
-        <Badge variant="secondary" className="text-lg bg-primary/20 text-primary capitalize">{prakriti}</Badge>
+        <Badge variant="secondary" className="text-lg bg-accent text-accent-foreground capitalize">{prakriti}</Badge>
       </CardHeader>
       <CardContent>
         <p className="text-muted-foreground">

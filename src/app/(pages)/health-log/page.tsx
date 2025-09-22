@@ -26,82 +26,42 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import { useState } from 'react';
 
-const initialPastLogs = [
+const pastLogs = [
   {
     date: '2024-07-20',
     foodIntake: 'Oats with berries for breakfast, lentil soup for lunch, grilled vegetables for dinner.',
     symptoms: 'Felt energetic and clear-headed.',
-    waterIntake: '2.5',
-    sleepHours: '8',
-    bowelMovement: 'normal',
-    energyLevel: '5',
+    waterIntake: '2.5L',
+    sleepHours: '8 hours',
+    bowelMovement: 'Normal',
+    energyLevel: '5/5',
   },
   {
     date: '2024-07-19',
     foodIntake: 'Rice with yogurt for lunch, kichdi for dinner.',
     symptoms: 'A bit of bloating in the evening.',
-    waterIntake: '2',
-    sleepHours: '6.5',
-    bowelMovement: 'normal',
-    energyLevel: '3',
+    waterIntake: '2L',
+    sleepHours: '6.5 hours',
+    bowelMovement: 'Normal',
+    energyLevel: '3/5',
   },
   {
     date: '2024-07-18',
     foodIntake: 'Skipped breakfast. Had a heavy lunch with fried food.',
     symptoms: 'Felt sluggish and sleepy after lunch.',
-    waterIntake: '1.5',
-    sleepHours: '7',
-    bowelMovement: 'constipated',
-    energyLevel: '2',
+    waterIntake: '1.5L',
+    sleepHours: '7 hours',
+    bowelMovement: 'Constipated',
+    energyLevel: '2/5',
   },
 ];
 
-type Log = typeof initialPastLogs[0];
-
 export default function HealthLogPage() {
     const { toast } = useToast();
-    const [pastLogs, setPastLogs] = useState<Log[]>(initialPastLogs);
-    const [foodIntake, setFoodIntake] = useState('');
-    const [symptoms, setSymptoms] = useState('');
-    const [waterIntake, setWaterIntake] = useState('');
-    const [sleepHours, setSleepHours] = useState('');
-    const [bowelMovement, setBowelMovement] = useState('');
-    const [energyLevel, setEnergyLevel] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-
-        if(!foodIntake && !symptoms && !waterIntake && !sleepHours && !bowelMovement && !energyLevel) {
-          toast({
-            title: "Empty Log",
-            description: "Please fill out at least one field to save a log.",
-            variant: "destructive"
-          });
-          return;
-        }
-
-        const newLog: Log = {
-          date: new Date().toISOString().split('T')[0],
-          foodIntake,
-          symptoms,
-          waterIntake,
-          sleepHours,
-          bowelMovement,
-          energyLevel,
-        }
-
-        setPastLogs([newLog, ...pastLogs]);
-
-        // Reset form
-        setFoodIntake('');
-        setSymptoms('');
-        setWaterIntake('');
-        setSleepHours('');
-        setBowelMovement('');
-        setEnergyLevel('');
-
         toast({
             title: "Log Saved!",
             description: "Your health log for today has been successfully saved.",
@@ -134,8 +94,6 @@ export default function HealthLogPage() {
                     id="food-intake"
                     placeholder="List the meals and snacks you had..."
                     rows={4}
-                    value={foodIntake}
-                    onChange={(e) => setFoodIntake(e.target.value)}
                 />
                 </div>
                 <div className="space-y-2">
@@ -144,21 +102,19 @@ export default function HealthLogPage() {
                     id="symptoms"
                     placeholder="Any discomfort, energy levels, mood..."
                     rows={4}
-                    value={symptoms}
-                    onChange={(e) => setSymptoms(e.target.value)}
                 />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="water-intake">Water Intake (liters)</Label>
-                <Input id="water-intake" type="number" step="0.1" placeholder="e.g., 2.5" value={waterIntake} onChange={(e) => setWaterIntake(e.target.value)} />
+                <Input id="water-intake" type="number" step="0.1" placeholder="e.g., 2.5" />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="sleep-hours">Sleep (hours)</Label>
-                <Input id="sleep-hours" type="number" step="0.1" placeholder="e.g., 7.5" value={sleepHours} onChange={(e) => setSleepHours(e.target.value)} />
+                <Input id="sleep-hours" type="number" step="0.1" placeholder="e.g., 7.5" />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="bowel-movement">Bowel Movement</Label>
-                <Select value={bowelMovement} onValueChange={setBowelMovement}>
+                <Select>
                     <SelectTrigger id="bowel-movement">
                     <SelectValue placeholder="Select quality" />
                     </SelectTrigger>
@@ -166,13 +122,12 @@ export default function HealthLogPage() {
                     <SelectItem value="normal">Normal</SelectItem>
                     <SelectItem value="constipated">Constipated</SelectItem>
                     <SelectItem value="loose">Loose</SelectItem>
-                    <SelectItem value="not-today">Not Today</SelectItem>
                     </SelectContent>
                 </Select>
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="energy-level">Energy Level (1-5)</Label>
-                <Select value={energyLevel} onValueChange={setEnergyLevel}>
+                <Select>
                     <SelectTrigger id="energy-level">
                     <SelectValue placeholder="Select level" />
                     </SelectTrigger>
@@ -221,30 +176,30 @@ export default function HealthLogPage() {
                       <Pizza className="w-4 h-4 mt-1 text-primary" />
                       <div>
                         <p className="font-semibold">Food Intake</p>
-                        <p className="text-muted-foreground">{log.foodIntake || 'Not logged'}</p>
+                        <p className="text-muted-foreground">{log.foodIntake}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Smile className="w-4 h-4 mt-1 text-primary" />
                       <div>
                         <p className="font-semibold">Symptoms/Feelings</p>
-                        <p className="text-muted-foreground">{log.symptoms || 'Not logged'}</p>
+                        <p className="text-muted-foreground">{log.symptoms}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-center gap-3">
                             <Droplets className="w-4 h-4 text-primary" />
-                            <p><span className="font-semibold">Water:</span> {log.waterIntake ? `${log.waterIntake}L` : 'N/A'}</p>
+                            <p><span className="font-semibold">Water:</span> {log.waterIntake}</p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Bed className="w-4 h-4 text-primary" />
-                            <p><span className="font-semibold">Sleep:</span> {log.sleepHours ? `${log.sleepHours} hrs` : 'N/A'}</p>
+                            <p><span className="font-semibold">Sleep:</span> {log.sleepHours}</p>
                         </div>
                         <div className="flex items-center gap-3">
-                             <p><span className="font-semibold">Bowel Movement:</span> <span className="capitalize">{log.bowelMovement || 'N/A'}</span></p>
+                             <p><span className="font-semibold">Bowel Movement:</span> {log.bowelMovement}</p>
                         </div>
                         <div className="flex items-center gap-3">
-                            <p><span className="font-semibold">Energy Level:</span> {log.energyLevel ? `${log.energyLevel}/5` : 'N/A'}</p>
+                            <p><span className="font-semibold">Energy Level:</span> {log.energyLevel}</p>
                         </div>
                     </div>
                   </div>

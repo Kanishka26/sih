@@ -1,4 +1,3 @@
-
 export type Food = {
   id: string;
   name: string;
@@ -113,7 +112,7 @@ export let users: User[] = [
   {
     id: 'user1',
     name: 'Dr. Mehta',
-    email: 'doctor@ahaarsetu.com',
+    email: 'doctor@sentinix.com',
     password: 'password',
     role: 'doctor',
     prakriti: 'Pitta'
