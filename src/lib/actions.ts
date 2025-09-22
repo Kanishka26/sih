@@ -8,6 +8,10 @@ import {
   suggestSeasonalFoods,
   type SuggestSeasonalFoodsInput,
 } from '@/ai/flows/suggest-seasonal-foods';
+import {
+  chatWithDietician,
+  type ChatWithDieticianInput,
+} from '@/ai/flows/chat-with-dietician';
 import { z } from 'zod';
 
 const dietChartSchema = z.object({
@@ -38,4 +42,20 @@ export async function suggestSeasonalFoodsAction(
     throw new Error('Invalid input');
   }
   return await suggestSeasonalFoods(parsedInput.data);
+}
+
+
+const chatWithDieticianSchema = z.object({
+  dieticianName: z.string(),
+  dieticianSpecialization: z.string(),
+  message: z.string(),
+  history: z.array(z.any()),
+});
+
+export async function chatWithDieticianAction(input: ChatWithDieticianInput) {
+    const parsedInput = chatWithDieticianSchema.safeParse(input);
+    if (!parsedInput.success) {
+        throw new Error('Invalid input for chat');
+    }
+    return await chatWithDietician(parsedInput.data);
 }

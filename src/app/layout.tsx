@@ -6,7 +6,7 @@ import { AppLayout } from '@/components/app-layout';
 import { LanguageProvider } from '@/context/language-context';
 
 export const metadata: Metadata = {
-  title: 'Sentinix - Your Ayurvedic Diet Companion',
+  title: 'AhaarSetu - Your Ayurvedic Diet Companion',
   description: 'A modern, beautiful, and feature-rich Ayurvedic diet planning web app.',
 };
 

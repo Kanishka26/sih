@@ -47,7 +47,7 @@ export function AppSidebar() {
       <SidebarHeader>
         <div className="flex items-center gap-2">
           <Logo className="w-9 h-9 text-primary" />
-          <span className="font-headline text-2xl font-bold tracking-tight">Sentinix</span>
+          <span className="font-headline text-2xl font-bold tracking-tight">AhaarSetu</span>
         </div>
       </SidebarHeader>
       <SidebarContent className="p-2">
