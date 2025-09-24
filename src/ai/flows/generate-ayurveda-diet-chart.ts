@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview Generates a personalized Ayurveda-compliant diet chart based on user inputs.
@@ -27,7 +28,7 @@ const GenerateAyurvedaDietChartOutputSchema = z.object({
   dietChart: z
     .string()
     .describe(
-      'A personalized Ayurveda-compliant diet chart in a readable format.'
+      'A personalized Ayurveda-compliant diet chart in a readable markdown format.'
     ),
 });
 export type GenerateAyurvedaDietChartOutput = z.infer<
@@ -44,13 +45,19 @@ const prompt = ai.definePrompt({
   name: 'generateAyurvedaDietChartPrompt',
   input: {schema: GenerateAyurvedaDietChartInputSchema},
   output: {schema: GenerateAyurvedaDietChartOutputSchema},
-  prompt: `You are an experienced Ayurvedic nutritionist. Generate a personalized Ayurveda-compliant diet chart based on the user's age, gender, and prakriti.
+  prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
-  Age: {{{age}}}
-  Gender: {{{gender}}}
-  Prakriti: {{{prakriti}}}
+  User Profile:
+  - Age: {{{age}}}
+  - Gender: {{{gender}}}
+  - Prakriti (Dosha): {{{prakriti}}}
 
-  Provide a detailed diet chart with recommended foods and meal timings that aligns with Ayurvedic principles for the given characteristics.`,
+  Please provide a detailed 7-day diet chart in markdown format. The chart should be easy to read and follow. For each day, include:
+  1.  **Meal Timings:** (e.g., Early Morning, Breakfast, Lunch, Mid-Afternoon, Dinner).
+  2.  **Food Recommendations:** Specific and simple food items for each meal.
+  3.  **Preparation Notes:** Brief notes on how to prepare the food where necessary (e.g., "soaked almonds", "lightly spiced").
+  
+  The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods.`,
 });
 
 const generateAyurvedaDietChartFlow = ai.defineFlow(
