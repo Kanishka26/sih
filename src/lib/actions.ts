@@ -17,6 +17,10 @@ import {
     analyzeMealRasas,
     type AnalyzeMealRasasInput,
 } from '@/ai/flows/analyze-meal-rasas';
+import {
+    analyzeFoodImage,
+    type AnalyzeFoodImageInput,
+} from '@/ai/flows/analyze-food-image';
 import { z } from 'zod';
 
 const dietChartSchema = z.object({
@@ -75,4 +79,16 @@ export async function analyzeMealRasasAction(input: AnalyzeMealRasasInput) {
         throw new Error('Invalid input for rasa analysis');
     }
     return await analyzeMealRasas(parsedInput.data);
+}
+
+const analyzeFoodImageSchema = z.object({
+    photoDataUri: z.string().startsWith('data:image/'),
+});
+
+export async function analyzeFoodImageAction(input: AnalyzeFoodImageInput) {
+    const parsedInput = analyzeFoodImageSchema.safeParse(input);
+    if (!parsedInput.success) {
+        throw new Error('Invalid input for food image analysis');
+    }
+    return await analyzeFoodImage(parsedInput.data);
 }

@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState, useRef, useEffect, useTransition } from 'react';
@@ -15,7 +16,7 @@ import { Camera, Loader2, RefreshCw, Sparkles, Upload } from 'lucide-react';
 import Image from 'next/image';
 import { type AnalyzeFoodImageOutput } from '@/ai/flows/analyze-food-image';
 import { Badge } from '@/components/ui/badge';
-import { analyzeFoodImage } from '@/ai/flows/analyze-food-image';
+import { analyzeFoodImageAction } from '@/lib/actions';
 import { Input } from '@/components/ui/input';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
@@ -96,7 +97,7 @@ export default function NutriScanPage() {
     if (!capturedImage) return;
     startTransition(async () => {
       try {
-        const res = await analyzeFoodImage({ photoDataUri: capturedImage });
+        const res = await analyzeFoodImageAction({ photoDataUri: capturedImage });
         setResult(res);
       } catch (error) {
         toast({
