@@ -44,10 +44,10 @@ export function RasaBalanceWidget() {
           Today's taste profile. Score: <span className="text-primary font-bold">78/100</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex-1 items-center pb-0">
+      <CardContent className="items-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[150px]"
+          className="mx-auto aspect-square w-full max-w-[200px]"
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -58,8 +58,8 @@ export function RasaBalanceWidget() {
                 data={chartData}
                 dataKey="value"
                 nameKey="name"
-                innerRadius={30}
-                outerRadius={50}
+                innerRadius={40}
+                outerRadius={60}
                 strokeWidth={2}
                 >
                 {chartData.map((entry, index) => (
