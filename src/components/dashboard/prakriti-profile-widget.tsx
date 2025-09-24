@@ -45,12 +45,12 @@ export function PrakritiProfileWidget() {
         <Badge variant="secondary" className="text-lg bg-accent text-accent-foreground capitalize">{prakriti}</Badge>
       </CardHeader>
       <CardContent>
-        <p className="text-muted-foreground">
+        <p className="text-foreground/90">
           {recommendation}
         </p>
       </CardContent>
       <CardFooter>
-          <Button asChild variant="outline">
+          <Button asChild variant="outline" size="sm">
               <Link href="/prakriti-scan">Re-take the PrakritiScan Test</Link>
           </Button>
       </CardFooter>

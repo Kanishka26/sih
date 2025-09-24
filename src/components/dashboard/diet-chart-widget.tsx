@@ -68,8 +68,8 @@ export function DietChartWidget() {
         {!dietPlan ? (
              <div className="space-y-4">
                 {[...Array(5)].map((_, i) => (
-                    <div key={i} className="flex items-center gap-4">
-                        <Skeleton className="h-8 w-20 rounded-full" />
+                    <div key={i} className="flex items-center gap-4 p-2">
+                        <Skeleton className="h-8 w-20 rounded-md" />
                         <Skeleton className="h-10 w-10 rounded-full" />
                         <div className="flex-1 space-y-2">
                            <Skeleton className="h-4 w-1/4" />
@@ -84,23 +84,23 @@ export function DietChartWidget() {
                 <TableRow>
                 <TableHead className="w-[100px]">Time</TableHead>
                 <TableHead>Meal</TableHead>
-                <TableHead className="hidden md:table-cell">Details</TableHead>
+                <TableHead>Details</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
                 {dietPlan.map((item) => (
                 <TableRow key={item.time}>
                     <TableCell>
-                    <Badge variant="outline" className="text-sm">{item.time}</Badge>
+                    <Badge variant="outline" className="text-sm font-normal">{item.time}</Badge>
                     </TableCell>
                     <TableCell>
                     <div className="flex items-center gap-3">
-                        <div className='p-2 bg-primary/10 rounded-full'>{item.icon}</div>
+                        <div className='hidden sm:block p-2 bg-primary/10 rounded-full'>{item.icon}</div>
                         <p className="font-semibold">{item.meal}</p>
                     </div>
                     </TableCell>
-                    <TableCell className="hidden md:table-cell">
-                    <p className="text-foreground/90">{item.details}</p>
+                    <TableCell>
+                    <p className="text-foreground/80">{item.details}</p>
                     </TableCell>
                 </TableRow>
                 ))}
