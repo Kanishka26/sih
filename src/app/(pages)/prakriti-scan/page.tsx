@@ -287,7 +287,7 @@ const questions = [
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
-        part: "Part III: Psychological & EmotionalTraits",
+        part: "Part III: Psychological & Emotional Traits",
         question: "How do you approach projects or tasks?",
         options: ["I'm great at starting things with enthusiasm, but may not finish them", "I'm a good planner and I see projects through to completion efficiently", "I work slowly and steadily, and always finish what I start"],
         prakriti: ["Vata", "Pitta", "Kapha"]
@@ -448,5 +448,3 @@ export default function PrakritiScanPage() {
     </div>
   );
 }
-
-    
