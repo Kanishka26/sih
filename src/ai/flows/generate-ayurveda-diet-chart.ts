@@ -28,7 +28,7 @@ const GenerateAyurvedaDietChartOutputSchema = z.object({
   dietChart: z
     .string()
     .describe(
-      'A personalized Ayurveda-compliant diet chart in a readable markdown format.'
+      'A personalized Ayurveda-compliant diet chart as an HTML string. Use TailwindCSS classes for styling within the HTML.'
     ),
 });
 export type GenerateAyurvedaDietChartOutput = z.infer<
@@ -47,17 +47,14 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
-Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan in markdown format.
+Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
 
 User Profile:
 - Age: {{{age}}}
 - Gender: {{{gender}}}
 - Prakriti (Dosha): {{{prakriti}}}
 
-Please provide a detailed 7-day diet chart in markdown format. The chart should be easy to read and follow. For each day, include:
-1.  **Meal Timings:** (e.g., Early Morning, Breakfast, Lunch, Mid-Afternoon, Dinner).
-2.  **Food Recommendations:** Specific and simple food items for each meal.
-3.  **Preparation Notes:** Brief notes on how to prepare the food where necessary (e.g., "soaked almonds", "lightly spiced").
+Please provide a detailed 7-day diet chart in HTML format. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items. The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable.
   
 The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods.`,
 });
