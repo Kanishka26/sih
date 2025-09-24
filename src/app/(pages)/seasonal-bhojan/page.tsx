@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -31,8 +32,9 @@ import {
 } from '@/components/ui/card';
 import { suggestSeasonalFoodsAction } from '@/lib/actions';
 import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foods';
-import { Loader2, Wand2 } from 'lucide-react';
+import { Leaf, Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Separator } from '@/components/ui/separator';
 
 const formSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter'], {
@@ -46,6 +48,12 @@ const formSchema = z.object({
     .min(2, 'Location must be at least 2 characters.')
     .max(50),
 });
+
+// Helper function to parse markdown lists
+const parseMarkdownList = (markdown: string) => {
+  if (!markdown) return [];
+  return markdown.split('\n').map(item => item.replace(/^- /, '').trim()).filter(Boolean);
+}
 
 export default function SeasonalBhojanPage() {
   const [isPending, startTransition] = useTransition();
@@ -77,6 +85,10 @@ export default function SeasonalBhojanPage() {
       }
     });
   }
+
+  const seasonalFoodsList = result ? parseMarkdownList(result.seasonalFoods) : [];
+  const recommendationsList = result ? parseMarkdownList(result.dietaryRecommendations) : [];
+
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -199,14 +211,30 @@ export default function SeasonalBhojanPage() {
               {form.getValues('currentSeason')}.
             </CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-                <h4 className="font-semibold text-lg mb-2">Seasonal Foods</h4>
-                <p className="text-sm text-muted-foreground">{result.seasonalFoods}</p>
+          <CardContent className="space-y-6">
+            <div className="p-4 bg-primary/10 rounded-lg">
+                <h4 className="font-semibold text-lg mb-3 text-primary-foreground/90">Ideal Seasonal Foods</h4>
+                <ul className="space-y-2">
+                  {seasonalFoodsList.map((food, index) => (
+                    <li key={index} className="flex items-center gap-3 text-sm text-foreground/90">
+                      <Leaf className="w-4 h-4 text-accent" />
+                      <span>{food}</span>
+                    </li>
+                  ))}
+                </ul>
             </div>
-             <div>
-                <h4 className="font-semibold text-lg mb-2">Dietary Recommendations</h4>
-                <p className="text-sm text-muted-foreground">{result.dietaryRecommendations}</p>
+            
+            <Separator />
+            
+             <div className="p-4">
+                <h4 className="font-semibold text-lg mb-3">Dietary Recommendations</h4>
+                <ul className="space-y-2 list-disc list-outside pl-5">
+                  {recommendationsList.map((rec, index) => (
+                    <li key={index} className="text-sm text-muted-foreground">
+                      {rec}
+                    </li>
+                  ))}
+                </ul>
             </div>
           </CardContent>
         </Card>
