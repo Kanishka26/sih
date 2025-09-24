@@ -47,7 +47,7 @@ export function RasaBalanceWidget() {
       <CardContent className="flex-1 flex flex-col items-center justify-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[200px]"
+          className="mx-auto aspect-square w-full max-w-[150px]"
         >
           <ResponsiveContainer width="100%" height={120}>
             <PieChart>
