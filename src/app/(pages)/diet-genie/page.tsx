@@ -73,7 +73,6 @@ export default function DietGeniePage() {
 
     html2canvas(element, {
       scale: scale,
-      useCORS: true,
       logging: true,
       width: element.offsetWidth,
       height: element.offsetHeight,
