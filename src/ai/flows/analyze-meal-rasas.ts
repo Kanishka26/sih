@@ -58,7 +58,7 @@ Food Items:
 
 Based on your knowledge of Ayurvedic principles and the properties of these foods, determine the relative strength of each of the six tastes: Madhura (Sweet), Amla (Sour), Lavana (Salty), Katu (Pungent), Tikta (Bitter), and Kashaya (Astringent).
 
-Provide a score from 0 to 10 for each taste, where 0 means it's absent and 10 means it's extremely dominant. The scores should reflect the combined taste profile of the entire meal.
+Provide a score from 0 to 10 for each taste, where 0 means it's absent and 10 means it's extremely dominant. The scores should reflect the combined taste profile of the entire meal. Your response must be a JSON object containing a 'rasaBalance' object with all six tastes as keys.
 
 Then, provide one simple, actionable recommendation to improve the balance of the meal.`,
 });
