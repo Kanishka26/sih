@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -15,31 +16,66 @@ import { Label } from '@/components/ui/label';
 import { Leaf, Flame, Wind } from 'lucide-react';
 
 const questions = [
-  {
-    question: 'What is your body frame?',
-    options: ['Thin, light frame', 'Medium build', 'Large, sturdy frame'],
-    prakriti: ['Vata', 'Pitta', 'Kapha'],
-  },
-  {
-    question: 'How is your skin?',
-    options: ['Dry, rough, thin', 'Sensitive, reddish, warm', 'Thick, oily, cool'],
-    prakriti: ['Vata', 'Pitta', 'Kapha'],
-  },
-  {
-    question: 'Describe your hair.',
-    options: ['Dry, thin, brittle', 'Fine, soft, premature graying', 'Thick, oily, wavy'],
-    prakriti: ['Vata', 'Pitta', 'Kapha'],
-  },
-  {
-    question: 'What is your appetite like?',
-    options: ['Irregular, variable', 'Strong, sharp, unbearable', 'Slow but steady'],
-    prakriti: ['Vata', 'Pitta', 'Kapha'],
-  },
-  {
-    question: 'How is your mood generally?',
-    options: ['Enthusiastic, lively, but changes quickly', 'Intelligent, sharp, but can be irritable', 'Calm, stable, but can be lethargic'],
-    prakriti: ['Vata', 'Pitta', 'Kapha'],
-  },
+    {
+        question: "How do you typically complete your work?",
+        options: ["Quickly, with bursts of energy, but can get distracted", "In a focused, intense, and goal-oriented manner", "Slow, steady, and methodical"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What is your body frame and build?",
+        options: ["Thin, light frame, find it hard to gain weight", "Medium, muscular build, well-proportioned", "Large, sturdy frame, tend to gain weight easily"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How would you describe your skin?",
+        options: ["Dry, cool, thin, prone to roughness", "Warm, sensitive, prone to rashes, acne, or redness", "Thick, oily, cool, and smooth"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How do you handle temperature changes?",
+        options: ["Dislike cold and wind", "Dislike heat and sun", "Adaptable, but dislike damp, cold weather"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What are your eyes like?",
+        options: ["Small, active, can be dry", "Medium-sized, sharp, and penetrating gaze", "Large, calm, and attractive"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "Describe your hair.",
+        options: ["Dry, thin, brittle, or frizzy", "Fine, soft, may have premature graying or thinning", "Thick, oily, wavy, and lustrous"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What is your appetite like?",
+        options: ["Irregular, variable, you might forget to eat", "Strong, sharp, you get irritable if you miss a meal", "Slow but steady, you enjoy food and can skip meals easily"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How is your digestive power?",
+        options: ["Variable, sometimes good, sometimes weak (gas, bloating)", "Strong, efficient, can digest almost anything", "Slow, heavy feeling after meals"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How would you describe your memory?",
+        options: ["Quick to learn, but also quick to forget", "Sharp, good memory, can recall details", "Slow to learn, but retains information for a long time"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What is your general mood and temperament?",
+        options: ["Enthusiastic, lively, but can be anxious or worried", "Intelligent, sharp-witted, but can be irritable or angry", "Calm, stable, and patient, but can be lethargic"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How are your joints?",
+        options: ["Prominent, tend to crack or pop", "Medium-sized, flexible", "Large, well-lubricated, sturdy"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "Describe your sleep pattern.",
+        options: ["Light, interrupted sleep, can suffer from insomnia", "Sound sleeper, but can be disturbed by heat", "Deep, long, and heavy sleep"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    }
 ];
 
 const prakritiInfo = {
