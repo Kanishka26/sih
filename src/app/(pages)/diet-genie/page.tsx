@@ -213,13 +213,14 @@ export default function DietGeniePage() {
             </CardDescription>
           </CardHeader>
           <CardContent
-            ref={dietChartRef}
-            className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline"
+            className="p-6 pt-0"
           >
             <div
-              dangerouslySetInnerHTML={{
-                __html: result.dietChart,
-              }}
+                ref={dietChartRef}
+                className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline p-4 border rounded-lg bg-background"
+                dangerouslySetInnerHTML={{
+                    __html: result.dietChart,
+                }}
             />
           </CardContent>
           <CardFooter>
