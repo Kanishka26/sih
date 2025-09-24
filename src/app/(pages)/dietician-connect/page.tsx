@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -11,7 +12,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Phone, Send, Bot, User } from 'lucide-react';
+import { Phone, Send, Bot, User, X } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { useState, useRef, useEffect } from 'react';
 import {
@@ -19,6 +20,7 @@ import {
   DialogContent,
   DialogHeader,
   DialogTitle,
+  DialogDescription,
 } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -31,6 +33,7 @@ type Dietician = {
   hospital: string;
   specialization: string;
   qualifications: string;
+  bio: string;
   image: string;
   dataAiHint: string;
   fees: number;
@@ -42,6 +45,7 @@ const dieticians: Dietician[] = [
     hospital: 'Apollo Hospital, Delhi',
     specialization: 'Clinical Nutrition',
     qualifications: 'M.Sc. (Food & Nutrition), RD',
+    bio: 'Dr. Anjali Sharma is a renowned clinical nutritionist with over 12 years of experience in managing lifestyle diseases through diet. She specializes in creating personalized diet plans for diabetes, cardiac health, and weight management, with a focus on integrating Ayurvedic principles.',
     image: 'https://picsum.photos/seed/doc1/400/400',
     dataAiHint: 'female doctor portrait',
     fees: 1200,
@@ -51,6 +55,7 @@ const dieticians: Dietician[] = [
     hospital: 'Fortis Hospital, Mumbai',
     specialization: 'Pediatric Nutrition',
     qualifications: 'M.Sc. (Pediatric Nutrition), RD',
+    bio: 'Dr. Rohan Verma focuses on child nutrition from infancy to adolescence. He has helped countless families establish healthy eating habits and address issues like picky eating, food allergies, and childhood obesity. He believes in a gentle, family-centered approach.',
     image: 'https://picsum.photos/seed/doc2/400/400',
     dataAiHint: 'male doctor portrait',
     fees: 1500,
@@ -60,6 +65,7 @@ const dieticians: Dietician[] = [
     hospital: 'Max Healthcare, Bangalore',
     specialization: 'Sports Nutrition',
     qualifications: 'PG Diploma (Sports Nutrition), RD',
+    bio: 'An expert in sports nutrition, Dr. Priya Singh works with athletes of all levels to optimize their performance, recovery, and overall health. She combines modern sports science with Ayurvedic wisdom to create holistic nutritional strategies.',
     image: 'https://picsum.photos/seed/doc3/400/400',
     dataAiHint: 'female doctor smiling',
     fees: 1800,
@@ -69,6 +75,7 @@ const dieticians: Dietician[] = [
     hospital: 'Artemis Hospital, Gurgaon',
     specialization: 'Ayurvedic Dietetics',
     qualifications: 'BAMS, M.Sc. (Ayurvedic Dietetics)',
+    bio: "Dr. Sameer Patel is a classically trained Ayurvedic doctor who specializes in 'Ahar Chikitsa' (diet-based therapy). He excels at diagnosing dosha imbalances and prescribing food-based remedies to restore health and prevent disease.",
     image: 'https://picsum.photos/seed/doc4/400/400',
     dataAiHint: 'male doctor smiling',
     fees: 1000,
@@ -78,6 +85,7 @@ const dieticians: Dietician[] = [
     hospital: 'Narayana Health, Kolkata',
     specialization: 'Geriatric Nutrition',
     qualifications: 'M.Sc. (Geriatric Nutrition), CDE',
+    bio: 'With a compassionate approach, Dr. Meera Desai supports the elderly population in maintaining their health and vitality through appropriate nutrition. She has extensive experience in managing age-related conditions and dietary needs.',
     image: 'https://picsum.photos/seed/doc5/400/400',
     dataAiHint: 'doctor portrait',
     fees: 1100,
@@ -87,6 +95,7 @@ const dieticians: Dietician[] = [
     hospital: 'Medanta, Lucknow',
     specialization: 'Weight Management',
     qualifications: 'M.Sc. (Nutrition), CWC',
+    bio: 'Dr. Vikram Rathore is a certified wellness coach who focuses on sustainable weight management. He avoids crash diets and instead empowers his clients with the knowledge of mindful eating and Ayurvedic principles for long-term results.',
     image: 'https://picsum.photos/seed/doc6/400/400',
     dataAiHint: 'doctor face',
     fees: 2000,
@@ -101,7 +110,8 @@ type Message = {
 
 export default function DieticianConnectPage() {
     const { toast } = useToast();
-    const [selectedDietician, setSelectedDietician] = useState<Dietician | null>(null);
+    const [viewingDietician, setViewingDietician] = useState<Dietician | null>(null);
+    const [isChatOpen, setIsChatOpen] = useState(false);
     const [chatHistory, setChatHistory] = useState<Message[]>([]);
     const [currentMessage, setCurrentMessage] = useState('');
     const [isTyping, setIsTyping] = useState(false);
@@ -117,17 +127,23 @@ export default function DieticianConnectPage() {
     }, [chatHistory]);
 
     const handleConnect = (dietician: Dietician) => {
-      setSelectedDietician(dietician);
-      setChatHistory([
-        {
-          role: 'model',
-          parts: [{ text: `Hello! I'm ${dietician.name}. How can I help you today with ${dietician.specialization.toLowerCase()}?` }],
-        },
-      ]);
+        setIsChatOpen(true);
+        setChatHistory([
+            {
+            role: 'model',
+            parts: [{ text: `Hello! I'm ${dietician.name}. How can I help you today with ${dietician.specialization.toLowerCase()}?` }],
+            },
+        ]);
     };
+
+    const closeAllDialogs = () => {
+        setViewingDietician(null);
+        setIsChatOpen(false);
+        setChatHistory([]);
+    }
   
     const handleSendMessage = async () => {
-      if (!currentMessage.trim() || !selectedDietician) return;
+      if (!currentMessage.trim() || !viewingDietician) return;
   
       const userMessage: Message = {
         role: 'user',
@@ -141,8 +157,8 @@ export default function DieticianConnectPage() {
 
       try {
         const stream = await chatWithDieticianAction({
-            dieticianName: selectedDietician.name,
-            dieticianSpecialization: selectedDietician.specialization,
+            dieticianName: viewingDietician.name,
+            dieticianSpecialization: viewingDietician.specialization,
             message: currentMessage,
             history: chatHistory,
         });
@@ -179,7 +195,7 @@ export default function DieticianConnectPage() {
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {dieticians.map((dietician) => (
-          <Card key={dietician.name} className="flex flex-col">
+          <Card key={dietician.name} className="flex flex-col cursor-pointer hover:shadow-lg transition-shadow" onClick={() => setViewingDietician(dietician)}>
             <CardHeader className="items-center text-center p-6">
               <div className="relative w-32 h-32 mb-4">
                 <Image
@@ -196,38 +212,91 @@ export default function DieticianConnectPage() {
             <CardContent className="text-center flex-1 space-y-2">
               <Badge variant="secondary">{dietician.specialization}</Badge>
               <p className="text-xs text-muted-foreground">{dietician.qualifications}</p>
-              <div className="pt-2">
+            </CardContent>
+            <CardFooter className="flex-col gap-2 pt-0">
+                <div className="pt-2">
                   <p className="text-2xl font-bold">₹{dietician.fees}</p>
                   <p className="text-xs text-muted-foreground">Consultation Fee</p>
-              </div>
-            </CardContent>
-            <CardFooter>
-              <Button
-                className="w-full"
-                onClick={() => handleConnect(dietician)}
-              >
-                <Phone className="mr-2 h-4 w-4" />
-                Connect Now
-              </Button>
+                </div>
+                 <Button
+                    className="w-full mt-2"
+                    variant="outline"
+                  >
+                    View Details
+                  </Button>
             </CardFooter>
           </Card>
         ))}
       </div>
-      <Dialog open={!!selectedDietician} onOpenChange={() => setSelectedDietician(null)}>
-        <DialogContent className="sm:max-w-[525px] h-[80vh] flex flex-col bg-card text-card-foreground">
-            {selectedDietician && (
+
+    {/* Details Dialog */}
+    <Dialog open={!!viewingDietician && !isChatOpen} onOpenChange={(open) => !open && closeAllDialogs()}>
+        <DialogContent className="sm:max-w-lg bg-card text-card-foreground">
+            {viewingDietician && (
                 <>
-                    <DialogHeader className="text-left">
+                    <DialogHeader className="items-center text-center">
+                         <div className="relative w-32 h-32 mb-4">
+                            <Image
+                            src={viewingDietician.image}
+                            alt={viewingDietician.name}
+                            data-ai-hint={viewingDietician.dataAiHint}
+                            fill
+                            className="rounded-full object-cover border-4 border-primary/20"
+                            />
+                        </div>
+                        <DialogTitle className="text-2xl font-headline">{viewingDietician.name}</DialogTitle>
+                        <DialogDescription>
+                            <p>{viewingDietician.hospital}</p>
+                            <div className="flex gap-2 justify-center mt-2">
+                               <Badge variant="secondary">{viewingDietician.specialization}</Badge>
+                               <Badge variant="outline">{viewingDietician.qualifications}</Badge>
+                            </div>
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className="px-6 py-4 space-y-4">
+                        <div>
+                            <h4 className="font-semibold mb-1">About</h4>
+                            <p className="text-sm text-muted-foreground">{viewingDietician.bio}</p>
+                        </div>
+                        <div className="text-center pt-2">
+                            <p className="text-3xl font-bold">₹{viewingDietician.fees}</p>
+                            <p className="text-sm text-muted-foreground">Consultation Fee</p>
+                        </div>
+                    </div>
+                    <div className="px-6 pb-6">
+                        <Button
+                            className="w-full"
+                            onClick={() => handleConnect(viewingDietician)}
+                        >
+                            <Phone className="mr-2 h-4 w-4" />
+                            Connect for ₹{viewingDietician.fees}
+                        </Button>
+                    </div>
+                </>
+            )}
+        </DialogContent>
+    </Dialog>
+
+
+    {/* Chat Dialog */}
+    <Dialog open={isChatOpen} onOpenChange={(open) => !open && closeAllDialogs()}>
+        <DialogContent className="sm:max-w-[525px] h-[80vh] flex flex-col bg-card text-card-foreground">
+            {viewingDietician && (
+                <>
+                    <DialogHeader className="text-left relative">
                         <DialogTitle className="flex items-center gap-3">
                             <Avatar>
-                                <AvatarImage src={selectedDietician.image} />
-                                <AvatarFallback>{selectedDietician.name.charAt(0)}</AvatarFallback>
+                                <AvatarImage src={viewingDietician.image} />
+                                <AvatarFallback>{viewingDietician.name.charAt(0)}</AvatarFallback>
                             </Avatar>
                             <div>
-                                <p>{selectedDietician.name}</p>
-                                <p className="text-sm font-light text-muted-foreground">{selectedDietician.specialization}</p>
+                                <p>{viewingDietician.name}</p>
+                                <p className="text-sm font-light text-muted-foreground">{viewingDietician.specialization}</p>
                             </div>
                         </DialogTitle>
+                         <button onClick={() => setIsChatOpen(false)} className="absolute right-0 top-0 p-2 rounded-full hover:bg-muted">
+                            <X className="w-4 h-4"/>
+                        </button>
                     </DialogHeader>
                     <ScrollArea className="flex-1 p-4" ref={scrollAreaRef}>
                         <div className="space-y-4">
@@ -235,7 +304,7 @@ export default function DieticianConnectPage() {
                                 <div key={index} className={`flex items-end gap-2 ${msg.role === 'user' ? 'justify-end' : ''}`}>
                                     {msg.role === 'model' && (
                                         <Avatar className="w-8 h-8">
-                                            <AvatarImage src={selectedDietician.image} />
+                                            <AvatarImage src={viewingDietician.image} />
                                             <AvatarFallback><Bot/></AvatarFallback>
                                         </Avatar>
                                     )}
@@ -252,7 +321,7 @@ export default function DieticianConnectPage() {
                             {isTyping && (
                                 <div className="flex items-end gap-2">
                                      <Avatar className="w-8 h-8">
-                                        <AvatarImage src={selectedDietician.image} />
+                                        <AvatarImage src={viewingDietician.image} />
                                         <AvatarFallback><Bot/></AvatarFallback>
                                     </Avatar>
                                     <div className="rounded-lg p-3 bg-muted">
