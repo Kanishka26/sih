@@ -47,9 +47,9 @@ export function RasaBalanceWidget() {
       <CardContent className="flex-1 flex flex-col items-center justify-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[250px]"
+          className="mx-auto aspect-square w-full max-w-[200px]"
         >
-          <ResponsiveContainer width="100%" height={150}>
+          <ResponsiveContainer width="100%" height={120}>
             <PieChart>
                 <ChartTooltip
                 content={<ChartTooltipContent nameKey="name" hideLabel />}
@@ -58,8 +58,8 @@ export function RasaBalanceWidget() {
                 data={chartData}
                 dataKey="value"
                 nameKey="name"
-                innerRadius={40}
-                outerRadius={60}
+                innerRadius={30}
+                outerRadius={50}
                 strokeWidth={2}
                 >
                 {chartData.map((entry, index) => (
