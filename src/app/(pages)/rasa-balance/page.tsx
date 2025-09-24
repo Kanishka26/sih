@@ -1,3 +1,4 @@
+
 'use client';
 import {
   Card,
@@ -108,7 +109,7 @@ export default function RasaBalancePage() {
   }, [rasaResult]);
 
   return (
-    <div className="space-y-8 max-w-6xl mx-auto">
+    <div className="space-y-8 max-w-4xl mx-auto">
        <div className="text-center">
         <h1 className="text-3xl font-headline font-bold">
           RasaBalance (रस संतुलन)
@@ -117,106 +118,108 @@ export default function RasaBalancePage() {
           Track the six tastes in your meals to maintain harmony.
         </p>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="md:col-span-1">
-          <Card>
-            <CardHeader>
-              <CardTitle>Log Your Meal</CardTitle>
-              <CardDescription>Enter the foods you ate.</CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="space-y-2">
-                <Label htmlFor="food-input">Food Item</Label>
-                <div className="flex gap-2">
-                  <Input 
-                    id="food-input"
-                    placeholder="e.g., Apple, Rice"
-                    value={foodInput}
-                    onChange={(e) => setFoodInput(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Enter' && handleAddFood()}
-                  />
-                  <Button onClick={handleAddFood} size="sm">Add</Button>
-                </div>
+      
+      <Card>
+        <CardHeader>
+          <CardTitle>Log Your Meal</CardTitle>
+          <CardDescription>Enter the foods you ate to see the rasa balance.</CardDescription>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="food-input">Food Item</Label>
+            <div className="flex gap-2">
+              <Input 
+                id="food-input"
+                placeholder="e.g., Apple, Rice"
+                value={foodInput}
+                onChange={(e) => setFoodInput(e.target.value)}
+                onKeyDown={(e) => e.key === 'Enter' && handleAddFood()}
+              />
+              <Button onClick={handleAddFood} size="sm">Add</Button>
+            </div>
+          </div>
+          <div className="space-y-2">
+              <Label>Your Meal Items</Label>
+              <div className="flex flex-wrap gap-2 min-h-[40px] p-2 border rounded-md bg-background">
+                  {foodItems.length === 0 && <p className="text-sm text-muted-foreground">No items added yet.</p>}
+                  {foodItems.map(item => (
+                      <Badge key={item} variant="secondary" className="capitalize">
+                          {item}
+                          <button onClick={() => handleRemoveFood(item)} className="ml-2 rounded-full hover:bg-muted-foreground/20">
+                              <XIcon className="h-3 w-3" />
+                          </button>
+                      </Badge>
+                  ))}
               </div>
-              <div className="space-y-2">
-                  <Label>Your Meal Items</Label>
-                  <div className="flex flex-wrap gap-2 min-h-[40px] p-2 border rounded-md bg-background">
-                      {foodItems.length === 0 && <p className="text-sm text-muted-foreground">No items added yet.</p>}
-                      {foodItems.map(item => (
-                          <Badge key={item} variant="secondary" className="capitalize">
-                              {item}
-                              <button onClick={() => handleRemoveFood(item)} className="ml-2 rounded-full hover:bg-muted-foreground/20">
-                                  <XIcon className="h-3 w-3" />
-                              </button>
-                          </Badge>
-                      ))}
-                  </div>
-              </div>
+          </div>
+        </CardContent>
+        <CardFooter className="flex-col gap-4">
+              <Button onClick={handleAnalyzeMeal} disabled={isPending || foodItems.length === 0} className="w-full">
+                {isPending ? <Loader2 className="animate-spin mr-2"/> : <Sparkles className="mr-2"/>}
+                Analyze Rasa Balance
+            </Button>
+            {foodItems.length > 0 && (
+                <Button variant="outline" className="w-full" onClick={() => {
+                setFoodItems([]);
+                setRasaResult(null);
+              }}>
+                <Trash2 className="mr-2" />
+                Clear Meal
+              </Button>
+            )}
+        </CardFooter>
+      </Card>
+
+      {isPending && (
+        <Card>
+            <CardContent className="flex items-center justify-center h-[400px] flex-col gap-4">
+                <Loader2 className="w-10 h-10 animate-spin text-primary" />
+                <p className="text-muted-foreground">Analyzing your meal...</p>
             </CardContent>
-            <CardFooter>
-                 <Button onClick={handleAnalyzeMeal} disabled={isPending || foodItems.length === 0} className="w-full">
-                    {isPending ? <Loader2 className="animate-spin mr-2"/> : <Sparkles className="mr-2"/>}
-                    Analyze Rasa Balance
-                </Button>
-            </CardFooter>
+        </Card>
+      )}
+
+      {(rasaResult || !isPending) && (
+          <Card>
+              <CardHeader>
+              <CardTitle>Your Rasa Balance</CardTitle>
+              <CardDescription>
+                  Your six-taste balance score for this meal is{' '}
+                  <span className="text-primary font-bold text-lg">{balanceScore}</span>.
+              </CardDescription>
+              </CardHeader>
+              <CardContent>
+              <ChartContainer config={chartConfig} className="w-full h-[400px]">
+                  <BarChart
+                  data={chartData}
+                  margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                  >
+                  <CartesianGrid strokeDasharray="3 3" />
+                  <XAxis
+                      dataKey="name"
+                      stroke="hsl(var(--foreground))"
+                      fontSize={12}
+                      tickLine={false}
+                      axisLine={false}
+                  />
+                  <YAxis
+                      stroke="hsl(var(--foreground))"
+                      fontSize={12}
+                      tickLine={false}
+                      axisLine={false}
+                      tickFormatter={(value) => `${value}`}
+                  />
+                  <ChartTooltip
+                      cursor={false}
+                      content={<ChartTooltipContent hideLabel />}
+                  />
+                  <Bar dataKey="value" radius={[4, 4, 0, 0]} />
+                  </BarChart>
+              </ChartContainer>
+              </CardContent>
           </Card>
-        </div>
-        <div className="md:col-span-3">
-            <Card>
-                <CardHeader>
-                <CardTitle>Today's Rasa Balance</CardTitle>
-                <CardDescription>
-                    Your six-taste balance score for this meal is{' '}
-                    <span className="text-primary font-bold text-lg">{balanceScore}</span>.
-                </CardDescription>
-                </CardHeader>
-                <CardContent>
-                {isPending ? (
-                    <div className="flex items-center justify-center h-[400px]">
-                        <Loader2 className="w-10 h-10 animate-spin text-primary" />
-                    </div>
-                ) : (
-                <ChartContainer config={chartConfig} className="w-full h-[400px]">
-                    <BarChart
-                    data={chartData}
-                    margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                    >
-                    <CartesianGrid strokeDasharray="3 3" />
-                    <XAxis
-                        dataKey="name"
-                        stroke="hsl(var(--foreground))"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                    />
-                    <YAxis
-                        stroke="hsl(var(--foreground))"
-                        fontSize={12}
-                        tickLine={false}
-                        axisLine={false}
-                        tickFormatter={(value) => `${value}`}
-                    />
-                    <ChartTooltip
-                        cursor={false}
-                        content={<ChartTooltipContent hideLabel />}
-                    />
-                    <Bar dataKey="value" radius={[4, 4, 0, 0]} />
-                    </BarChart>
-                </ChartContainer>
-                )}
-                </CardContent>
-                 <CardFooter>
-                  <Button variant="outline" className="ml-auto" onClick={() => {
-                    setFoodItems([]);
-                    setRasaResult(null);
-                  }}>
-                    <Trash2 className="mr-2" />
-                    Clear Meal
-                  </Button>
-                </CardFooter>
-            </Card>
-        </div>
-      </div>
+      )}
+
     </div>
   );
 }
