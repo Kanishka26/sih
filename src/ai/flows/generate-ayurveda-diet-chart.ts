@@ -43,14 +43,14 @@ export async function generateAyurvedaDietChart(
 
 const prompt = ai.definePrompt({
   name: 'generateAyurvedaDietChartPrompt',
-  input: {schema: GenerateAyurvedaDietChartInputSchema},
+  input: {schema: z.object({ prompt: GenerateAyurvedaDietChartInputSchema })},
   output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
 User Profile:
-- Age: {{age}}
-- Gender: {{gender}}
-- Prakriti (Dosha): {{prakriti}}
+- Age: {{prompt.age}}
+- Gender: {{prompt.gender}}
+- Prakriti (Dosha): {{prompt.prakriti}}
 
 Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
 
@@ -66,7 +66,7 @@ const generateAyurvedaDietChartFlow = ai.defineFlow(
     outputSchema: GenerateAyurvedaDietChartOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
+    const {output} = await prompt({ prompt: input });
     return output!;
   }
 );
