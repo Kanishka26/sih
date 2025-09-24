@@ -93,9 +93,18 @@ export default function RasaBalancePage() {
   };
   
   const { chartData, balanceScore } = useMemo(() => {
-    const data = Object.entries(analysisResult?.rasaBalance || initialChartData).map(([name, value]) => ({
+    const rasaBalance = analysisResult ? {
+        'Madhura (Sweet)': analysisResult['Madhura (Sweet)'],
+        'Amla (Sour)': analysisResult['Amla (Sour)'],
+        'Lavana (Salty)': analysisResult['Lavana (Salty)'],
+        'Katu (Pungent)': analysisResult['Katu (Pungent)'],
+        'Tikta (Bitter)': analysisResult['Tikta (Bitter)'],
+        'Kashaya (Astringent)': analysisResult['Kashaya (Astringent)'],
+    } : initialChartData;
+
+    const data = Object.entries(rasaBalance).map(([name, value]) => ({
       name,
-      value,
+      value: value || 0,
       fill: chartConfig[name as keyof typeof chartConfig]?.color,
     }));
     
