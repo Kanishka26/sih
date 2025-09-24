@@ -23,18 +23,11 @@ import {
 } from '@/ai/flows/analyze-food-image';
 import { z } from 'zod';
 
-const dietChartSchema = z.object({
-  age: z.coerce.number().min(1).max(120),
-  gender: z.enum(['male', 'female']),
-  prakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
-});
 
 export async function generateDietChartAction(input: GenerateAyurvedaDietChartInput) {
-  const parsedInput = dietChartSchema.safeParse(input);
-  if (!parsedInput.success) {
-    throw new Error('Invalid input');
-  }
-  return await generateAyurvedaDietChart(parsedInput.data);
+  // The Genkit flow already handles input validation with its Zod schema.
+  // The redundant validation here was causing conflicts.
+  return await generateAyurvedaDietChart(input);
 }
 
 const seasonalFoodsSchema = z.object({
