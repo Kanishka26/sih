@@ -19,7 +19,7 @@ import { useState, useMemo, useTransition } from 'react';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Loader2, Sparkles, Trash2, XIcon } from 'lucide-react';
+import { Loader2, Sparkles, Trash2, XIcon, PlusCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { analyzeMealRasasAction } from '@/lib/actions';
 import { type AnalyzeMealRasasOutput } from '@/ai/flows/analyze-meal-rasas';
@@ -44,6 +44,8 @@ const chartConfig = {
   'Kashaya (Astringent)': { color: 'hsl(var(--primary))' },
 };
 
+const commonFoods = ['Rice', 'Lentils (Dal)', 'Ghee', 'Apple', 'Spinach', 'Milk', 'Ginger', 'Turmeric'];
+
 export default function RasaBalancePage() {
   const [foodInput, setFoodInput] = useState('');
   const [foodItems, setFoodItems] = useState<string[]>([]);
@@ -51,11 +53,15 @@ export default function RasaBalancePage() {
   const { toast } = useToast();
   const [analysisResult, setAnalysisResult] = useState<AnalyzeMealRasasOutput | null>(null);
 
-  const handleAddFood = () => {
-    if (foodInput.trim() && !foodItems.includes(foodInput.trim().toLowerCase())) {
-      setFoodItems([...foodItems, foodInput.trim().toLowerCase()]);
-      setFoodInput('');
+  const addFoodItem = (food: string) => {
+    if (food.trim() && !foodItems.includes(food.trim().toLowerCase())) {
+      setFoodItems([...foodItems, food.trim().toLowerCase()]);
     }
+  };
+
+  const handleAddFood = () => {
+    addFoodItem(foodInput);
+    setFoodInput('');
   };
 
   const handleRemoveFood = (itemToRemove: string) => {
@@ -137,6 +143,16 @@ export default function RasaBalancePage() {
                 onKeyDown={(e) => e.key === 'Enter' && handleAddFood()}
               />
               <Button onClick={handleAddFood} size="sm">Add</Button>
+            </div>
+          </div>
+           <div className="space-y-2">
+            <Label>Quick Add Common Foods</Label>
+            <div className="flex flex-wrap gap-2">
+              {commonFoods.map(food => (
+                <Button key={food} variant="outline" size="sm" onClick={() => addFoodItem(food)} disabled={foodItems.includes(food.toLowerCase())}>
+                   <PlusCircle className="mr-2 h-4 w-4"/> {food}
+                </Button>
+              ))}
             </div>
           </div>
           <div className="space-y-2">
