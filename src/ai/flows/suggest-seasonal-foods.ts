@@ -35,12 +35,12 @@ const SuggestSeasonalFoodsOutputSchema = z.object({
   seasonalFoods: z
     .string()
     .describe(
-      'A list of foods that are beneficial to eat during the current season according to Ayurveda, in markdown list format. Use hyphens (-) for list items.'
+      'A markdown list of 5-7 ideal seasonal foods for the user. Each item must start with a hyphen (-).'
     ),
   dietaryRecommendations: z
     .string()
     .describe(
-      'Dietary recommendations for the current season based on the user’s prakriti and Ayurvedic principles, in markdown list format. Use hyphens (-) for list items.'
+      'A markdown list of 3-5 general dietary recommendations for this season and prakriti. Each item must start with a hyphen (-).'
     ),
 });
 export type SuggestSeasonalFoodsOutput = z.infer<
