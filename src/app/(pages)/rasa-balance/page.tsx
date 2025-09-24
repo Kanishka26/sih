@@ -180,7 +180,7 @@ export default function RasaBalancePage() {
         </Card>
       )}
 
-      {(analysisResult || !isPending && foodItems.length === 0) && (
+      {analysisResult && !isPending && (
           <Card>
               <CardHeader>
               <CardTitle>Your Rasa Balance</CardTitle>
@@ -227,6 +227,46 @@ export default function RasaBalancePage() {
                       </AlertDescription>
                     </Alert>
                   )}
+              </CardContent>
+          </Card>
+      )}
+
+      {!analysisResult && !isPending && foodItems.length === 0 && (
+          <Card>
+              <CardHeader>
+                  <CardTitle>Your Rasa Balance</CardTitle>
+                   <CardDescription>
+                       Add food items to your meal to see your balance score.
+                    </CardDescription>
+              </CardHeader>
+              <CardContent>
+                   <ChartContainer config={chartConfig} className="w-full h-[400px]">
+                        <BarChart
+                            data={chartData}
+                            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                        >
+                            <CartesianGrid strokeDasharray="3 3" />
+                            <XAxis
+                                dataKey="name"
+                                stroke="hsl(var(--foreground))"
+                                fontSize={12}
+                                tickLine={false}
+                                axisLine={false}
+                            />
+                            <YAxis
+                                stroke="hsl(var(--foreground))"
+                                fontSize={12}
+                                tickLine={false}
+                                axisLine={false}
+                                tickFormatter={(value) => `${value}`}
+                            />
+                            <ChartTooltip
+                                cursor={false}
+                                content={<ChartTooltipContent hideLabel />}
+                            />
+                            <Bar dataKey="value" radius={[4, 4, 0, 0]} />
+                        </BarChart>
+                    </ChartContainer>
               </CardContent>
           </Card>
       )}
