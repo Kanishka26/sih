@@ -63,6 +63,11 @@ export default function SeasonalBhojanPage() {
     },
   });
 
+  const seasonalFoodList = result?.seasonalFoods
+    .split('- ')
+    .map(s => s.trim())
+    .filter(Boolean) || [];
+
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
       setResult(null);
@@ -204,11 +209,14 @@ export default function SeasonalBhojanPage() {
           <CardContent className="space-y-6">
             <div className="p-4 bg-primary/10 rounded-lg">
                 <h4 className="font-semibold text-lg mb-3 text-primary-foreground/90">Ideal Seasonal Foods</h4>
-                <div
-                    className="prose prose-sm dark:prose-invert max-w-none prose-ul:list-none prose-ul:p-0 prose-li:flex prose-li:items-start prose-li:gap-3 prose-li:my-2 prose-p:m-0 text-foreground/90"
-                    dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/^- /gm, '<li><img src="/leaf.svg" class="w-4 h-4 mt-1" /><span>')
-                    .replace(/\n/g, '</span></li>') }}
-                />
+                 <ul className="space-y-2 text-foreground/90">
+                    {seasonalFoodList.map((food, index) => (
+                        <li key={index} className="flex items-start gap-3">
+                            <img src="/leaf.svg" className="w-4 h-4 mt-1" alt="leaf icon" />
+                            <span>{food}</span>
+                        </li>
+                    ))}
+                 </ul>
             </div>
             
             <Separator />
