@@ -5,29 +5,25 @@ import {
   CardHeader,
   CardTitle,
   CardDescription,
+  CardFooter,
 } from '@/components/ui/card';
 import {
   ChartContainer,
   ChartTooltip,
   ChartTooltipContent,
 } from '@/components/ui/chart';
-import { Checkbox } from '@/components/ui/checkbox';
 import { Label } from '@/components/ui/label';
 import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from 'recharts';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useTransition } from 'react';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
+import { Loader2, Sparkles, Trash2, XIcon } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
+import { analyzeMealRasasAction } from '@/lib/actions';
+import { type RasaBalance } from '@/ai/flows/analyze-meal-rasas';
 
-const foodItems = [
-  { id: 'apple', name: 'Apple', rasas: { Madhura: 5, Kashaya: 2 } },
-  { id: 'lentils', name: 'Lentils', rasas: { Madhura: 4, Kashaya: 3 } },
-  { id: 'rice', name: 'Rice', rasas: { Madhura: 6 } },
-  { id: 'spinach', name: 'Spinach', rasas: { Kashaya: 4, Tikta: 2 } },
-  { id: 'lemon', name: 'Lemon', rasas: { Amla: 6 } },
-  { id: 'salt', name: 'Salt', rasas: { Lavana: 7 } },
-  { id: 'chilli', name: 'Chilli', rasas: { Katu: 7 } },
-  { id: 'gourd', name: 'Bitter Gourd', rasas: { Tikta: 8 } },
-];
-
-const initialRasaTotals = {
+const initialChartData: RasaBalance = {
   'Madhura (Sweet)': 0,
   'Amla (Sour)': 0,
   'Lavana (Salty)': 0,
@@ -47,40 +43,57 @@ const chartConfig = {
 };
 
 export default function RasaBalancePage() {
-  const [selectedFoods, setSelectedFoods] = useState<string[]>([]);
-  
-  const handleFoodToggle = (foodId: string) => {
-    setSelectedFoods(prev => 
-      prev.includes(foodId) ? prev.filter(id => id !== foodId) : [...prev, foodId]
-    );
+  const [foodInput, setFoodInput] = useState('');
+  const [foodItems, setFoodItems] = useState<string[]>([]);
+  const [isPending, startTransition] = useTransition();
+  const { toast } = useToast();
+  const [rasaResult, setRasaResult] = useState<RasaBalance | null>(null);
+
+  const handleAddFood = () => {
+    if (foodInput.trim() && !foodItems.includes(foodInput.trim().toLowerCase())) {
+      setFoodItems([...foodItems, foodInput.trim().toLowerCase()]);
+      setFoodInput('');
+    }
+  };
+
+  const handleRemoveFood = (itemToRemove: string) => {
+    setFoodItems(foodItems.filter(item => item !== itemToRemove));
   };
   
+  const handleAnalyzeMeal = () => {
+    if (foodItems.length === 0) {
+      toast({
+        title: 'No foods to analyze',
+        description: 'Please add at least one food item.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    startTransition(async () => {
+      setRasaResult(null);
+      try {
+        const result = await analyzeMealRasasAction({ foodItems });
+        setRasaResult(result.rasaBalance);
+      } catch (error) {
+        toast({
+          title: 'Error Analyzing Meal',
+          description: 'Could not get the rasa balance. Please try again.',
+          variant: 'destructive',
+        });
+      }
+    });
+  };
+
   const { chartData, balanceScore } = useMemo(() => {
-    const rasaTotals = { ...initialRasaTotals };
-    let totalPoints = 0;
-    let numRasasPresent = 0;
+    const data = Object.entries(rasaResult || initialChartData).map(([name, value]) => ({
+      name,
+      value,
+      fill: chartConfig[name as keyof typeof chartConfig]?.color,
+    }));
+    
+    const totalPoints = data.reduce((acc, curr) => acc + curr.value, 0);
+    const numRasasPresent = data.filter(d => d.value > 0).length;
 
-    selectedFoods.forEach(foodId => {
-      const food = foodItems.find(f => f.id === foodId);
-      if (food) {
-        for (const [rasa, value] of Object.entries(food.rasas)) {
-          const key = Object.keys(rasaTotals).find(k => k.startsWith(rasa)) as keyof typeof rasaTotals;
-          if (key) {
-            rasaTotals[key] += value;
-          }
-        }
-      }
-    });
-
-    const data = Object.entries(rasaTotals).map(([name, value]) => {
-      if (value > 0) {
-        totalPoints += value;
-        numRasasPresent++;
-      }
-      return { name, value, fill: chartConfig[name as keyof typeof chartConfig]?.color };
-    });
-
-    // Balance Score Calculation
     const idealValue = totalPoints / (numRasasPresent || 1);
     let deviation = 0;
     if (totalPoints > 0) {
@@ -92,7 +105,7 @@ export default function RasaBalancePage() {
     const score = totalPoints === 0 ? 0 : Math.max(0, Math.round(100 - (deviation / (maxDeviation || 1)) * 100));
 
     return { chartData: data, balanceScore: score };
-  }, [selectedFoods]);
+  }, [rasaResult]);
 
   return (
     <div className="space-y-8 max-w-6xl mx-auto">
@@ -109,20 +122,43 @@ export default function RasaBalancePage() {
           <Card>
             <CardHeader>
               <CardTitle>Log Your Meal</CardTitle>
-              <CardDescription>Select foods you ate today.</CardDescription>
+              <CardDescription>Enter the foods you ate.</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
-              {foodItems.map(food => (
-                <div key={food.id} className="flex items-center space-x-2">
-                  <Checkbox 
-                    id={food.id} 
-                    onCheckedChange={() => handleFoodToggle(food.id)}
-                    checked={selectedFoods.includes(food.id)}
+              <div className="space-y-2">
+                <Label htmlFor="food-input">Food Item</Label>
+                <div className="flex gap-2">
+                  <Input 
+                    id="food-input"
+                    placeholder="e.g., Apple, Rice"
+                    value={foodInput}
+                    onChange={(e) => setFoodInput(e.target.value)}
+                    onKeyDown={(e) => e.key === 'Enter' && handleAddFood()}
                   />
-                  <Label htmlFor={food.id} className="cursor-pointer">{food.name}</Label>
+                  <Button onClick={handleAddFood} size="sm">Add</Button>
                 </div>
-              ))}
+              </div>
+              <div className="space-y-2">
+                  <Label>Your Meal Items</Label>
+                  <div className="flex flex-wrap gap-2 min-h-[40px] p-2 border rounded-md bg-background">
+                      {foodItems.length === 0 && <p className="text-sm text-muted-foreground">No items added yet.</p>}
+                      {foodItems.map(item => (
+                          <Badge key={item} variant="secondary" className="capitalize">
+                              {item}
+                              <button onClick={() => handleRemoveFood(item)} className="ml-2 rounded-full hover:bg-muted-foreground/20">
+                                  <XIcon className="h-3 w-3" />
+                              </button>
+                          </Badge>
+                      ))}
+                  </div>
+              </div>
             </CardContent>
+            <CardFooter>
+                 <Button onClick={handleAnalyzeMeal} disabled={isPending || foodItems.length === 0} className="w-full">
+                    {isPending ? <Loader2 className="animate-spin mr-2"/> : <Sparkles className="mr-2"/>}
+                    Analyze Rasa Balance
+                </Button>
+            </CardFooter>
           </Card>
         </div>
         <div className="md:col-span-3">
@@ -130,11 +166,16 @@ export default function RasaBalancePage() {
                 <CardHeader>
                 <CardTitle>Today's Rasa Balance</CardTitle>
                 <CardDescription>
-                    Your six-taste balance score for today is{' '}
+                    Your six-taste balance score for this meal is{' '}
                     <span className="text-primary font-bold text-lg">{balanceScore}</span>.
                 </CardDescription>
                 </CardHeader>
                 <CardContent>
+                {isPending ? (
+                    <div className="flex items-center justify-center h-[400px]">
+                        <Loader2 className="w-10 h-10 animate-spin text-primary" />
+                    </div>
+                ) : (
                 <ChartContainer config={chartConfig} className="w-full h-[400px]">
                     <BarChart
                     data={chartData}
@@ -162,7 +203,17 @@ export default function RasaBalancePage() {
                     <Bar dataKey="value" radius={[4, 4, 0, 0]} />
                     </BarChart>
                 </ChartContainer>
+                )}
                 </CardContent>
+                 <CardFooter>
+                  <Button variant="outline" className="ml-auto" onClick={() => {
+                    setFoodItems([]);
+                    setRasaResult(null);
+                  }}>
+                    <Trash2 className="mr-2" />
+                    Clear Meal
+                  </Button>
+                </CardFooter>
             </Card>
         </div>
       </div>

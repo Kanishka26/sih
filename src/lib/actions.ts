@@ -12,6 +12,10 @@ import {
   chatWithDietician,
   type ChatWithDieticianInput,
 } from '@/ai/flows/chat-with-dietician';
+import {
+    analyzeMealRasas,
+    type AnalyzeMealRasasInput,
+} from '@/ai/flows/analyze-meal-rasas';
 import { z } from 'zod';
 
 const dietChartSchema = z.object({
@@ -58,4 +62,16 @@ export async function chatWithDieticianAction(input: ChatWithDieticianInput) {
         throw new Error('Invalid input for chat');
     }
     return await chatWithDietician(parsedInput.data);
+}
+
+const analyzeMealRasasSchema = z.object({
+    foodItems: z.array(z.string()).min(1, "Please provide at least one food item."),
+});
+
+export async function analyzeMealRasasAction(input: AnalyzeMealRasasInput) {
+    const parsedInput = analyzeMealRasasSchema.safeParse(input);
+    if (!parsedInput.success) {
+        throw new Error('Invalid input for rasa analysis');
+    }
+    return await analyzeMealRasas(parsedInput.data);
 }
