@@ -1,3 +1,4 @@
+
 'use client';
 
 import { DietChartWidget } from '@/components/dashboard/diet-chart-widget';
@@ -8,15 +9,15 @@ import { SeasonalSuggestionsWidget } from '@/components/dashboard/seasonal-sugge
 
 export default function DashboardPage() {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
       {/* Main Panel */}
-      <div className="lg:col-span-2 space-y-8">
+      <div className="lg:col-span-2 flex flex-col space-y-8">
           <PrakritiProfileWidget />
           <DietChartWidget />
       </div>
 
       {/* Right Panel */}
-      <div className="lg:col-span-1 space-y-8">
+      <div className="lg:col-span-1 flex flex-col space-y-8">
           <RasaBalanceWidget />
           <SeasonalSuggestionsWidget />
           <QuickLogWidget />

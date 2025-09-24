@@ -1,3 +1,4 @@
+
 'use client';
 import Link from 'next/link';
 import {
@@ -31,7 +32,7 @@ export function PrakritiProfileWidget() {
   };
 
   return (
-    <Card className="bg-card text-card-foreground">
+    <Card className="bg-card text-card-foreground flex-1 flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex items-center gap-4">
             <div className='p-3 bg-primary/10 rounded-full'>
@@ -44,7 +45,7 @@ export function PrakritiProfileWidget() {
         </div>
         <Badge variant="secondary" className="text-lg bg-accent text-accent-foreground capitalize">{prakriti}</Badge>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         <p className="text-foreground/90">
           {recommendation}
         </p>

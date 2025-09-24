@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -12,7 +13,7 @@ const seasonalFoods = [
 
 export function SeasonalSuggestionsWidget() {
   return (
-    <Card className="bg-card text-card-foreground">
+    <Card className="bg-card text-card-foreground flex flex-col h-full">
       <CardHeader>
         <div className="flex items-center gap-2">
             <Sun className="w-6 h-6 text-primary"/>
@@ -20,7 +21,7 @@ export function SeasonalSuggestionsWidget() {
         </div>
         <CardDescription>Current Season: <span className="font-semibold text-primary">Summer</span></CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex-1">
         <div className="relative w-full h-32 rounded-lg overflow-hidden mb-4">
           <Image
             src="https://picsum.photos/seed/summer/600/400"
@@ -46,7 +47,7 @@ export function SeasonalSuggestionsWidget() {
           ))}
         </ul>
       </CardContent>
-      <CardFooter>
+      <CardFooter className="mt-auto">
           <Button asChild className="w-full" variant="outline">
               <Link href="/seasonal-bhojan">Get More Suggestions</Link>
           </Button>

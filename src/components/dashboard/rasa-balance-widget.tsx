@@ -1,3 +1,4 @@
+
 'use client';
 import {
   Card,
@@ -37,17 +38,17 @@ const chartConfig = {
 
 export function RasaBalanceWidget() {
   return (
-    <Card className="flex flex-col">
+    <Card className="flex flex-col h-full">
       <CardHeader>
         <CardTitle>RasaBalance (रस संतुलन)</CardTitle>
         <CardDescription>
           Today's taste profile. Score: <span className="text-primary font-bold">78/100</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="flex justify-center pb-0">
+      <CardContent className="flex-1 flex justify-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square h-[180px] w-[180px]"
+          className="mx-auto aspect-square h-full w-full max-h-[180px]"
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
