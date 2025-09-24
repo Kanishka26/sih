@@ -205,8 +205,9 @@ export default function SeasonalBhojanPage() {
             <div className="p-4 bg-primary/10 rounded-lg">
                 <h4 className="font-semibold text-lg mb-3 text-primary-foreground/90">Ideal Seasonal Foods</h4>
                 <div
-                    className="prose prose-sm dark:prose-invert max-w-none prose-ul:list-none prose-ul:pl-0 prose-li:flex prose-li:items-center prose-li:gap-3 prose-li:text-foreground/90 before:content-[''] before:w-4 before:h-4 before:bg-[url('/leaf.svg')] before:bg-no-repeat"
-                    dangerouslySetInnerHTML={{ __html: result.seasonalFoods }}
+                    className="prose prose-sm dark:prose-invert max-w-none prose-ul:list-none prose-ul:p-0 prose-li:flex prose-li:items-start prose-li:gap-3 prose-li:my-2 prose-p:m-0 text-foreground/90"
+                    dangerouslySetInnerHTML={{ __html: result.seasonalFoods.replace(/^- /gm, '<li><img src="/leaf.svg" class="w-4 h-4 mt-1" /><span>')
+                    .replace(/\n/g, '</span></li>') }}
                 />
             </div>
             
