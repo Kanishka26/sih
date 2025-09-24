@@ -175,7 +175,6 @@ export default function HomePage() {
                     </Card>
                 </Link>
                 ))}
-                {/* Add Prakriti Scan to the grid as well for completeness */}
                  <Link href="/prakriti-scan" passHref>
                     <Card className="h-full flex flex-col hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
                     <CardHeader className="flex-col items-center text-center">
