@@ -16,64 +16,127 @@ import { Label } from '@/components/ui/label';
 import { Leaf, Flame, Wind } from 'lucide-react';
 
 const questions = [
+    // Part I: Physiological & Mental Traits
     {
-        question: "How do you typically complete your work?",
-        options: ["Quickly, with bursts of energy, but can get distracted", "In a focused, intense, and goal-oriented manner", "Slow, steady, and methodical"],
+        question: "How would you describe your mental activity?",
+        options: ["Active, creative, and full of new ideas, but can be restless", "Focused, sharp, intelligent, and a good leader", "Calm, stable, and thoughtful"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
-        question: "What is your body frame and build?",
-        options: ["Thin, light frame, find it hard to gain weight", "Medium, muscular build, well-proportioned", "Large, sturdy frame, tend to gain weight easily"],
+        question: "How do you learn new things?",
+        options: ["I grasp things quickly, but also forget quickly", "I have a sharp, penetrating memory and learn systematically", "I learn slowly, but my long-term memory is excellent"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
-        question: "How would you describe your skin?",
-        options: ["Dry, cool, thin, prone to roughness", "Warm, sensitive, prone to rashes, acne, or redness", "Thick, oily, cool, and smooth"],
-        prakriti: ["Vata", "Pitta", "Kapha"]
-    },
-    {
-        question: "How do you handle temperature changes?",
-        options: ["Dislike cold and wind", "Dislike heat and sun", "Adaptable, but dislike damp, cold weather"],
-        prakriti: ["Vata", "Pitta", "Kapha"]
-    },
-    {
-        question: "What are your eyes like?",
-        options: ["Small, active, can be dry", "Medium-sized, sharp, and penetrating gaze", "Large, calm, and attractive"],
-        prakriti: ["Vata", "Pitta", "Kapha"]
-    },
-    {
-        question: "Describe your hair.",
-        options: ["Dry, thin, brittle, or frizzy", "Fine, soft, may have premature graying or thinning", "Thick, oily, wavy, and lustrous"],
+        question: "What is your natural emotional tendency under stress?",
+        options: ["I become anxious, worried, or fearful", "I become irritable, angry, and impatient", "I become withdrawn, quiet, and avoid conflict"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
         question: "What is your appetite like?",
-        options: ["Irregular, variable, you might forget to eat", "Strong, sharp, you get irritable if you miss a meal", "Slow but steady, you enjoy food and can skip meals easily"],
+        options: ["Irregular, variable; I might forget to eat", "Strong and sharp; I get irritable if I miss a meal", "Slow but steady; I enjoy food and can skip meals without issue"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
-        question: "How is your digestive power?",
-        options: ["Variable, sometimes good, sometimes weak (gas, bloating)", "Strong, efficient, can digest almost anything", "Slow, heavy feeling after meals"],
+        question: "How is your digestion?",
+        options: ["Variable; prone to gas, bloating, and constipation", "Strong and fast; can lead to acidity or loose stools", "Slow and heavy; I feel full for a long time after eating"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
-        question: "How would you describe your memory?",
-        options: ["Quick to learn, but also quick to forget", "Sharp, good memory, can recall details", "Slow to learn, but retains information for a long time"],
-        prakriti: ["Vata", "Pitta", "Kapha"]
-    },
-    {
-        question: "What is your general mood and temperament?",
-        options: ["Enthusiastic, lively, but can be anxious or worried", "Intelligent, sharp-witted, but can be irritable or angry", "Calm, stable, and patient, but can be lethargic"],
-        prakriti: ["Vata", "Pitta", "Kapha"]
-    },
-    {
-        question: "How are your joints?",
-        options: ["Prominent, tend to crack or pop", "Medium-sized, flexible", "Large, well-lubricated, sturdy"],
+        question: "How do you handle your finances?",
+        options: ["I spend money quickly and impulsively", "I spend on quality, luxury items and manage money well", "I am good at saving and accumulate wealth steadily"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
         question: "Describe your sleep pattern.",
-        options: ["Light, interrupted sleep, can suffer from insomnia", "Sound sleeper, but can be disturbed by heat", "Deep, long, and heavy sleep"],
+        options: ["Light, interrupted sleep; prone to insomnia", "I sleep soundly for a moderate duration, but can be disturbed by heat", "I enjoy deep, long, and heavy sleep and can feel groggy upon waking"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How do you speak?",
+        options: ["I speak quickly and can be talkative", "My speech is clear, sharp, and convincing", "My speech is slow, melodic, and calm"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What are your dreams like?",
+        options: ["Active and adventurous; dreams of flying, running", "Intense and colorful; dreams of fire, conflicts, or problem-solving", "Calm and watery; dreams of lakes, clouds, romance"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How is your energy level throughout the day?",
+        options: ["Comes in bursts; variable energy, can get tired easily", "Strong and consistent, especially during the middle of the day", "Steady and enduring, but can be slow to get started"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+     {
+        question: "How do you handle weather?",
+        options: ["I dislike cold, dry, and windy weather", "I dislike hot, sunny weather and feel better in the cold", "I dislike damp, cool, and cloudy weather"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What's your stamina like?",
+        options: ["Good for short bursts, but I tire easily", "Moderate and focused stamina", "Excellent, strong endurance and stamina"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+
+    // Part II: Physical Traits
+    {
+        question: "What is your body frame and build?",
+        options: ["Thin, light frame; find it hard to gain weight", "Medium, muscular build; well-proportioned", "Large, sturdy, and broad frame; tend to gain weight easily"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How would you describe your skin?",
+        options: ["Dry, cool, thin, with visible veins, prone to roughness", "Warm, oily, sensitive; prone to rashes, acne, or moles", "Thick, oily, cool, and smooth"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How is your body temperature?",
+        options: ["My hands and feet are often cold", "I often feel warm and may have a reddish complexion", "My skin is usually cool to the touch"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "Describe your hair.",
+        options: ["Dry, thin, brittle, or frizzy", "Fine, soft; may have premature graying or thinning", "Thick, oily, wavy, and lustrous"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What are your eyes like?",
+        options: ["Small, active, can be dry; may be dark or black", "Medium-sized, sharp, and penetrating; light-colored (hazel, green)", "Large, calm, and attractive with thick lashes; usually blue or brown"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How are your joints?",
+        options: ["Prominent, thin, and tend to crack or pop", "Medium-sized, loose, and flexible", "Large, well-lubricated, and sturdy"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What are your nails like?",
+        options: ["Dry, rough, brittle; they break easily", "Soft, pink, and flexible", "Thick, strong, smooth, and shiny"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What are your teeth like?",
+        options: ["Irregular, protruding, with receding gums", "Medium-sized, yellowish, prone to cavities", "Strong, white, and well-formed"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How much do you perspire?",
+        options: ["Scant perspiration, even in hot weather", "I perspire a lot, especially when it's hot", "I perspire moderately, even without much exertion"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "What is your thirst level?",
+        options: ["Variable and sometimes I forget to drink water", "I get thirsty often and drink large amounts of water", "I rarely feel very thirsty"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "Describe your lips.",
+        options: ["Thin, dry, and often chapped", "Medium-sized, soft, and reddish", "Full, smooth, and slightly oily"],
+        prakriti: ["Vata", "Pitta", "Kapha"]
+    },
+    {
+        question: "How do you walk?",
+        options: ["A quick, light-footed pace", "A determined, purposeful stride", "A slow, steady, and graceful walk"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     }
 ];
