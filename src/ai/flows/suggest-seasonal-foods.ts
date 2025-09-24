@@ -35,12 +35,12 @@ const SuggestSeasonalFoodsOutputSchema = z.object({
   seasonalFoods: z
     .string()
     .describe(
-      'A list of foods that are beneficial to eat during the current season according to Ayurveda, in markdown format.'
+      'A list of foods that are beneficial to eat during the current season according to Ayurveda, in markdown list format. Use hyphens (-) for list items.'
     ),
   dietaryRecommendations: z
     .string()
     .describe(
-      'Dietary recommendations for the current season based on the user’s prakriti and Ayurvedic principles, in markdown format.'
+      'Dietary recommendations for the current season based on the user’s prakriti and Ayurvedic principles, in markdown list format. Use hyphens (-) for list items.'
     ),
 });
 export type SuggestSeasonalFoodsOutput = z.infer<
@@ -60,7 +60,7 @@ const prompt = ai.definePrompt({
   prompt: `You are an Ayurvedic expert. Your task is to provide seasonal food suggestions and dietary recommendations based on the user's location, the current season, and their prakriti.
 
 Your response MUST be a JSON object with two keys: "seasonalFoods" and "dietaryRecommendations".
-Each key should contain a string formatted as a markdown list (using hyphens).
+The value for each key MUST be a string containing a markdown-formatted list using hyphens (-) for each item.
 
 User Profile:
 - Current Season: {{{currentSeason}}}
@@ -68,8 +68,8 @@ User Profile:
 - User Location: {{{location}}}
 
 Based on the above information, provide:
-1.  **seasonalFoods**: A markdown list of seasonal foods that are ideal for the user.
-2.  **dietaryRecommendations**: A markdown list of general dietary recommendations for this season and prakriti.`,
+1.  **seasonalFoods**: A markdown list of 5-7 ideal seasonal foods for the user.
+2.  **dietaryRecommendations**: A markdown list of 3-5 general dietary recommendations for this season and prakriti.`,
 });
 
 const suggestSeasonalFoodsFlow = ai.defineFlow(

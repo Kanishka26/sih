@@ -49,12 +49,6 @@ const formSchema = z.object({
     .max(50),
 });
 
-// Helper function to parse markdown lists
-const parseMarkdownList = (markdown: string) => {
-  if (!markdown) return [];
-  return markdown.split('\n').map(item => item.replace(/^- /, '').trim()).filter(Boolean);
-}
-
 export default function SeasonalBhojanPage() {
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<SuggestSeasonalFoodsOutput | null>(
@@ -85,10 +79,6 @@ export default function SeasonalBhojanPage() {
       }
     });
   }
-
-  const seasonalFoodsList = result ? parseMarkdownList(result.seasonalFoods) : [];
-  const recommendationsList = result ? parseMarkdownList(result.dietaryRecommendations) : [];
-
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -214,27 +204,20 @@ export default function SeasonalBhojanPage() {
           <CardContent className="space-y-6">
             <div className="p-4 bg-primary/10 rounded-lg">
                 <h4 className="font-semibold text-lg mb-3 text-primary-foreground/90">Ideal Seasonal Foods</h4>
-                <ul className="space-y-2">
-                  {seasonalFoodsList.map((food, index) => (
-                    <li key={index} className="flex items-center gap-3 text-sm text-foreground/90">
-                      <Leaf className="w-4 h-4 text-accent" />
-                      <span>{food}</span>
-                    </li>
-                  ))}
-                </ul>
+                <div
+                    className="prose prose-sm dark:prose-invert max-w-none prose-ul:list-none prose-ul:pl-0 prose-li:flex prose-li:items-center prose-li:gap-3 prose-li:text-foreground/90 before:content-[''] before:w-4 before:h-4 before:bg-[url('/leaf.svg')] before:bg-no-repeat"
+                    dangerouslySetInnerHTML={{ __html: result.seasonalFoods }}
+                />
             </div>
             
             <Separator />
             
              <div className="p-4">
                 <h4 className="font-semibold text-lg mb-3">Dietary Recommendations</h4>
-                <ul className="space-y-2 list-disc list-outside pl-5">
-                  {recommendationsList.map((rec, index) => (
-                    <li key={index} className="text-sm text-muted-foreground">
-                      {rec}
-                    </li>
-                  ))}
-                </ul>
+                <div
+                    className="prose prose-sm dark:prose-invert max-w-none prose-ul:pl-5 text-muted-foreground"
+                    dangerouslySetInnerHTML={{ __html: result.dietaryRecommendations }}
+                />
             </div>
           </CardContent>
         </Card>
