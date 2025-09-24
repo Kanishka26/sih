@@ -33,9 +33,9 @@ export type SuggestSeasonalFoodsInput = z.infer<
 
 const SuggestSeasonalFoodsOutputSchema = z.object({
   seasonalFoods: z
-    .string()
+    .array(z.string())
     .describe(
-      'A markdown list of 5-7 ideal seasonal foods for the user. Each item must start with a hyphen (-).'
+      'An array of 5-7 ideal seasonal food names for the user.'
     ),
   dietaryRecommendations: z
     .string()
@@ -60,7 +60,8 @@ const prompt = ai.definePrompt({
   prompt: `You are an Ayurvedic expert. Your task is to provide seasonal food suggestions and dietary recommendations based on the user's location, the current season, and their prakriti.
 
 Your response MUST be a JSON object with two keys: "seasonalFoods" and "dietaryRecommendations".
-The value for each key MUST be a string containing a markdown-formatted list using hyphens (-) for each item.
+The value for "seasonalFoods" MUST be an array of strings.
+The value for "dietaryRecommendations" MUST be a string containing a markdown-formatted list using hyphens (-) for each item.
 
 User Profile:
 - Current Season: {{{currentSeason}}}
@@ -68,7 +69,7 @@ User Profile:
 - User Location: {{{location}}}
 
 Based on the above information, provide:
-1.  **seasonalFoods**: A markdown list of 5-7 ideal seasonal foods for the user.
+1.  **seasonalFoods**: An array of 5-7 ideal seasonal food names for the user.
 2.  **dietaryRecommendations**: A markdown list of 3-5 general dietary recommendations for this season and prakriti.`,
 });
 

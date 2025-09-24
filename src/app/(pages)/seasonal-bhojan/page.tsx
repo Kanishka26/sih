@@ -32,7 +32,7 @@ import {
 } from '@/components/ui/card';
 import { suggestSeasonalFoodsAction } from '@/lib/actions';
 import { type SuggestSeasonalFoodsOutput } from '@/ai/flows/suggest-seasonal-foods';
-import { Leaf, Loader2, Wand2 } from 'lucide-react';
+import { Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Separator } from '@/components/ui/separator';
 
@@ -63,10 +63,6 @@ export default function SeasonalBhojanPage() {
     },
   });
 
-  const seasonalFoodList = result?.seasonalFoods
-    .split('- ')
-    .map(s => s.trim())
-    .filter(Boolean) || [];
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     startTransition(async () => {
@@ -210,7 +206,7 @@ export default function SeasonalBhojanPage() {
             <div className="p-4 bg-primary/10 rounded-lg">
                 <h4 className="font-semibold text-lg mb-3 text-primary-foreground/90">Ideal Seasonal Foods</h4>
                  <ul className="space-y-2 text-foreground/90">
-                    {seasonalFoodList.map((food, index) => (
+                    {result.seasonalFoods.map((food, index) => (
                         <li key={index} className="flex items-start gap-3">
                             <img src="/leaf.svg" className="w-4 h-4 mt-1" alt="leaf icon" />
                             <span>{food}</span>
