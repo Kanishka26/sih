@@ -33,6 +33,7 @@ type Dietician = {
   qualifications: string;
   image: string;
   dataAiHint: string;
+  fees: number;
 };
 
 const dieticians: Dietician[] = [
@@ -43,6 +44,7 @@ const dieticians: Dietician[] = [
     qualifications: 'M.Sc. (Food & Nutrition), RD',
     image: 'https://picsum.photos/seed/doc1/400/400',
     dataAiHint: 'female doctor portrait',
+    fees: 1200,
   },
   {
     name: 'Dr. Rohan Verma',
@@ -51,6 +53,7 @@ const dieticians: Dietician[] = [
     qualifications: 'M.Sc. (Pediatric Nutrition), RD',
     image: 'https://picsum.photos/seed/doc2/400/400',
     dataAiHint: 'male doctor portrait',
+    fees: 1500,
   },
   {
     name: 'Dr. Priya Singh',
@@ -59,6 +62,7 @@ const dieticians: Dietician[] = [
     qualifications: 'PG Diploma (Sports Nutrition), RD',
     image: 'https://picsum.photos/seed/doc3/400/400',
     dataAiHint: 'female doctor smiling',
+    fees: 1800,
   },
   {
     name: 'Dr. Sameer Patel',
@@ -67,6 +71,7 @@ const dieticians: Dietician[] = [
     qualifications: 'BAMS, M.Sc. (Ayurvedic Dietetics)',
     image: 'https://picsum.photos/seed/doc4/400/400',
     dataAiHint: 'male doctor smiling',
+    fees: 1000,
   },
   {
     name: 'Dr. Meera Desai',
@@ -75,6 +80,7 @@ const dieticians: Dietician[] = [
     qualifications: 'M.Sc. (Geriatric Nutrition), CDE',
     image: 'https://picsum.photos/seed/doc5/400/400',
     dataAiHint: 'doctor portrait',
+    fees: 1100,
   },
   {
     name: 'Dr. Vikram Rathore',
@@ -83,6 +89,7 @@ const dieticians: Dietician[] = [
     qualifications: 'M.Sc. (Nutrition), CWC',
     image: 'https://picsum.photos/seed/doc6/400/400',
     dataAiHint: 'doctor face',
+    fees: 2000,
   },
 ];
 
@@ -189,6 +196,10 @@ export default function DieticianConnectPage() {
             <CardContent className="text-center flex-1 space-y-2">
               <Badge variant="secondary">{dietician.specialization}</Badge>
               <p className="text-xs text-muted-foreground">{dietician.qualifications}</p>
+              <div className="pt-2">
+                  <p className="text-2xl font-bold">₹{dietician.fees}</p>
+                  <p className="text-xs text-muted-foreground">Consultation Fee</p>
+              </div>
             </CardContent>
             <CardFooter>
               <Button
