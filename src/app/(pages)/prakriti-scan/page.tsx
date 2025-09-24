@@ -405,30 +405,6 @@ export default function PrakritiScanPage() {
             }}>Take the Test Again</Button>
           </CardFooter>
         </Card>
-        
-        <Card className="w-full max-w-md">
-            <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                    <FileCheck2 className="w-6 h-6 text-primary" />
-                    Upload Certificate
-                </CardTitle>
-                <CardDescription>
-                    Already have a Prakriti Parikshan certificate? Upload it here to save it to your profile.
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
-                <div className="flex items-center gap-2">
-                    <Input id="certificate-upload" type="file" onChange={handleFileChange} className="flex-1" />
-                </div>
-                 {fileName && <p className="text-sm text-muted-foreground">Selected file: {fileName}</p>}
-            </CardContent>
-            <CardFooter>
-                 <Button className="w-full" onClick={handleUpload}>
-                    <Upload className="mr-2" /> Upload and Save
-                 </Button>
-            </CardFooter>
-        </Card>
-
       </div>
     );
   }
@@ -460,6 +436,29 @@ export default function PrakritiScanPage() {
             The results from this test are indicative and intended for educational purposes only. For an accurate diagnosis and personalized advice, please consult a qualified Ayurvedic practitioner.
           </AlertDescription>
         </Alert>
+
+        <Card>
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <FileCheck2 className="w-6 h-6 text-primary" />
+                    Upload Certificate
+                </CardTitle>
+                <CardDescription>
+                    Already have a Prakriti Parikshan certificate? Upload it here to save it to your profile.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="flex items-center gap-2">
+                    <Input id="certificate-upload" type="file" onChange={handleFileChange} className="flex-1" />
+                </div>
+                 {fileName && <p className="text-sm text-muted-foreground">Selected file: {fileName}</p>}
+            </CardContent>
+            <CardFooter>
+                 <Button className="w-full" onClick={handleUpload}>
+                    <Upload className="mr-2" /> Upload and Save
+                 </Button>
+            </CardFooter>
+        </Card>
 
       <Card>
         <CardContent className="space-y-12 p-6">
@@ -508,5 +507,3 @@ export default function PrakritiScanPage() {
     </div>
   );
 }
-
-    
