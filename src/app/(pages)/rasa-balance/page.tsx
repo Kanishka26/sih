@@ -22,9 +22,10 @@ import { Badge } from '@/components/ui/badge';
 import { Loader2, Sparkles, Trash2, XIcon } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { analyzeMealRasasAction } from '@/lib/actions';
-import { type RasaBalance } from '@/ai/flows/analyze-meal-rasas';
+import { type AnalyzeMealRasasOutput } from '@/ai/flows/analyze-meal-rasas';
+import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 
-const initialChartData: RasaBalance = {
+const initialChartData = {
   'Madhura (Sweet)': 0,
   'Amla (Sour)': 0,
   'Lavana (Salty)': 0,
@@ -48,7 +49,7 @@ export default function RasaBalancePage() {
   const [foodItems, setFoodItems] = useState<string[]>([]);
   const [isPending, startTransition] = useTransition();
   const { toast } = useToast();
-  const [rasaResult, setRasaResult] = useState<RasaBalance | null>(null);
+  const [analysisResult, setAnalysisResult] = useState<AnalyzeMealRasasOutput | null>(null);
 
   const handleAddFood = () => {
     if (foodInput.trim() && !foodItems.includes(foodInput.trim().toLowerCase())) {
@@ -71,10 +72,10 @@ export default function RasaBalancePage() {
       return;
     }
     startTransition(async () => {
-      setRasaResult(null);
+      setAnalysisResult(null);
       try {
         const result = await analyzeMealRasasAction({ foodItems });
-        setRasaResult(result.rasaBalance);
+        setAnalysisResult(result);
       } catch (error) {
         toast({
           title: 'Error Analyzing Meal',
@@ -84,9 +85,9 @@ export default function RasaBalancePage() {
       }
     });
   };
-
+  
   const { chartData, balanceScore } = useMemo(() => {
-    const data = Object.entries(rasaResult || initialChartData).map(([name, value]) => ({
+    const data = Object.entries(analysisResult?.rasaBalance || initialChartData).map(([name, value]) => ({
       name,
       value,
       fill: chartConfig[name as keyof typeof chartConfig]?.color,
@@ -106,7 +107,7 @@ export default function RasaBalancePage() {
     const score = totalPoints === 0 ? 0 : Math.max(0, Math.round(100 - (deviation / (maxDeviation || 1)) * 100));
 
     return { chartData: data, balanceScore: score };
-  }, [rasaResult]);
+  }, [analysisResult]);
 
   return (
     <div className="space-y-8 max-w-4xl mx-auto">
@@ -161,7 +162,7 @@ export default function RasaBalancePage() {
             {foodItems.length > 0 && (
                 <Button variant="outline" className="w-full" onClick={() => {
                 setFoodItems([]);
-                setRasaResult(null);
+                setAnalysisResult(null);
               }}>
                 <Trash2 className="mr-2" />
                 Clear Meal
@@ -179,7 +180,7 @@ export default function RasaBalancePage() {
         </Card>
       )}
 
-      {(rasaResult || !isPending) && (
+      {(analysisResult || !isPending && foodItems.length === 0) && (
           <Card>
               <CardHeader>
               <CardTitle>Your Rasa Balance</CardTitle>
@@ -188,34 +189,44 @@ export default function RasaBalancePage() {
                   <span className="text-primary font-bold text-lg">{balanceScore}</span>.
               </CardDescription>
               </CardHeader>
-              <CardContent>
-              <ChartContainer config={chartConfig} className="w-full h-[400px]">
-                  <BarChart
-                  data={chartData}
-                  margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                  >
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis
-                      dataKey="name"
-                      stroke="hsl(var(--foreground))"
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                  />
-                  <YAxis
-                      stroke="hsl(var(--foreground))"
-                      fontSize={12}
-                      tickLine={false}
-                      axisLine={false}
-                      tickFormatter={(value) => `${value}`}
-                  />
-                  <ChartTooltip
-                      cursor={false}
-                      content={<ChartTooltipContent hideLabel />}
-                  />
-                  <Bar dataKey="value" radius={[4, 4, 0, 0]} />
-                  </BarChart>
-              </ChartContainer>
+              <CardContent className="space-y-4">
+                  <ChartContainer config={chartConfig} className="w-full h-[400px]">
+                      <BarChart
+                      data={chartData}
+                      margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
+                      >
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis
+                          dataKey="name"
+                          stroke="hsl(var(--foreground))"
+                          fontSize={12}
+                          tickLine={false}
+                          axisLine={false}
+                      />
+                      <YAxis
+                          stroke="hsl(var(--foreground))"
+                          fontSize={12}
+                          tickLine={false}
+                          axisLine={false}
+                          tickFormatter={(value) => `${value}`}
+                      />
+                      <ChartTooltip
+                          cursor={false}
+                          content={<ChartTooltipContent hideLabel />}
+                      />
+                      <Bar dataKey="value" radius={[4, 4, 0, 0]} />
+                      </BarChart>
+                  </ChartContainer>
+
+                   {analysisResult?.recommendation && (
+                    <Alert>
+                      <Sparkles className="h-4 w-4" />
+                      <AlertTitle>Recommendation</AlertTitle>
+                      <AlertDescription>
+                        {analysisResult.recommendation}
+                      </AlertDescription>
+                    </Alert>
+                  )}
               </CardContent>
           </Card>
       )}
