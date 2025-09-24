@@ -47,6 +47,8 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
+  Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan in markdown format.
+
   User Profile:
   - Age: {{{age}}}
   - Gender: {{{gender}}}
