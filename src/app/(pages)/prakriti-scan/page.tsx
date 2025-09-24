@@ -260,7 +260,7 @@ const questions = [
         part: "Part III: Psychological & Emotional Traits",
         question: "What are your hobbies like?",
         options: ["I enjoy travel, art, and exciting activities", "I prefer competitive sports, debates, and leadership roles", "I enjoy relaxing activities like gardening, cooking, or being near water"],
-        prakriti ["Vata", "Pitta", "Kapha"]
+        prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
         part: "Part III: Psychological & Emotional Traits",
