@@ -1,3 +1,4 @@
+
 'use client';
 import { Button } from '@/components/ui/button';
 import {
@@ -26,8 +27,9 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { useState } from 'react';
 
-const pastLogs = [
+const initialPastLogs = [
   {
     date: '2024-07-20',
     foodIntake: 'Oats with berries for breakfast, lentil soup for lunch, grilled vegetables for dinner.',
@@ -59,14 +61,53 @@ const pastLogs = [
 
 export default function HealthLogPage() {
     const { toast } = useToast();
+    const [pastLogs, setPastLogs] = useState(initialPastLogs);
+
+    const [foodIntake, setFoodIntake] = useState('');
+    const [symptoms, setSymptoms] = useState('');
+    const [waterIntake, setWaterIntake] = useState('');
+    const [sleepHours, setSleepHours] = useState('');
+    const [bowelMovement, setBowelMovement] = useState('');
+    const [energyLevel, setEnergyLevel] = useState('');
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        
+        if (!foodIntake && !symptoms && !waterIntake && !sleepHours && !bowelMovement && !energyLevel) {
+            toast({
+                title: "Empty Log",
+                description: "Please fill out at least one field to save your log.",
+                variant: "destructive"
+            });
+            return;
+        }
+
+        const newLog = {
+            date: new Date().toISOString().split('T')[0],
+            foodIntake,
+            symptoms,
+            waterIntake: waterIntake ? `${waterIntake}L` : '',
+            sleepHours: sleepHours ? `${sleepHours} hours` : '',
+            bowelMovement,
+            energyLevel,
+        };
+
+        setPastLogs([newLog, ...pastLogs]);
+
+        // Reset form fields
+        setFoodIntake('');
+        setSymptoms('');
+        setWaterIntake('');
+        setSleepHours('');
+        setBowelMovement('');
+        setEnergyLevel('');
+
         toast({
             title: "Log Saved!",
             description: "Your health log for today has been successfully saved.",
-        })
+        });
     }
+
   return (
     <div className="max-w-4xl mx-auto space-y-8">
       <div>
@@ -94,6 +135,8 @@ export default function HealthLogPage() {
                     id="food-intake"
                     placeholder="List the meals and snacks you had..."
                     rows={4}
+                    value={foodIntake}
+                    onChange={(e) => setFoodIntake(e.target.value)}
                 />
                 </div>
                 <div className="space-y-2">
@@ -102,19 +145,21 @@ export default function HealthLogPage() {
                     id="symptoms"
                     placeholder="Any discomfort, energy levels, mood..."
                     rows={4}
+                    value={symptoms}
+                    onChange={(e) => setSymptoms(e.target.value)}
                 />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="water-intake">Water Intake (liters)</Label>
-                <Input id="water-intake" type="number" step="0.1" placeholder="e.g., 2.5" />
+                <Input id="water-intake" type="number" step="0.1" placeholder="e.g., 2.5" value={waterIntake} onChange={(e) => setWaterIntake(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="sleep-hours">Sleep (hours)</Label>
-                <Input id="sleep-hours" type="number" step="0.1" placeholder="e.g., 7.5" />
+                <Input id="sleep-hours" type="number" step="0.1" placeholder="e.g., 7.5" value={sleepHours} onChange={(e) => setSleepHours(e.target.value)} />
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="bowel-movement">Bowel Movement</Label>
-                <Select>
+                <Select value={bowelMovement} onValueChange={setBowelMovement}>
                     <SelectTrigger id="bowel-movement">
                     <SelectValue placeholder="Select quality" />
                     </SelectTrigger>
@@ -127,7 +172,7 @@ export default function HealthLogPage() {
                 </div>
                 <div className="space-y-2">
                 <Label htmlFor="energy-level">Energy Level (1-5)</Label>
-                <Select>
+                 <Select value={energyLevel} onValueChange={setEnergyLevel}>
                     <SelectTrigger id="energy-level">
                     <SelectValue placeholder="Select level" />
                     </SelectTrigger>
@@ -163,7 +208,7 @@ export default function HealthLogPage() {
         <CardContent>
           <Accordion type="single" collapsible className="w-full">
             {pastLogs.map((log) => (
-              <AccordionItem value={log.date} key={log.date}>
+              <AccordionItem value={log.date + Math.random()} key={log.date + Math.random()}>
                 <AccordionTrigger>
                     <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-muted-foreground" />
@@ -176,30 +221,30 @@ export default function HealthLogPage() {
                       <Pizza className="w-4 h-4 mt-1 text-primary" />
                       <div>
                         <p className="font-semibold">Food Intake</p>
-                        <p className="text-muted-foreground">{log.foodIntake}</p>
+                        <p className="text-muted-foreground">{log.foodIntake || 'Not logged'}</p>
                       </div>
                     </div>
                     <div className="flex items-start gap-3">
                       <Smile className="w-4 h-4 mt-1 text-primary" />
                       <div>
                         <p className="font-semibold">Symptoms/Feelings</p>
-                        <p className="text-muted-foreground">{log.symptoms}</p>
+                        <p className="text-muted-foreground">{log.symptoms || 'Not logged'}</p>
                       </div>
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <div className="flex items-center gap-3">
                             <Droplets className="w-4 h-4 text-primary" />
-                            <p><span className="font-semibold">Water:</span> {log.waterIntake}</p>
+                            <p><span className="font-semibold">Water:</span> {log.waterIntake || 'N/A'}</p>
                         </div>
                         <div className="flex items-center gap-3">
                             <Bed className="w-4 h-4 text-primary" />
-                            <p><span className="font-semibold">Sleep:</span> {log.sleepHours}</p>
+                            <p><span className="font-semibold">Sleep:</span> {log.sleepHours || 'N/A'}</p>
                         </div>
                         <div className="flex items-center gap-3">
-                             <p><span className="font-semibold">Bowel Movement:</span> {log.bowelMovement}</p>
+                             <p><span className="font-semibold">Bowel Movement:</span> {log.bowelMovement || 'N/A'}</p>
                         </div>
                         <div className="flex items-center gap-3">
-                            <p><span className="font-semibold">Energy Level:</span> {log.energyLevel}</p>
+                            <p><span className="font-semibold">Energy Level:</span> {log.energyLevel ? `${log.energyLevel}/5` : 'N/A'}</p>
                         </div>
                     </div>
                   </div>
