@@ -13,8 +13,11 @@ import {
 } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Leaf, Flame, Wind } from 'lucide-react';
+import { Leaf, Flame, Wind, AlertTriangle, Upload, FileCheck2 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
+import { Input } from '@/components/ui/input';
+import { useToast } from '@/hooks/use-toast';
 
 const questions = [
     // Part I: Physical Traits
@@ -330,6 +333,8 @@ const prakritiInfo = {
 export default function PrakritiScanPage() {
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [result, setResult] = useState<string | null>(null);
+  const [fileName, setFileName] = useState('');
+  const { toast } = useToast();
 
   const handleAnswerChange = (questionIndex: number, value: string) => {
     setAnswers((prev) => ({ ...prev, [questionIndex]: value }));
@@ -351,11 +356,33 @@ export default function PrakritiScanPage() {
     );
     setResult(dominantPrakriti);
   };
+  
+    const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const file = event.target.files?.[0];
+        if (file) {
+            setFileName(file.name);
+        }
+    };
+    
+    const handleUpload = () => {
+        if (fileName) {
+            toast({
+                title: "Certificate Uploaded",
+                description: `${fileName} has been saved to your profile.`,
+            });
+        } else {
+            toast({
+                title: "No file selected",
+                description: "Please choose a file to upload.",
+                variant: "destructive",
+            });
+        }
+    };
 
   if (result) {
     const info = prakritiInfo[result as keyof typeof prakritiInfo];
     return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center">
+      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-8">
         <Card className="w-full max-w-md shadow-xl bg-card text-card-foreground">
           <CardHeader>
             <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4">
@@ -378,6 +405,30 @@ export default function PrakritiScanPage() {
             }}>Take the Test Again</Button>
           </CardFooter>
         </Card>
+        
+        <Card className="w-full max-w-md">
+            <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                    <FileCheck2 className="w-6 h-6 text-primary" />
+                    Upload Certificate
+                </CardTitle>
+                <CardDescription>
+                    Already have a Prakriti Parikshan certificate? Upload it here to save it to your profile.
+                </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+                <div className="flex items-center gap-2">
+                    <Input id="certificate-upload" type="file" onChange={handleFileChange} className="flex-1" />
+                </div>
+                 {fileName && <p className="text-sm text-muted-foreground">Selected file: {fileName}</p>}
+            </CardContent>
+            <CardFooter>
+                 <Button className="w-full" onClick={handleUpload}>
+                    <Upload className="mr-2" /> Upload and Save
+                 </Button>
+            </CardFooter>
+        </Card>
+
       </div>
     );
   }
@@ -401,6 +452,15 @@ export default function PrakritiScanPage() {
             (dosha). For the most accurate result, answer based on your lifelong tendencies, not just how you feel today.
         </p>
       </div>
+
+       <Alert variant="destructive">
+          <AlertTriangle className="h-4 w-4" />
+          <AlertTitle>Disclaimer</AlertTitle>
+          <AlertDescription>
+            The results from this test are indicative and intended for educational purposes only. For an accurate diagnosis and personalized advice, please consult a qualified Ayurvedic practitioner.
+          </AlertDescription>
+        </Alert>
+
       <Card>
         <CardContent className="space-y-12 p-6">
           {Object.entries(parts).map(([partName, partQuestions]) => (
@@ -448,3 +508,5 @@ export default function PrakritiScanPage() {
     </div>
   );
 }
+
+    
