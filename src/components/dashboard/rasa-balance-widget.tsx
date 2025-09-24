@@ -37,17 +37,17 @@ const chartConfig = {
 
 export function RasaBalanceWidget() {
   return (
-    <Card className="h-full flex flex-col">
+    <Card>
       <CardHeader>
         <CardTitle>RasaBalance (रस संतुलन)</CardTitle>
         <CardDescription>
           Today's taste profile. Score: <span className="text-primary font-bold">78/100</span>
         </CardDescription>
       </CardHeader>
-      <CardContent className="items-center pb-0">
+      <CardContent className="flex justify-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square w-full max-w-[200px]"
+          className="mx-auto aspect-square max-w-xs"
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
@@ -58,8 +58,8 @@ export function RasaBalanceWidget() {
                 data={chartData}
                 dataKey="value"
                 nameKey="name"
-                innerRadius={40}
-                outerRadius={60}
+                innerRadius={60}
+                outerRadius={80}
                 strokeWidth={2}
                 >
                 {chartData.map((entry, index) => (
