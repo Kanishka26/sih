@@ -19,18 +19,13 @@ export type AnalyzeMealRasasInput = z.infer<
   typeof AnalyzeMealRasasInputSchema
 >;
 
-export const RasaBalanceSchema = z.object({
+const AnalyzeMealRasasOutputSchema = z.object({
     "Madhura (Sweet)": z.number().describe("The relative strength of the Sweet taste (Madhura) in the meal, on a scale of 0 to 10."),
     "Amla (Sour)": z.number().describe("The relative strength of the Sour taste (Amla) in the meal, on a scale of 0 to 10."),
     "Lavana (Salty)": z.number().describe("The relative strength of the Salty taste (Lavana) in the meal, on a scale of 0 to 10."),
     "Katu (Pungent)": z.number().describe("The relative strength of the Pungent taste (Katu) in the meal, on a scale of 0 to 10."),
     "Tikta (Bitter)": z.number().describe("The relative strength of the Bitter taste (Tikta) in the meal, on a scale of 0 to 10."),
     "Kashaya (Astringent)": z.number().describe("The relative strength of the Astringent taste (Kashaya) in the meal, on a scale of 0 to 10."),
-});
-export type RasaBalance = z.infer<typeof RasaBalanceSchema>;
-
-
-const AnalyzeMealRasasOutputSchema = RasaBalanceSchema.extend({
     recommendation: z.string().describe("A brief, actionable recommendation to improve the balance of the meal, e.g., 'Consider adding a squeeze of lemon for some Sour taste.'")
 });
 
