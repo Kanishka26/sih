@@ -50,9 +50,9 @@ const prompt = ai.definePrompt({
 Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
 
 User Profile:
-- Age: {{{age}}}
-- Gender: {{{gender}}}
-- Prakriti (Dosha): {{{prakriti}}}
+- Age: {{age}}
+- Gender: {{gender}}
+- Prakriti (Dosha): {{prakriti}}
 
 Please provide a detailed 7-day diet chart in HTML format. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items. The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable.
   
