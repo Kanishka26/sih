@@ -1,3 +1,4 @@
+
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -217,7 +218,7 @@ export default function DietGeniePage() {
           >
             <div
               dangerouslySetInnerHTML={{
-                __html: result.dietChart.replace(/\\n/g, '<br />'),
+                __html: result.dietChart,
               }}
             />
           </CardContent>
