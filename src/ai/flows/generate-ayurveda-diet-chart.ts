@@ -47,14 +47,14 @@ const prompt = ai.definePrompt({
   output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
-Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
-
 User Profile:
 - Age: {{age}}
 - Gender: {{gender}}
 - Prakriti (Dosha): {{prakriti}}
 
-Please provide a detailed 7-day diet chart in HTML format. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items. The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable.
+Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
+
+The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
   
 The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods.`,
 });
