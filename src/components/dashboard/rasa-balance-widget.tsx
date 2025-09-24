@@ -37,7 +37,7 @@ const chartConfig = {
 
 export function RasaBalanceWidget() {
   return (
-    <Card>
+    <Card className="flex flex-col">
       <CardHeader>
         <CardTitle>RasaBalance (रस संतुलन)</CardTitle>
         <CardDescription>
@@ -47,7 +47,7 @@ export function RasaBalanceWidget() {
       <CardContent className="flex justify-center pb-0">
         <ChartContainer
           config={chartConfig}
-          className="mx-auto aspect-square max-w-xs"
+          className="mx-auto aspect-square h-[180px] w-[180px]"
         >
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
