@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
-import { AppLayout } from '@/components/app-layout';
 import { LanguageProvider } from '@/context/language-context';
 
 export const metadata: Metadata = {
@@ -31,7 +30,7 @@ export default function RootLayout({
       </head>
       <body className={cn('antialiased')}>
         <LanguageProvider>
-          <AppLayout>{children}</AppLayout>
+            {children}
         </LanguageProvider>
         <Toaster />
       </body>

@@ -19,6 +19,7 @@ import {
   Stethoscope,
   Camera,
 } from 'lucide-react';
+import { Logo } from '@/components/logo';
 
 const features = [
   {
@@ -85,33 +86,48 @@ const features = [
 
 export default function HomePage() {
   return (
-    <div className="space-y-8">
-      <div className="text-center">
-        <h1 className="text-4xl font-headline font-bold">
-          Welcome to AhaarSetu
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Your modern companion for an Ayurvedic lifestyle.
-        </p>
-      </div>
+    <div className="flex flex-col min-h-screen">
+      <header className="p-4 flex justify-between items-center border-b">
+         <div className="flex items-center gap-2">
+          <Logo className="w-9 h-9 text-primary" />
+          <span className="font-headline text-2xl font-bold tracking-tight">AhaarSetu</span>
+        </div>
+      </header>
+      <main className="flex-1 p-4 sm:p-6 lg:p-8">
+        <div className="space-y-8 max-w-7xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-4xl font-headline font-bold">
+              Welcome to AhaarSetu
+            </h1>
+            <p className="text-lg text-muted-foreground">
+              Your modern companion for an Ayurvedic lifestyle.
+            </p>
+          </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {features.map((feature) => (
-          <Link href={feature.href} key={feature.href} passHref>
-            <Card className="h-full flex flex-col hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-              <CardHeader className="flex-col items-center text-center">
-                <div className="p-4 bg-primary/10 rounded-full mb-3">
-                    {feature.icon}
-                </div>
-                <CardTitle className="text-xl">{feature.label}</CardTitle>
-              </CardHeader>
-              <CardContent className="text-center text-muted-foreground flex-1">
-                <p>{feature.description}</p>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {features.map((feature) => (
+              <Link href={feature.href} key={feature.href} passHref>
+                <Card className="h-full flex flex-col hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                  <CardHeader className="flex-col items-center text-center">
+                    <div className="p-4 bg-primary/10 rounded-full mb-3">
+                        {feature.icon}
+                    </div>
+                    <CardTitle className="text-xl">{feature.label}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="text-center text-muted-foreground flex-1">
+                    <p>{feature.description}</p>
+                  </CardContent>
+                </Card>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </main>
+      <footer className="border-t py-4 px-4 sm:px-6">
+        <p className="text-center text-sm text-muted-foreground">
+          🌿 AhaarSetu – Ayurveda Diet
+        </p>
+      </footer>
     </div>
   );
 }
