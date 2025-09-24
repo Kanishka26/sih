@@ -171,22 +171,26 @@ export default function RasaBalancePage() {
         </CardFooter>
       </Card>
 
-      {isPending && (
+      {isPending ? (
         <Card>
             <CardContent className="flex items-center justify-center h-[400px] flex-col gap-4">
                 <Loader2 className="w-10 h-10 animate-spin text-primary" />
                 <p className="text-muted-foreground">Analyzing your meal...</p>
             </CardContent>
         </Card>
-      )}
-
-      {analysisResult && !isPending && (
+      ) : (
           <Card>
               <CardHeader>
               <CardTitle>Your Rasa Balance</CardTitle>
               <CardDescription>
-                  Your six-taste balance score for this meal is{' '}
-                  <span className="text-primary font-bold text-lg">{balanceScore}</span>.
+                  {analysisResult ? (
+                    <>
+                      Your six-taste balance score for this meal is{' '}
+                      <span className="text-primary font-bold text-lg">{balanceScore}</span>.
+                    </>
+                  ) : (
+                       "Add food items to your meal to see your balance score."
+                  )}
               </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -227,46 +231,6 @@ export default function RasaBalancePage() {
                       </AlertDescription>
                     </Alert>
                   )}
-              </CardContent>
-          </Card>
-      )}
-
-      {!analysisResult && !isPending && foodItems.length === 0 && (
-          <Card>
-              <CardHeader>
-                  <CardTitle>Your Rasa Balance</CardTitle>
-                   <CardDescription>
-                       Add food items to your meal to see your balance score.
-                    </CardDescription>
-              </CardHeader>
-              <CardContent>
-                   <ChartContainer config={chartConfig} className="w-full h-[400px]">
-                        <BarChart
-                            data={chartData}
-                            margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
-                        >
-                            <CartesianGrid strokeDasharray="3 3" />
-                            <XAxis
-                                dataKey="name"
-                                stroke="hsl(var(--foreground))"
-                                fontSize={12}
-                                tickLine={false}
-                                axisLine={false}
-                            />
-                            <YAxis
-                                stroke="hsl(var(--foreground))"
-                                fontSize={12}
-                                tickLine={false}
-                                axisLine={false}
-                                tickFormatter={(value) => `${value}`}
-                            />
-                            <ChartTooltip
-                                cursor={false}
-                                content={<ChartTooltipContent hideLabel />}
-                            />
-                            <Bar dataKey="value" radius={[4, 4, 0, 0]} />
-                        </BarChart>
-                    </ChartContainer>
               </CardContent>
           </Card>
       )}
