@@ -42,7 +42,7 @@ export function DieticianSidebar() {
       <SidebarContent className="p-2">
         <SidebarMenu>
           {menuItems.map((item) => (
-            <SidebarMenuItem key={item.href}>
+            <SidebarMenuItem key={`${item.href}-${item.label.en}`}>
               <SidebarMenuButton
                 asChild
                 isActive={pathname === item.href}
