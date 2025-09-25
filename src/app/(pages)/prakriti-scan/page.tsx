@@ -13,7 +13,7 @@ import {
 } from '@/components/ui/card';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
-import { Leaf, Flame, Wind, AlertTriangle, Upload, FileCheck2 } from 'lucide-react';
+import { Leaf, Flame, Wind, AlertTriangle, Upload, FileCheck2, Zap } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { Alert, AlertTitle, AlertDescription } from '@/components/ui/alert';
 import { Input } from '@/components/ui/input';
@@ -315,7 +315,7 @@ const questions = [
     }
 ];
 
-const prakritiInfo = {
+const prakritiInfo: Record<string, { icon: JSX.Element; description: string }> = {
     Vata: {
         icon: <Wind className="w-12 h-12 text-primary" />,
         description: "Vata is characterized by the energy of movement. People with a dominant Vata dosha are often thin, energetic, and creative. They are known for their quick thinking but can also be prone to anxiety and dry skin."
@@ -327,7 +327,23 @@ const prakritiInfo = {
     Kapha: {
         icon: <Leaf className="w-12 h-12 text-primary" />,
         description: "Kapha is the energy of lubrication and structure. Those with a dominant Kapha dosha tend to have a sturdy build, calm temperament, and good stamina. They are caring and thoughtful but may struggle with weight gain and sluggishness."
-    }
+    },
+    'Vata-Pitta': {
+        icon: <div className="flex -space-x-4"><Wind className="w-10 h-10 text-primary" /><Flame className="w-10 h-10 text-primary" /></div>,
+        description: "This combination blends the qualities of Vata and Pitta. You may be creative and quick-moving (Vata), but also sharp and driven (Pitta). The key is to balance Vata's tendency for coldness and dryness with Pitta's heat."
+    },
+    'Pitta-Kapha': {
+        icon: <div className="flex -space-x-4"><Flame className="w-10 h-10 text-primary" /><Leaf className="w-10 h-10 text-primary" /></div>,
+        description: "You have a powerful combination of Pitta's fire and Kapha's stability. This often results in a strong, muscular physique and good leadership qualities. The challenge is balancing Pitta's intensity with Kapha's relaxed nature."
+    },
+    'Vata-Kapha': {
+        icon: <div className="flex -space-x-4"><Wind className="w-10 h-10 text-primary" /><Leaf className="w-10 h-10 text-primary" /></div>,
+        description: "You exhibit a 'contradictory' nature, blending Vata's lightness and mobility with Kapha's stability and heaviness. You might be creative yet grounded, but may struggle with digestive issues or feeling stuck."
+    },
+    'Tridoshic': {
+        icon: <div className="flex -space-x-4"><Wind className="w-8 h-8 text-primary" /><Flame className="w-8 h-8 text-primary" /><Leaf className="w-8 h-8 text-primary" /></div>,
+        description: "You have a relatively even balance of all three doshas, which is rare and considered a very healthy state. Your key to wellness is to maintain this balance by adopting a varied diet and lifestyle that adapts to the seasons."
+    },
 }
 
 export default function PrakritiScanPage() {
@@ -351,10 +367,28 @@ export default function PrakritiScanPage() {
       }
     });
 
-    const dominantPrakriti = Object.keys(counts).reduce((a, b) =>
-      counts[a as keyof typeof counts] > counts[b as keyof typeof counts] ? a : b
-    );
-    setResult(dominantPrakriti);
+    const sortedDoshas = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+    
+    const [d1, score1] = sortedDoshas[0];
+    const [d2, score2] = sortedDoshas[1];
+    const [d3, score3] = sortedDoshas[2];
+
+    const diff12 = score1 - score2;
+    const diff23 = score2 - score3;
+    const diff13 = score1 - score3;
+
+    let finalResult = '';
+
+    if (diff13 <= 5) {
+        finalResult = 'Tridoshic';
+    } else if (diff12 <= 5) {
+        const dualDosha = [d1, d2].sort().join('-') as keyof typeof prakritiInfo;
+        finalResult = dualDosha;
+    } else {
+        finalResult = d1;
+    }
+
+    setResult(finalResult);
   };
   
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -385,7 +419,7 @@ export default function PrakritiScanPage() {
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-center space-y-8">
         <Card className="w-full max-w-md shadow-xl bg-card text-card-foreground">
           <CardHeader>
-            <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4">
+            <div className="mx-auto bg-primary/10 p-3 rounded-full mb-4 flex items-center justify-center w-20 h-20">
                 {info.icon}
             </div>
             <CardTitle className="text-2xl">Your Prakriti is {result}!</CardTitle>
@@ -507,3 +541,5 @@ export default function PrakritiScanPage() {
     </div>
   );
 }
+
+    
