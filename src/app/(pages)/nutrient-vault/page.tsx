@@ -1,3 +1,4 @@
+
 'use client';
 import {
   Card,
@@ -5,6 +6,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
+  CardFooter
 } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import {
@@ -16,16 +18,28 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
-import { Search } from 'lucide-react';
-import { useState } from 'react';
+import { Search, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useState, useMemo } from 'react';
 import { foodDatabase, type Food } from '@/lib/data';
+import { Button } from '@/components/ui/button';
+
+const FOODS_PER_PAGE = 10;
 
 export default function NutrientVaultPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [currentPage, setCurrentPage] = useState(1);
   
-  const filteredFoods = foodDatabase.filter((food) =>
+  const filteredFoods = useMemo(() => foodDatabase.filter((food) =>
     food.name.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  ), [searchTerm]);
+
+  const totalPages = Math.ceil(filteredFoods.length / FOODS_PER_PAGE);
+
+  const currentFoods = useMemo(() => {
+    const startIndex = (currentPage - 1) * FOODS_PER_PAGE;
+    const endIndex = startIndex + FOODS_PER_PAGE;
+    return filteredFoods.slice(startIndex, endIndex);
+  }, [filteredFoods, currentPage]);
 
   return (
     <div className="space-y-8">
@@ -50,7 +64,10 @@ export default function NutrientVaultPage() {
               placeholder="Search for foods..." 
               className="pl-8" 
               value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              onChange={(e) => {
+                setSearchTerm(e.target.value);
+                setCurrentPage(1); // Reset to first page on new search
+              }}
             />
           </div>
         </CardHeader>
@@ -66,7 +83,7 @@ export default function NutrientVaultPage() {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {filteredFoods.map((food) => (
+              {currentFoods.length > 0 ? currentFoods.map((food) => (
                 <TableRow key={food.id}>
                   <TableCell className="font-medium flex items-center gap-2">
                     {food.name} <Badge variant="secondary">{food.category}</Badge>
@@ -80,10 +97,41 @@ export default function NutrientVaultPage() {
                     </Badge>
                   </TableCell>
                 </TableRow>
-              ))}
+              )) : (
+                <TableRow>
+                    <TableCell colSpan={5} className="h-24 text-center">
+                        No results found.
+                    </TableCell>
+                </TableRow>
+              )}
             </TableBody>
           </Table>
         </CardContent>
+        {totalPages > 1 && (
+            <CardFooter className="flex items-center justify-center space-x-2 pt-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                >
+                    <ChevronLeft className="mr-2 h-4 w-4" />
+                    Previous
+                </Button>
+                <span className="text-sm text-muted-foreground">
+                    Page {currentPage} of {totalPages}
+                </span>
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                    <ChevronRight className="ml-2 h-4 w-4" />
+                </Button>
+            </CardFooter>
+        )}
       </Card>
     </div>
   );
