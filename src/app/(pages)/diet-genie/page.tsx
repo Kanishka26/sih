@@ -44,7 +44,7 @@ const formSchema = z.object({
   gender: z.enum(['male', 'female'], {
     required_error: 'Please select a gender.',
   }),
-  prakriti: z.enum(['Vata', 'Pitta', 'Kapha'], {
+  prakriti: z.enum(['Vata', 'Pitta', 'Kapha', 'Vata-Pitta', 'Pitta-Kapha', 'Vata-Kapha', 'Tridoshic'], {
     required_error: 'Please select a prakriti.',
   }),
 });
@@ -197,6 +197,10 @@ export default function DietGeniePage() {
                           <SelectItem value="Vata">Vata</SelectItem>
                           <SelectItem value="Pitta">Pitta</SelectItem>
                           <SelectItem value="Kapha">Kapha</SelectItem>
+                          <SelectItem value="Vata-Pitta">Vata-Pitta</SelectItem>
+                          <SelectItem value="Pitta-Kapha">Pitta-Kapha</SelectItem>
+                          <SelectItem value="Vata-Kapha">Vata-Kapha</SelectItem>
+                          <SelectItem value="Tridoshic">Tridoshic</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />

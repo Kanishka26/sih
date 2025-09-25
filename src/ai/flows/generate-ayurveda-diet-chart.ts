@@ -15,9 +15,9 @@ const GenerateAyurvedaDietChartInputSchema = z.object({
   age: z.number().describe('The age of the user in years.'),
   gender: z.enum(['male', 'female']).describe('The gender of the user.'),
   prakriti: z
-    .string()
+    .enum(['Vata', 'Pitta', 'Kapha', 'Vata-Pitta', 'Pitta-Kapha', 'Vata-Kapha', 'Tridoshic'])
     .describe(
-      'The prakriti (body constitution) of the user, e.g., Vata, Pitta, Kapha.'
+      'The prakriti (body constitution) of the user, e.g., Vata, Pitta, Kapha, Vata-Pitta.'
     ),
 });
 export type GenerateAyurvedaDietChartInput = z.infer<
@@ -56,7 +56,7 @@ Your response MUST be a JSON object with a single key "dietChart". The value of 
 
 The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
   
-The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods.`,
+The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods. For dual-dosha types, provide a balanced plan that pacifies both doshas involved.`,
 });
 
 const generateAyurvedaDietChartFlow = ai.defineFlow(
