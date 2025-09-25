@@ -25,6 +25,7 @@ import {
   Flame,
   Leaf,
   ArrowRight,
+  Users,
 } from 'lucide-react';
 import { Logo } from '@/components/logo';
 
@@ -83,6 +84,18 @@ const features = [
     description: 'Analyze your meal from an image.',
     icon: <Camera className="h-10 w-10 text-primary" />,
   },
+  {
+    href: '/prakriti-scan',
+    label: 'PrakritiScan',
+    description: 'Discover your Ayurvedic body type.',
+    icon: <HeartPulse className="h-10 w-10 text-primary" />,
+  },
+  {
+    href: '/dietician-dashboard',
+    label: 'Dietician Hub',
+    description: 'Manage your patients and their progress.',
+    icon: <Users className="h-10 w-10 text-primary" />,
+  }
 ];
 
 const doshas = [
@@ -175,19 +188,6 @@ export default function HomePage() {
                     </Card>
                 </Link>
                 ))}
-                 <Link href="/prakriti-scan" passHref>
-                    <Card className="h-full flex flex-col hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <CardHeader className="flex-col items-center text-center">
-                        <div className="p-4 bg-primary/10 rounded-full mb-3">
-                        <HeartPulse className="h-10 w-10 text-primary" />
-                        </div>
-                        <CardTitle className="text-xl">PrakritiScan</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-center text-muted-foreground flex-1">
-                        <p>Discover your Ayurvedic body type.</p>
-                    </CardContent>
-                    </Card>
-                </Link>
             </div>
           </div>
         </div>

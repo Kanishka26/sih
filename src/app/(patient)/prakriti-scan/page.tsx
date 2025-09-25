@@ -374,7 +374,6 @@ export default function PrakritiScanPage() {
     const [d3, score3] = sortedDoshas[2];
 
     const diff12 = score1 - score2;
-    const diff23 = score2 - score3;
     const diff13 = score1 - score3;
 
     let finalResult = '';
@@ -541,5 +540,3 @@ export default function PrakritiScanPage() {
     </div>
   );
 }
-
-    

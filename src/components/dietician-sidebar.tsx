@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -12,37 +13,21 @@ import {
 } from '@/components/ui/sidebar';
 import {
   LayoutDashboard,
-  HeartPulse,
-  Scale,
-  ClipboardEdit,
-  ChefHat,
-  BookOpen,
-  ClipboardList,
-  SunSnow,
-  Stethoscope,
-  Camera,
-  Home,
   Users,
+  BarChart,
+  Home,
 } from 'lucide-react';
 import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
-  { href: '/', label: {en: 'Home', hi: 'होम'}, icon: Home },
-  { href: '/dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
-  { href: '/prakriti-scan', label: {en: 'PrakritiScan', hi: 'प्रकृति स्कैन'}, icon: HeartPulse },
-  { href: '/rasa-balance', label: {en: 'RasaBalance', hi: 'रस संतुलन'}, icon: Scale },
-  { href: '/diet-genie', label: {en: 'DietGenie', hi: 'आहार जिन्न'}, icon: ClipboardEdit },
-  { href: '/recipe-guru', label: {en: 'RecipeGuru', hi: 'विधान गुरु'}, icon: ChefHat },
-  { href: '/nutrient-vault', label: {en: 'NutrientVault', hi: 'पोषण भंडार'}, icon: BookOpen },
-  { href: '/health-log', label: {en: 'HealthLog', hi: 'स्वास्थ्य लॉग'}, icon: ClipboardList },
-  { href: '/seasonal-bhojan', label: {en: 'SeasonalBhojan', hi: 'ऋतु आहार'}, icon: SunSnow },
-  { href: '/dietician-connect', label: {en: 'Dietician Connect', hi: 'आहार विशेषज्ञ से जुड़ें'}, icon: Stethoscope },
-  { href: '/nutriscan', label: {en: 'NutriScan', hi: 'पोषण स्कैन'}, icon: Camera },
-  { href: '/dietician-dashboard', label: {en: 'Dietician Hub', hi: 'आहार विशेषज्ञ हब'}, icon: Users },
+  { href: '/', label: { en: 'Home', hi: 'होम' }, icon: Home },
+  { href: '/dietician-dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
+  { href: '#', label: {en: 'Patients', hi: 'मरीजों'}, icon: Users },
+  { href: '#', label: {en: 'Reports', hi: 'रिपोर्ट'}, icon: BarChart },
 ];
 
-export function AppSidebar() {
+export function DieticianSidebar() {
   const pathname = usePathname();
   const { t } = useLanguage();
 
@@ -76,7 +61,7 @@ export function AppSidebar() {
         </SidebarMenu>
       </SidebarContent>
       <SidebarFooter className="p-4 text-center text-xs text-muted-foreground/80">
-        <p>🌿 Powered by Ayurveda + Modern Nutrition</p>
+        <p>🌿 Dietician Portal</p>
       </SidebarFooter>
     </>
   );
