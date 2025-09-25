@@ -21,12 +21,15 @@ import {
     analyzeFoodImage,
     type AnalyzeFoodImageInput,
 } from '@/ai/flows/analyze-food-image';
+import {
+    analyzeSingleFood,
+    type AnalyzeSingleFoodInput,
+} from '@/ai/flows/analyze-single-food';
 import { z } from 'zod';
 
 
 export async function generateDietChartAction(input: GenerateAyurvedaDietChartInput) {
   // The Genkit flow already handles input validation with its Zod schema.
-  // The redundant validation here was causing conflicts.
   return await generateAyurvedaDietChart(input);
 }
 
@@ -84,4 +87,16 @@ export async function analyzeFoodImageAction(input: AnalyzeFoodImageInput) {
         throw new Error('Invalid input for food image analysis');
     }
     return await analyzeFoodImage(parsedInput.data);
+}
+
+const analyzeSingleFoodSchema = z.object({
+    foodName: z.string().min(1, "Please provide a food name."),
+});
+
+export async function analyzeSingleFoodAction(input: AnalyzeSingleFoodInput) {
+    const parsedInput = analyzeSingleFoodSchema.safeParse(input);
+    if (!parsedInput.success) {
+        throw new Error('Invalid input for food analysis');
+    }
+    return await analyzeSingleFood(parsedInput.data);
 }
