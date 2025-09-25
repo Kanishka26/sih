@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -38,7 +39,7 @@ export default function RecipeGuruPage() {
     async function fetchRecipes() {
       setLoading(true);
       try {
-        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?a=Indian');
+        const listRes = await fetch('https://www.themealdb.com/api/json/v1/1/filter.php?c=Vegetarian');
         const listData = await listRes.json();
         
         const recipeStubs = listData.meals || [];
@@ -145,7 +146,7 @@ export default function RecipeGuruPage() {
           RecipeGuru (विधान गुरु)
         </h1>
         <p className="text-muted-foreground">
-          Discover recipes from a curated database of Indian foods.
+          Discover recipes from a curated database of vegetarian foods.
         </p>
       </div>
 
