@@ -52,7 +52,7 @@ User Profile:
 - Gender: {{gender}}
 - Prakriti (Dosha): {{prakriti}}
 
-Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as an HTML document. Do not include markdown.
+Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document. Do not include markdown or any other characters outside the JSON structure.
 
 The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
   
