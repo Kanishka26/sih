@@ -44,7 +44,6 @@ export async function generateAyurvedaDietChart(
 const prompt = ai.definePrompt({
   name: 'generateAyurvedaDietChartPrompt',
   input: {schema: GenerateAyurvedaDietChartInputSchema},
-  output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
 User Profile:
@@ -52,7 +51,12 @@ User Profile:
 - Gender: {{gender}}
 - Prakriti (Dosha): {{prakriti}}
 
-Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document. Do not include markdown or any other characters outside the JSON structure.
+Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document.
+
+Example response format:
+{
+  "dietChart": "<h3>Day 1</h3><h4>Breakfast (8:00 AM)</h4><ul><li>Oatmeal</li></ul>..."
+}
 
 The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
   
@@ -66,7 +70,21 @@ const generateAyurvedaDietChartFlow = ai.defineFlow(
     outputSchema: GenerateAyurvedaDietChartOutputSchema,
   },
   async input => {
-    const {output} = await prompt(input);
-    return output!;
+    const { text } = await ai.generate({ prompt: await prompt.render(input) });
+    
+    try {
+        // The model should return a JSON string, so we parse it.
+        const parsed = JSON.parse(text);
+        if (parsed.dietChart) {
+            return { dietChart: parsed.dietChart };
+        }
+    } catch (e) {
+        // If parsing fails, it's likely the model returned raw HTML.
+        // We'll wrap it in the expected object structure.
+        return { dietChart: text };
+    }
+    
+    // Fallback in case of unexpected structure
+    return { dietChart: text };
   }
 );
