@@ -46,7 +46,7 @@ export default function AuthenticationPage() {
     if (role === 'dietician') {
         router.push('/dietician-dashboard');
     } else {
-        router.push('/dashboard');
+        router.push('/home');
     }
   };
 

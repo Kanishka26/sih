@@ -23,11 +23,13 @@ import {
   Stethoscope,
   Camera,
   Users,
+  Home,
 } from 'lucide-react';
 import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
+  { href: '/home', label: {en: 'Homepage', hi: 'होमपेज'}, icon: Home },
   { href: '/dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
   { href: '/prakriti-scan', label: {en: 'PrakritiScan', hi: 'प्रकृति स्कैन'}, icon: HeartPulse },
   { href: '/rasa-balance', label: {en: 'RasaBalance', hi: 'रस संतुलन'}, icon: Scale },
