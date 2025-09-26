@@ -298,7 +298,7 @@ const questions = [
     {
         part: "Part III: Psychological & Emotional Traits",
         question: "What is your attitude toward rules?",
-        options: ["I enjoy bending the rules and finding creative solutions", "I believe rules are important for order and efficiency", "I am happy to follow rules and appreciate structure"],
+        options: ["I enjoy bending the rules and find creative solutions", "I believe rules are important for order and efficiency", "I am happy to follow rules and appreciate structure"],
         prakriti: ["Vata", "Pitta", "Kapha"]
     },
     {
