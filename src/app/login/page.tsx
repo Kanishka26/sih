@@ -29,9 +29,13 @@ export default function AuthenticationPage() {
     // In a real app, you'd have actual authentication logic here.
     toast({
       title: 'Login Successful!',
-      description: `Redirecting to the homepage...`,
+      description: `Redirecting to the dashboard...`,
     });
-    router.push('/dashboard');
+    if (role === 'dietician') {
+        router.push('/dietician-dashboard');
+    } else {
+        router.push('/dashboard');
+    }
   };
 
   return (
