@@ -1,3 +1,4 @@
+
 'use client';
 
 import Link from 'next/link';
@@ -21,14 +22,12 @@ import {
   SunSnow,
   Stethoscope,
   Camera,
-  Home,
   Users,
 } from 'lucide-react';
 import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
-  { href: '/', label: {en: 'Home', hi: 'होम'}, icon: Home },
   { href: '/dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
   { href: '/prakriti-scan', label: {en: 'PrakritiScan', hi: 'प्रकृति स्कैन'}, icon: HeartPulse },
   { href: '/rasa-balance', label: {en: 'RasaBalance', hi: 'रस संतुलन'}, icon: Scale },

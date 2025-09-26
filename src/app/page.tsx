@@ -1,202 +1,130 @@
 
 'use client';
 
-import Link from 'next/link';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import {
-  LayoutDashboard,
-  HeartPulse,
-  Scale,
-  ClipboardEdit,
-  ChefHat,
-  BookOpen,
-  ClipboardList,
-  SunSnow,
-  Stethoscope,
-  Camera,
-  Wind,
-  Flame,
-  Leaf,
-  ArrowRight,
-  Users,
-} from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Logo } from '@/components/logo';
+import { cn } from '@/lib/utils';
+import { useToast } from '@/hooks/use-toast';
 
-const features = [
-  {
-    href: '/dashboard',
-    label: 'Dashboard',
-    description: 'Your personal wellness overview.',
-    icon: <LayoutDashboard className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/rasa-balance',
-    label: 'RasaBalance',
-    description: 'Track the six tastes in your meals.',
-    icon: <Scale className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/diet-genie',
-    label: 'DietGenie',
-    description: 'Generate a personalized diet chart.',
-    icon: <ClipboardEdit className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/recipe-guru',
-    label: 'RecipeGuru',
-    description: 'Explore healthy Ayurvedic recipes.',
-    icon: <ChefHat className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/nutrient-vault',
-    label: 'NutrientVault',
-    description: 'Browse our food database.',
-    icon: <BookOpen className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/health-log',
-    label: 'HealthLog',
-    description: 'Log your daily habits and symptoms.',
-    icon: <ClipboardList className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/seasonal-bhojan',
-    label: 'SeasonalBhojan',
-    description: 'Get seasonal food recommendations.',
-    icon: <SunSnow className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/dietician-connect',
-    label: 'Dietician Connect',
-    description: 'Chat with expert dieticians.',
-    icon: <Stethoscope className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/nutriscan',
-    label: 'NutriScan',
-    description: 'Analyze your meal from an image.',
-    icon: <Camera className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/prakriti-scan',
-    label: 'PrakritiScan',
-    description: 'Discover your Ayurvedic body type.',
-    icon: <HeartPulse className="h-10 w-10 text-primary" />,
-  },
-  {
-    href: '/dietician-dashboard',
-    label: 'Dietician Hub',
-    description: 'Manage your patients and their progress.',
-    icon: <Users className="h-10 w-10 text-primary" />,
-  }
-];
+export default function AuthenticationPage() {
+  const router = useRouter();
+  const { toast } = useToast();
+  const [role, setRole] = useState<'patient' | 'dietician'>('patient');
 
-const doshas = [
-    {
-        name: "Vata (Air + Ether)",
-        icon: <Wind className="w-10 h-10 text-primary" />,
-        description: "Characterized by qualities of being light, cold, dry, and mobile. Vata types are often creative, energetic, and lively but can be prone to anxiety, dry skin, and irregular digestion."
-    },
-    {
-        name: "Pitta (Fire + Water)",
-        icon: <Flame className="w-10 h-10 text-primary" />,
-        description: "Represents the energy of transformation and metabolism. Pitta individuals are typically sharp, intelligent, and driven, but can experience overheating, irritability, and skin inflammation."
-    },
-    {
-        name: "Kapha (Earth + Water)",
-        icon: <Leaf className="w-10 h-10 text-primary" />,
-        description: "Embodies structure, stability, and lubrication. Kapha types are calm, loving, and steady, but may face challenges with weight gain, sluggishness, and congestion when out of balance."
+  const handleLogin = (event: React.FormEvent) => {
+    event.preventDefault();
+    // In a real app, you'd have actual authentication logic here.
+    toast({
+      title: 'Login Successful!',
+      description: `Redirecting to the ${role} dashboard...`,
+    });
+    if (role === 'patient') {
+      router.push('/dashboard');
+    } else {
+      router.push('/dietician-dashboard');
     }
-]
+  };
 
-export default function HomePage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="p-4 flex justify-between items-center border-b bg-background/80 backdrop-blur-sm sticky top-0 z-20">
-        <div className="flex items-center gap-2">
-          <Logo className="w-9 h-9 text-primary" />
-          <span className="font-headline text-2xl font-bold tracking-tight">
-            AhaarSetu
-          </span>
-        </div>
-      </header>
-      <main className="flex-1 p-4 sm:p-6 lg:p-8">
-        <div className="space-y-12 max-w-7xl mx-auto">
-          <div className="text-center space-y-4">
-            <h1 className="text-4xl md:text-5xl font-headline font-bold">
-              Balance Your Body, Nourish Your Life
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-              "When diet is wrong, medicine is of no use. When diet is correct, medicine is of no need." - Ayurvedic Proverb
-            </p>
-          </div>
-
-          <div className="space-y-8">
-            <div className="text-center">
-                <h2 className="text-3xl font-headline font-bold">Discover Your Unique Constitution (Prakriti)</h2>
-                <p className="text-muted-foreground mt-2">Ayurveda teaches that we are all made of a unique combination of three mind-body principles, or doshas.</p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {doshas.map(dosha => (
-                <Card key={dosha.name} className="flex flex-col text-center">
-                    <CardHeader>
-                        <div className="mx-auto bg-primary/10 p-4 rounded-full mb-3 w-fit">
-                            {dosha.icon}
-                        </div>
-                        <CardTitle>{dosha.name}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="flex-1">
-                        <p className="text-muted-foreground">{dosha.description}</p>
-                    </CardContent>
-                </Card>
-              ))}
-            </div>
-             <div className="text-center">
-                <Button asChild size="lg">
-                    <Link href="/prakriti-scan">
-                        Take the PrakritiScan Test Now <ArrowRight className="ml-2" />
-                    </Link>
-                </Button>
-            </div>
-          </div>
-
-          <div className="space-y-8">
-            <div className="text-center">
-                 <h2 className="text-3xl font-headline font-bold">Explore Our Wellness Tools</h2>
-                 <p className="text-muted-foreground mt-2">Everything you need for a balanced, Ayurvedic lifestyle.</p>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                {features.map((feature) => (
-                <Link href={feature.href} key={feature.href} passHref>
-                    <Card className="h-full flex flex-col hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                    <CardHeader className="flex-col items-center text-center">
-                        <div className="p-4 bg-primary/10 rounded-full mb-3">
-                        {feature.icon}
-                        </div>
-                        <CardTitle className="text-xl">{feature.label}</CardTitle>
-                    </CardHeader>
-                    <CardContent className="text-center text-muted-foreground flex-1">
-                        <p>{feature.description}</p>
-                    </CardContent>
-                    </Card>
-                </Link>
-                ))}
-            </div>
-          </div>
-        </div>
-      </main>
-      <footer className="border-t py-4 px-4 sm:px-6">
-        <p className="text-center text-sm text-muted-foreground">
-          🌿 AhaarSetu – Ayurveda Diet
-        </p>
-      </footer>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+      <div className="flex items-center gap-3 mb-8">
+        <Logo className="w-12 h-12 text-primary" />
+        <span className="font-headline text-4xl font-bold tracking-tight">
+          AhaarSetu
+        </span>
+      </div>
+      <Tabs defaultValue="login" className="w-full max-w-md">
+        <TabsList className="grid w-full grid-cols-2">
+          <TabsTrigger value="login">Login</TabsTrigger>
+          <TabsTrigger value="register">Register</TabsTrigger>
+        </TabsList>
+        <TabsContent value="login">
+          <form onSubmit={handleLogin}>
+            <Card>
+              <CardHeader className="text-center">
+                <CardTitle>Welcome Back</CardTitle>
+                <CardDescription>
+                  Select your role and sign in to continue.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="m@example.com" defaultValue="patient@ahaarsetu.com" required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input id="password" type="password" defaultValue="password" required />
+                </div>
+                <div className="space-y-2">
+                  <Label>Role</Label>
+                  <div className="flex gap-2">
+                    <Button
+                      type="button"
+                      variant={role === 'patient' ? 'default' : 'outline'}
+                      className="w-full"
+                      onClick={() => setRole('patient')}
+                    >
+                      Patient
+                    </Button>
+                    <Button
+                      type="button"
+                      variant={role === 'dietician' ? 'default' : 'outline'}
+                      className="w-full"
+                      onClick={() => setRole('dietician')}
+                    >
+                      Dietician
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button type="submit" className="w-full">Sign In</Button>
+              </CardFooter>
+            </Card>
+          </form>
+        </TabsContent>
+        <TabsContent value="register">
+          <Card>
+            <CardHeader className="text-center">
+              <CardTitle>Create an Account</CardTitle>
+              <CardDescription>
+                Choose your role to get started on your wellness journey.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-4">
+              <div className="space-y-2">
+                <Label htmlFor="reg-name">Full Name</Label>
+                <Input id="reg-name" placeholder="John Doe" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="reg-email">Email</Label>
+                <Input id="reg-email" type="email" placeholder="m@example.com" required />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="reg-password">Password</Label>
+                <Input id="reg-password" type="password" required />
+              </div>
+            </CardContent>
+            <CardFooter>
+              <Button className="w-full">Create Account</Button>
+            </CardFooter>
+          </Card>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 }

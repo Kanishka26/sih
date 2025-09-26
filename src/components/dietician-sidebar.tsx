@@ -15,13 +15,11 @@ import {
   LayoutDashboard,
   Users,
   BarChart,
-  Home,
 } from 'lucide-react';
 import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
-  { href: '/', label: { en: 'Home', hi: 'होम' }, icon: Home },
   { href: '/dietician-dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
   { href: '#', label: {en: 'Patients', hi: 'मरीजों'}, icon: Users },
   { href: '#', label: {en: 'Reports', hi: 'रिपोर्ट'}, icon: BarChart },
