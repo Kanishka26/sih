@@ -38,7 +38,6 @@ const menuItems = [
   { href: '/seasonal-bhojan', label: {en: 'SeasonalBhojan', hi: 'ऋतु आहार'}, icon: SunSnow },
   { href: '/dietician-connect', label: {en: 'Dietician Connect', hi: 'आहार विशेषज्ञ से जुड़ें'}, icon: Stethoscope },
   { href: '/nutriscan', label: {en: 'NutriScan', hi: 'पोषण स्कैन'}, icon: Camera },
-  { href: '/dietician-dashboard', label: {en: 'Dietician Hub', hi: 'आहार विशेषज्ञ हब'}, icon: Users },
 ];
 
 export function AppSidebar() {
