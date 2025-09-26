@@ -1,27 +1,19 @@
 
 'use client';
 
-import { DietChartWidget } from '@/components/dashboard/diet-chart-widget';
-import { PrakritiProfileWidget } from '@/components/dashboard/prakriti-profile-widget';
-import { QuickLogWidget } from '@/components/dashboard/quick-log-widget';
-import { RasaBalanceWidget } from '@/components/dashboard/rasa-balance-widget';
-import { SeasonalSuggestionsWidget } from '@/components/dashboard/seasonal-suggestions-widget';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 
 export default function DashboardPage() {
-  return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
-      {/* Main Panel */}
-      <div className="lg:col-span-2 flex flex-col space-y-8">
-          <PrakritiProfileWidget />
-          <DietChartWidget />
-      </div>
+  const router = useRouter();
 
-      {/* Right Panel */}
-      <div className="lg:col-span-1 flex flex-col space-y-8">
-          <RasaBalanceWidget />
-          <SeasonalSuggestionsWidget />
-          <QuickLogWidget />
-      </div>
+  useEffect(() => {
+    router.replace('/');
+  }, [router]);
+
+  return (
+    <div className="flex h-screen items-center justify-center">
+      <p>Redirecting...</p>
     </div>
   );
 }

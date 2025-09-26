@@ -7,7 +7,7 @@ import { QuickLogWidget } from '@/components/dashboard/quick-log-widget';
 import { RasaBalanceWidget } from '@/components/dashboard/rasa-balance-widget';
 import { SeasonalSuggestionsWidget } from '@/components/dashboard/seasonal-suggestions-widget';
 
-export default function DashboardPage() {
+export default function HomePage() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
       {/* Main Panel */}
