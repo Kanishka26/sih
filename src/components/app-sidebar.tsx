@@ -28,7 +28,7 @@ import { Logo } from './logo';
 import { useLanguage } from '@/context/language-context';
 
 const menuItems = [
-  { href: '/', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
+  { href: '/dashboard', label: {en: 'Dashboard', hi: 'डैशबोर्ड'}, icon: LayoutDashboard },
   { href: '/prakriti-scan', label: {en: 'PrakritiScan', hi: 'प्रकृति स्कैन'}, icon: HeartPulse },
   { href: '/rasa-balance', label: {en: 'RasaBalance', hi: 'रस संतुलन'}, icon: Scale },
   { href: '/diet-genie', label: {en: 'DietGenie', hi: 'आहार जिन्न'}, icon: ClipboardEdit },
