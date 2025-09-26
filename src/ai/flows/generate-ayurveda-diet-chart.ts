@@ -28,7 +28,7 @@ const GenerateAyurvedaDietChartOutputSchema = z.object({
   dietChart: z
     .string()
     .describe(
-      'A personalized Ayurveda-compliant diet chart as an HTML string. Use TailwindCSS classes for styling within the HTML.'
+      'A personalized Ayurveda-compliant diet chart as an HTML string. Use TailwindCSS classes for styling within the HTML. The response must be a valid JSON object with a single "dietChart" key.'
     ),
 });
 export type GenerateAyurvedaDietChartOutput = z.infer<
@@ -44,6 +44,7 @@ export async function generateAyurvedaDietChart(
 const prompt = ai.definePrompt({
   name: 'generateAyurvedaDietChartPrompt',
   input: {schema: GenerateAyurvedaDietChartInputSchema},
+  output: {schema: GenerateAyurvedaDietChartOutputSchema},
   prompt: `You are an experienced Ayurvedic nutritionist. Your task is to generate a comprehensive, personalized 7-day diet chart based on the user's profile.
 
 User Profile:
@@ -53,14 +54,9 @@ User Profile:
 
 Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document.
 
-Example response format:
-{
-  "dietChart": "<h3>Day 1</h3><h4>Breakfast (8:00 AM)</h4><ul><li>Oatmeal</li></ul>..."
-}
-
 The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
   
-The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For example, for a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods. For dual-dosha types, provide a balanced plan that pacifies both doshas involved.`,
+The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods. For dual-dosha types, provide a balanced plan that pacifies both doshas involved.`,
 });
 
 const generateAyurvedaDietChartFlow = ai.defineFlow(
@@ -70,21 +66,10 @@ const generateAyurvedaDietChartFlow = ai.defineFlow(
     outputSchema: GenerateAyurvedaDietChartOutputSchema,
   },
   async input => {
-    const { text } = await ai.generate({ prompt: await prompt.render(input) });
-    
-    try {
-        // The model should return a JSON string, so we parse it.
-        const parsed = JSON.parse(text);
-        if (parsed.dietChart) {
-            return { dietChart: parsed.dietChart };
-        }
-    } catch (e) {
-        // If parsing fails, it's likely the model returned raw HTML.
-        // We'll wrap it in the expected object structure.
-        return { dietChart: text };
+    const { output } = await prompt(input);
+    if (!output) {
+      throw new Error("Failed to generate diet chart. The AI model did not return a valid output.");
     }
-    
-    // Fallback in case of unexpected structure
-    return { dietChart: text };
+    return output;
   }
 );
