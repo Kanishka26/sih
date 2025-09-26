@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { cn } from '@/lib/utils';
 import { Toaster } from '@/components/ui/toaster';
-import { LanguageProvider } from '@/context/language-context';
+import { Providers } from '@/components/providers';
 
 export const metadata: Metadata = {
   title: 'AhaarSetu - Your Ayurvedic Diet Companion',
@@ -29,9 +29,9 @@ export default function RootLayout({
         />
       </head>
       <body className={cn('antialiased')}>
-        <LanguageProvider>
-            {children}
-        </LanguageProvider>
+        <Providers>
+          {children}
+        </Providers>
         <Toaster />
       </body>
     </html>

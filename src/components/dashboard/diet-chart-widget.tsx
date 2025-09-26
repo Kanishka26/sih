@@ -49,7 +49,7 @@ export function DietChartWidget() {
 
   useEffect(() => {
     // In a real app, you'd fetch the specific chart. Here we mock it based on a default.
-    const prakriti = 'Pitta'; 
+    const prakriti: string = 'Pitta'; 
     if (prakriti === 'Vata') setDietPlan(vataDietPlan);
     else if (prakriti === 'Kapha') setDietPlan(kaphaDietPlan);
     else setDietPlan(pittaDietPlan);

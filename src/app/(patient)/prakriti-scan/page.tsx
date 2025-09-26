@@ -462,14 +462,6 @@ export default function PrakritiScanPage() {
         </p>
       </div>
 
-       <Alert variant="destructive">
-          <AlertTriangle className="h-4 w-4" />
-          <AlertTitle>Disclaimer</AlertTitle>
-          <AlertDescription>
-            The results from this test are indicative and intended for educational purposes only. For an accurate diagnosis and personalized advice, please consult a qualified Ayurvedic practitioner.
-          </AlertDescription>
-        </Alert>
-
         <Card>
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
@@ -537,6 +529,15 @@ export default function PrakritiScanPage() {
           </Button>
         </CardFooter>
       </Card>
+      
+      {/* Disclaimer moved to bottom */}
+      <Alert className="mt-6 border-gray-300 bg-gray-50">
+        <AlertTriangle className="h-4 w-4 text-black" />
+        <AlertTitle className="text-black">Disclaimer</AlertTitle>
+        <AlertDescription className="text-black">
+          The results from this test are indicative and intended for educational purposes only. For an accurate diagnosis and personalized advice, please consult a qualified Ayurvedic practitioner.
+        </AlertDescription>
+      </Alert>
     </div>
   );
 }

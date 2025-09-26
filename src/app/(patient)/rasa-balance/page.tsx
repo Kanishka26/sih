@@ -105,7 +105,7 @@ export default function RasaBalancePage() {
     const data = Object.entries(rasaBalance).map(([name, value]) => ({
       name,
       value: value || 0,
-      fill: chartConfig[name as keyof typeof chartConfig]?.color,
+      fill: (chartConfig[name as keyof typeof chartConfig] as any)?.color || 'hsl(var(--muted))',
     }));
     
     const totalPoints = data.reduce((acc, curr) => acc + curr.value, 0);

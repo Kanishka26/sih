@@ -8,7 +8,6 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
-import {GenerateRequest, Part,Tool} from '@genkit-ai/googleai';
 
 const ChatWithDieticianInputSchema = z.object({
   dieticianName: z.string().describe("The name of the dietician to chat with."),
@@ -32,7 +31,7 @@ export type ChatWithDieticianInput = z.infer<
 
 export async function chatWithDietician(
   input: ChatWithDieticianInput
-): Promise<AsyncGenerator<string>> {
+): Promise<string> {
   return chatWithDieticianFlow(input);
 }
 
@@ -50,17 +49,12 @@ const chatWithDieticianFlow = ai.defineFlow(
     Keep your responses concise and easy to understand. You are talking to a user in a real-time chat.
     `;
 
-    const request: GenerateRequest = {
+    const response = await ai.generate({
         model: 'googleai/gemini-2.5-flash',
-        history: history as {role: string, parts: Part[]}[],
         prompt: message,
         system: systemPrompt,
-    };
-    
-    const {stream} = ai.generateStream(request);
-
-    return stream.iterator<string>((chunk) => {
-      return chunk.text;
     });
+
+    return response.text;
   }
 );

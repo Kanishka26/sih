@@ -15,7 +15,7 @@ import { cn } from '@/lib/utils';
 
 export function PrakritiProfileWidget() {
   // In a real app, this would come from the user's profile
-  const prakriti = "Pitta"; 
+  const prakriti: string = "Pitta"; 
   const recommendation = "Focus on cooling foods like cucumber, milk, and rice. Avoid spicy and oily foods.";
 
   const getPrakritiInfo = () => {
