@@ -1,22 +1,30 @@
 
 'use client';
 
-import { useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { DietChartWidget } from '@/components/dashboard/diet-chart-widget';
+import { PrakritiProfileWidget } from '@/components/dashboard/prakriti-profile-widget';
+import { QuickLogWidget } from '@/components/dashboard/quick-log-widget';
+import { RasaBalanceWidget } from '@/components/dashboard/rasa-balance-widget';
+import { SeasonalSuggestionsWidget } from '@/components/dashboard/seasonal-suggestions-widget';
+import { AppLayout } from '@/components/app-layout';
 
-export default function Home() {
-  const router = useRouter();
-
-  useEffect(() => {
-    // In a real app, you would check for an authentication token.
-    // For this mock app, we'll just redirect to the login page.
-    router.replace('/login');
-  }, [router]);
-
-  // You can show a loader here while redirecting
+export default function HomePage() {
   return (
-    <div className="flex h-screen items-center justify-center">
-      <p>Loading...</p>
-    </div>
+    <AppLayout>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+        {/* Main Panel */}
+        <div className="lg:col-span-2 flex flex-col space-y-8">
+            <PrakritiProfileWidget />
+            <DietChartWidget />
+        </div>
+
+        {/* Right Panel */}
+        <div className="lg:col-span-1 flex flex-col space-y-8">
+            <RasaBalanceWidget />
+            <SeasonalSuggestionsWidget />
+            <QuickLogWidget />
+        </div>
+      </div>
+    </AppLayout>
   );
 }
