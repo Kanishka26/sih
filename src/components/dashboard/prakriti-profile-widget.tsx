@@ -32,7 +32,7 @@ export function PrakritiProfileWidget() {
   };
 
   return (
-    <Card className="bg-card text-card-foreground flex-1 flex flex-col">
+    <Card className="bg-card text-card-foreground flex flex-col">
       <CardHeader className="flex flex-row items-center justify-between">
         <div className="flex items-center gap-4">
             <div className='p-3 bg-primary/10 rounded-full'>
