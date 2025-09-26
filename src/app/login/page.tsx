@@ -16,13 +16,25 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Logo } from '@/components/logo';
-import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 export default function AuthenticationPage() {
   const router = useRouter();
   const { toast } = useToast();
   const [role, setRole] = useState<'patient' | 'dietician'>('patient');
+  const [email, setEmail] = useState('patient@ahaarsetu.com');
+  const [password, setPassword] = useState('password');
+
+  const handleRoleChange = (newRole: 'patient' | 'dietician') => {
+    setRole(newRole);
+    if (newRole === 'patient') {
+      setEmail('patient@ahaarsetu.com');
+      setPassword('password');
+    } else {
+      setEmail('dietician@ahaarsetu.com');
+      setPassword('password123');
+    }
+  };
 
   const handleLogin = (event: React.FormEvent) => {
     event.preventDefault();
@@ -62,21 +74,13 @@ export default function AuthenticationPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input id="email" type="email" placeholder="m@example.com" defaultValue="patient@ahaarsetu.com" required />
-                </div>
-                <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
-                  <Input id="password" type="password" defaultValue="password" required />
-                </div>
-                <div className="space-y-2">
                   <Label>Role</Label>
                   <div className="flex gap-2">
                     <Button
                       type="button"
                       variant={role === 'patient' ? 'default' : 'outline'}
                       className="w-full"
-                      onClick={() => setRole('patient')}
+                      onClick={() => handleRoleChange('patient')}
                     >
                       Patient
                     </Button>
@@ -84,11 +88,19 @@ export default function AuthenticationPage() {
                       type="button"
                       variant={role === 'dietician' ? 'default' : 'outline'}
                       className="w-full"
-                      onClick={() => setRole('dietician')}
+                      onClick={() => handleRoleChange('dietician')}
                     >
                       Dietician
                     </Button>
                   </div>
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="email">Email</Label>
+                  <Input id="email" type="email" placeholder="m@example.com" value={email} onChange={(e) => setEmail(e.target.value)} required />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="password">Password</Label>
+                  <Input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
                 </div>
               </CardContent>
               <CardFooter>
