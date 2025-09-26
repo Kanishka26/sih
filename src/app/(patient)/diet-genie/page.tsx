@@ -64,45 +64,31 @@ export default function DietGeniePage() {
   });
 
   const handleDownload = () => {
-    if (!result?.dietChart) return;
-
+    if (!result?.dietChart || !dietChartRef.current) return;
+  
     const pdf = new jsPDF('p', 'pt', 'a4');
-    
-    // Define margins
-    const margin = {
-        top: 40,
-        bottom: 40,
-        left: 40,
-        right: 40
-    };
-    
-    const pageDimensions = {
-        width: pdf.internal.pageSize.getWidth(),
-        height: pdf.internal.pageSize.getHeight()
-    };
-    
-    const usableWidth = pageDimensions.width - margin.left - margin.right;
-
-    // Add a title to the PDF
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const margin = 40;
+    const usableWidth = pdfWidth - margin * 2;
+  
     pdf.setFontSize(22);
-    pdf.text("Your Custom Diet Chart", margin.left, margin.top);
+    pdf.text('Your Custom Diet Chart', margin, margin);
     pdf.setFontSize(10);
     pdf.setTextColor(150);
     pdf.text(
       `Generated for a ${form.getValues('age')}-year-old ${form.getValues('gender')} with ${form.getValues('prakriti')} prakriti.`,
-      margin.left,
-      margin.top + 20
+      margin,
+      margin + 20
     );
-
-    // Add the HTML content
-    pdf.html(result.dietChart, {
+  
+    pdf.html(dietChartRef.current, {
       callback: function (doc) {
         doc.save('diet-chart.pdf');
       },
-      x: margin.left,
-      y: margin.top + 40,
+      x: margin,
+      y: margin + 40,
       width: usableWidth,
-      windowWidth: usableWidth 
+      windowWidth: dietChartRef.current.scrollWidth
     });
   };
 
@@ -251,7 +237,7 @@ export default function DietGeniePage() {
           >
             <div
                 ref={dietChartRef}
-                className="prose prose-sm max-w-none dark:prose-invert prose-headings:font-headline p-4 border rounded-lg bg-background"
+                className="prose prose-sm max-w-none prose-headings:font-headline p-4 border rounded-lg bg-background"
                 dangerouslySetInnerHTML={{
                     __html: result.dietChart,
                 }}
