@@ -1,4 +1,3 @@
-
 'use client';
 import {
   Card,
@@ -116,7 +115,7 @@ export default function NutrientVaultPage() {
                   <TableCell>{food.rasa}</TableCell>
                   <TableCell>{food.guna}</TableCell>
                   <TableCell>
-                    <Badge variant={food.virya === 'Hot' ? 'destructive' : 'default'} className={food.virya === 'Cold' ? 'bg-blue-500 hover:bg-blue-600' : ''}>
+                    <Badge variant={food.virya === 'Hot' ? 'destructive' : 'default'}>
                       {food.virya}
                     </Badge>
                   </TableCell>
@@ -212,7 +211,7 @@ export default function NutrientVaultPage() {
                         <TableRow>
                             <TableCell className="font-medium">Virya (Potency)</TableCell>
                             <TableCell>
-                                <Badge variant={analysisResult.virya === 'Hot' ? 'destructive' : 'default'} className={analysisResult.virya === 'Cold' ? 'bg-blue-500 hover:bg-blue-600' : ''}>
+                                <Badge variant={analysisResult.virya === 'Hot' ? 'destructive' : 'default'}>
                                     {analysisResult.virya}
                                 </Badge>
                             </TableCell>

@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -215,7 +214,7 @@ export default function DieticianConnectPage() {
             </CardContent>
             <CardFooter className="flex-col gap-2 pt-0">
                 <div className="pt-2">
-                  <p className="text-2xl font-bold">₹{dietician.fees}</p>
+                  <p className="text-2xl font-bold text-accent-foreground">₹{dietician.fees}</p>
                   <p className="text-xs text-muted-foreground">Consultation Fee</p>
                 </div>
                  <Button
@@ -259,7 +258,7 @@ export default function DieticianConnectPage() {
                             <p className="text-sm text-muted-foreground">{viewingDietician.bio}</p>
                         </div>
                         <div className="text-center pt-2">
-                            <p className="text-3xl font-bold">₹{viewingDietician.fees}</p>
+                            <p className="text-3xl font-bold text-accent-foreground">₹{viewingDietician.fees}</p>
                             <p className="text-sm text-muted-foreground">Consultation Fee</p>
                         </div>
                     </div>

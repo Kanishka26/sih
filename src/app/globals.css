@@ -4,41 +4,45 @@
 
 @layer base {
   :root {
-    --background: 210 20% 98%; /* Very Light Cool Grey */
+    --background: 210 40% 98%; /* Lighter Cool Grey */
     --foreground: 224 71.4% 4.1%;
     --card: 0 0% 100%; /* White */
     --card-foreground: 224 71.4% 4.1%;
     --popover: 0 0% 100%;
     --popover-foreground: 224 71.4% 4.1%;
-    --primary: 205 90% 60%; /* Soft Blue */
-    --primary-foreground: 210 20% 98%;
-    --secondary: 215 27.9% 90.0%;
-    --secondary-foreground: 224 71.4% 4.1%;
-    --muted: 215 27.9% 90.0%;
+
+    /* New Color Palette */
+    --primary: 180 50% 60%; /* Gentle Teal */
+    --primary-foreground: 180 50% 5%;
+    --secondary: 260 50% 75%; /* Soft Lavender */
+    --secondary-foreground: 260 50% 10%;
+    --muted: 215 27.9% 95%; /* Lighter Muted */
     --muted-foreground: 220 9% 46.1%;
-    --accent: 25 95% 70%; /* Warm Peach */
-    --accent-foreground: 25 95% 25%;
-    --destructive: 0 84.2% 60.2%;
+    --accent: 45 95% 70%; /* Sunny Yellow */
+    --accent-foreground: 45 95% 15%;
+    --destructive: 350 70% 70%; /* Muted Rose */
     --destructive-foreground: 0 0% 98%;
-    --border: 215 25% 90%;
-    --input: 215 25% 94%;
-    --ring: 205 90% 60%; /* Soft Blue */
+
+    --border: 215 25% 92%;
+    --input: 215 25% 96%;
+    --ring: 180 50% 60%; /* Gentle Teal */
     --radius: 0.8rem;
 
-    --chart-1: 205 80% 70%;
-    --chart-2: 25 85% 65%;
-    --chart-3: 130 60% 65%;
-    --chart-4: 280 70% 70%;
-    --chart-5: 50 90% 60%;
+    /* Expanded Chart/UI Colors */
+    --chart-1: 180 50% 60%; /* Teal */
+    --chart-2: 45 95% 70%; /* Sunny Yellow */
+    --chart-3: 15 80% 70%; /* Soft Coral */
+    --chart-4: 260 60% 75%; /* Lavender */
+    --chart-5: 120 40% 70%; /* Mint Green */
 
     /* Sidebar variables */
     --sidebar-background: 210 20% 99%;
     --sidebar-foreground: 224 71.4% 4.1%;
     --sidebar-border: 210 20% 90%;
-    --sidebar-ring: 205 90% 60%;
-    --sidebar-accent: 25 95% 94%;
-    --sidebar-accent-foreground: 25 95% 30%;
-    --sidebar-primary: 205 90% 60%;
+    --sidebar-ring: 180 50% 60%;
+    --sidebar-accent: 180 50% 94%;
+    --sidebar-accent-foreground: 180 50% 20%;
+    --sidebar-primary: 180 50% 60%;
     --sidebar-primary-foreground: 210 20% 98%;
   }
 
@@ -49,28 +53,31 @@
     --card-foreground: 0 0% 98%;
     --popover: 220 14% 10%;
     --popover-foreground: 0 0% 98%;
-    --primary: 205 80% 65%; /* Soft Blue */
-    --primary-foreground: 210 20% 5%;
-    --secondary: 215 20% 20%;
-    --secondary-foreground: 0 0% 98%;
+    
+    /* New Dark Palette */
+    --primary: 180 50% 65%; /* Gentle Teal */
+    --primary-foreground: 180 50% 10%;
+    --secondary: 260 40% 30%; /* Soft Lavender */
+    --secondary-foreground: 260 40% 90%;
     --muted: 215 20% 20%;
     --muted-foreground: 240 5% 64.9%;
-    --accent: 25 80% 55%; /* Warm Peach */
-    --accent-foreground: 0 0% 100%;
-    --destructive: 0 62.8% 30.6%;
+    --accent: 45 80% 60%; /* Sunny Yellow */
+    --accent-foreground: 45 80% 95%;
+    --destructive: 350 60% 40%; /* Muted Rose */
     --destructive-foreground: 0 0% 98%;
+    
     --border: 215 20% 25%;
     --input: 215 20% 25%;
-    --ring: 205 80% 65%;
+    --ring: 180 50% 65%;
 
     --sidebar-background: 220 14% 12%;
     --sidebar-foreground: 0 0% 98%;
     --sidebar-border: 215 20% 25%;
-    --sidebar-ring: 205 80% 65%;
-    --sidebar-accent: 25 80% 20%;
-    --sidebar-accent-foreground: 25 80% 90%;
-    --sidebar-primary: 205 80% 65%;
-    --sidebar-primary-foreground: 210 20% 5%;
+    --sidebar-ring: 180 50% 65%;
+    --sidebar-accent: 180 40% 20%;
+    --sidebar-accent-foreground: 180 40% 90%;
+    --sidebar-primary: 180 50% 65%;
+    --sidebar-primary-foreground: 180 50% 10%;
   }
 }
 

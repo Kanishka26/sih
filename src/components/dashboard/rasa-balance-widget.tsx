@@ -1,4 +1,3 @@
-
 'use client';
 import {
   Card,
@@ -23,7 +22,7 @@ const chartData = [
   { name: 'Salty', value: 200, color: 'hsl(var(--chart-3))' },
   { name: 'Pungent', value: 280, color: 'hsl(var(--chart-4))' },
   { name: 'Bitter', value: 189, color: 'hsl(var(--chart-5))' },
-  { name: 'Astringent', value: 239, color: 'hsl(var(--primary))' },
+  { name: 'Astringent', value: 239, color: 'hsl(var(--chart-1))' },
 ];
 
 const chartConfig = {
@@ -33,7 +32,7 @@ const chartConfig = {
   'Salty': { label: 'Salty', color: 'hsl(var(--chart-3))' },
   'Pungent': { label: 'Pungent', color: 'hsl(var(--chart-4))' },
   'Bitter': { label: 'Bitter', color: 'hsl(var(--chart-5))' },
-  'Astringent': { label: 'Astringent', color: 'hsl(var(--primary))' },
+  'Astringent': { label: 'Astringent', color: 'hsl(var(--chart-1))' },
 };
 
 export function RasaBalanceWidget() {
