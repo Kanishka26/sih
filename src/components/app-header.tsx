@@ -1,9 +1,11 @@
 
 'use client';
 
+import { useRouter } from 'next/navigation';
 import {
   Languages,
   UserCircle,
+  LogOut
 } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
@@ -20,6 +22,12 @@ import { useLanguage } from '@/context/language-context';
 
 export function AppHeader() {
   const { toggleLanguage } = useLanguage();
+  const router = useRouter();
+
+  const handleLogout = () => {
+    // In a real app, you would also clear the auth token here.
+    router.push('/login');
+  };
 
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:h-16 sm:px-6">
@@ -42,6 +50,11 @@ export function AppHeader() {
           <DropdownMenuSeparator />
           <DropdownMenuItem>Profile</DropdownMenuItem>
           <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem onClick={handleLogout}>
+            <LogOut className="mr-2 h-4 w-4" />
+            <span>Logout</span>
+          </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
     </header>
