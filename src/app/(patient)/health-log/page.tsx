@@ -28,40 +28,11 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { useState } from 'react';
-
-const initialPastLogs = [
-  {
-    date: '2024-07-20',
-    foodIntake: 'Oats with berries for breakfast, lentil soup for lunch, grilled vegetables for dinner.',
-    symptoms: 'Felt energetic and clear-headed.',
-    waterIntake: '2.5L',
-    sleepHours: '8 hours',
-    bowelMovement: 'Normal',
-    energyLevel: '5/5',
-  },
-  {
-    date: '2024-07-19',
-    foodIntake: 'Rice with yogurt for lunch, kichdi for dinner.',
-    symptoms: 'A bit of bloating in the evening.',
-    waterIntake: '2L',
-    sleepHours: '6.5 hours',
-    bowelMovement: 'Normal',
-    energyLevel: '3/5',
-  },
-  {
-    date: '2024-07-18',
-    foodIntake: 'Skipped breakfast. Had a heavy lunch with fried food.',
-    symptoms: 'Felt sluggish and sleepy after lunch.',
-    waterIntake: '1.5L',
-    sleepHours: '7 hours',
-    bowelMovement: 'Constipated',
-    energyLevel: '2/5',
-  },
-];
+import { useHealthLog } from '@/context/health-log-context';
 
 export default function HealthLogPage() {
     const { toast } = useToast();
-    const [pastLogs, setPastLogs] = useState(initialPastLogs);
+    const { pastLogs, addLog } = useHealthLog();
 
     const [foodIntake, setFoodIntake] = useState('');
     const [symptoms, setSymptoms] = useState('');
@@ -92,7 +63,7 @@ export default function HealthLogPage() {
             energyLevel,
         };
 
-        setPastLogs([newLog, ...pastLogs]);
+        addLog(newLog);
 
         // Reset form fields
         setFoodIntake('');
