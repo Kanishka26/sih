@@ -28,7 +28,7 @@ import {
 import { z } from 'zod';
 
 
-export async function generateDietChartAction(input: GenerateAyurvedaDietChartInput) {
+export async function generateAyurvedaDietChartAction(input: GenerateAyurvedaDietChartInput) {
   // The Genkit flow already handles input validation with its Zod schema.
   return await generateAyurvedaDietChart(input);
 }

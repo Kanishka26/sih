@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { useState, useTransition, useRef } from 'react';
 import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -34,7 +33,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-import { generateDietChartAction } from '@/lib/actions';
+import { generateAyurvedaDietChartAction } from '@/lib/actions';
 import { type GenerateAyurvedaDietChartOutput } from '@/ai/flows/generate-ayurveda-diet-chart';
 import { Download, Loader2, Wand2 } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -65,40 +64,45 @@ export default function DietGeniePage() {
   });
 
   const handleDownload = () => {
-    if (!dietChartRef.current) return;
+    if (!result?.dietChart) return;
 
-    // Temporarily increase scale for better resolution
-    const scale = 2;
-    const element = dietChartRef.current;
+    const pdf = new jsPDF('p', 'pt', 'a4');
+    
+    // Define margins
+    const margin = {
+        top: 40,
+        bottom: 40,
+        left: 40,
+        right: 40
+    };
+    
+    const pageDimensions = {
+        width: pdf.internal.pageSize.getWidth(),
+        height: pdf.internal.pageSize.getHeight()
+    };
+    
+    const usableWidth = pageDimensions.width - margin.left - margin.right;
 
-    html2canvas(element, {
-      scale: scale,
-      logging: true,
-      width: element.offsetWidth,
-      height: element.offsetHeight,
-      windowWidth: document.documentElement.offsetWidth,
-      windowHeight: document.documentElement.offsetHeight,
-    }).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-      const pdf = new jsPDF('p', 'mm', 'a4');
-      const pdfWidth = pdf.internal.pageSize.getWidth();
-      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
-      
-      let heightLeft = pdfHeight;
-      let position = 0;
-      const pageHeight = pdf.internal.pageSize.getHeight();
+    // Add a title to the PDF
+    pdf.setFontSize(22);
+    pdf.text("Your Custom Diet Chart", margin.left, margin.top);
+    pdf.setFontSize(10);
+    pdf.setTextColor(150);
+    pdf.text(
+      `Generated for a ${form.getValues('age')}-year-old ${form.getValues('gender')} with ${form.getValues('prakriti')} prakriti.`,
+      margin.left,
+      margin.top + 20
+    );
 
-      pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft > 0) {
-        position = heightLeft - pdfHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, pdfWidth, pdfHeight);
-        heightLeft -= pageHeight;
-      }
-      
-      pdf.save('diet-chart.pdf');
+    // Add the HTML content
+    pdf.html(result.dietChart, {
+      callback: function (doc) {
+        doc.save('diet-chart.pdf');
+      },
+      x: margin.left,
+      y: margin.top + 40,
+      width: usableWidth,
+      windowWidth: usableWidth 
     });
   };
 
@@ -106,7 +110,7 @@ export default function DietGeniePage() {
     startTransition(async () => {
       setResult(null);
       try {
-        const res = await generateDietChartAction(values);
+        const res = await generateAyurvedaDietChartAction(values);
         setResult(res);
       } catch (error) {
         toast({
@@ -254,7 +258,7 @@ export default function DietGeniePage() {
             />
           </CardContent>
           <CardFooter>
-            <Button onClick={handleDownload} className="ml-auto">
+            <Button onClick={handleDownload} className="ml-auto" disabled={!result}>
               <Download className="mr-2 h-4 w-4" />
               Download as PDF
             </Button>

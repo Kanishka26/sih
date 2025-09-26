@@ -52,11 +52,10 @@ User Profile:
 - Gender: {{gender}}
 - Prakriti (Dosha): {{prakriti}}
 
-Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document.
-
-The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items.
+Your response MUST be a JSON object with a single key "dietChart". The value of "dietChart" must be a string containing the diet plan as a complete HTML document. The HTML should be well-structured and styled using TailwindCSS classes to be clean and readable. Use headings (h3, h4) for days and meal times, and unordered lists (ul, li) for food items. Do not escape the HTML.
   
-The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods. For dual-dosha types, provide a balanced plan that pacifies both doshas involved.`,
+The diet must be tailored to the user's prakriti, age, and gender, adhering to Ayurvedic principles. For a Pitta person, suggest cooling foods. For a Vata person, suggest warm, grounding foods. For a Kapha person, suggest light, stimulating foods. For dual-dosha types, provide a balanced plan that pacifies both doshas involved.
+Example output format: { "dietChart": "<h3>Day 1</h3><h4>Breakfast</h4><ul><li>Oatmeal</li></ul>..." }`,
 });
 
 const generateAyurvedaDietChartFlow = ai.defineFlow(
