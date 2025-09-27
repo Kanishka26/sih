@@ -1,5 +1,4 @@
 'use client';
-
 import { useState } from 'react';
 import { useUser, type UserProfile } from '@/context/user-context';
 import { Button } from '@/components/ui/button';
@@ -22,11 +21,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Badge } from '@/components/ui/badge';
 import { useToast } from '@/hooks/use-toast';
 import { Save, X, Plus, Trash2 } from 'lucide-react';
-
 interface ProfileEditFormProps {
   onClose: () => void;
 }
-
 export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
   const { user, updateUser } = useUser();
   const { toast } = useToast();
@@ -45,15 +42,12 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
     allergies: user?.allergies || [],
     healthGoals: user?.healthGoals || [],
   });
-
   const [newDietaryHabit, setNewDietaryHabit] = useState('');
   const [newAllergy, setNewAllergy] = useState('');
   const [newHealthGoal, setNewHealthGoal] = useState('');
-
   const handleInputChange = (field: keyof UserProfile, value: any) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
-
   const addItem = (field: 'dietaryHabits' | 'allergies' | 'healthGoals', value: string) => {
     if (!value.trim()) return;
     
@@ -67,12 +61,10 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
     if (field === 'allergies') setNewAllergy('');
     if (field === 'healthGoals') setNewHealthGoal('');
   };
-
   const removeItem = (field: 'dietaryHabits' | 'allergies' | 'healthGoals', index: number) => {
     const currentItems = formData[field] as string[] || [];
     handleInputChange(field, currentItems.filter((_, i) => i !== index));
   };
-
   const handleSave = () => {
     try {
       updateUser(formData);
@@ -89,7 +81,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
       });
     }
   };
-
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
@@ -105,7 +96,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
           </Button>
         </div>
       </div>
-
       {/* Basic Information */}
       <Card>
         <CardHeader>
@@ -133,7 +123,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
               />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="age">Age</Label>
@@ -161,7 +150,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
               </Select>
             </div>
           </div>
-
           <div className="space-y-2">
             <Label htmlFor="phone">Phone Number</Label>
             <Input
@@ -173,7 +161,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
           </div>
         </CardContent>
       </Card>
-
       {/* Physical Information */}
       <Card>
         <CardHeader>
@@ -206,7 +193,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
               />
             </div>
           </div>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="prakriti">Prakriti (Body Constitution)</Label>
@@ -243,7 +229,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
           </div>
         </CardContent>
       </Card>
-
       {/* Dietary Habits */}
       <Card>
         <CardHeader>
@@ -280,7 +265,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
           </div>
         </CardContent>
       </Card>
-
       {/* Allergies */}
       <Card>
         <CardHeader>
@@ -317,7 +301,6 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
           </div>
         </CardContent>
       </Card>
-
       {/* Health Goals */}
       <Card>
         <CardHeader>
@@ -357,3 +340,4 @@ export function ProfileEditForm({ onClose }: ProfileEditFormProps) {
     </div>
   );
 }
+

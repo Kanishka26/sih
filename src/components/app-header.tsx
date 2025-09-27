@@ -1,6 +1,4 @@
-
 'use client';
-
 import { useRouter } from 'next/navigation';
 import {
   Languages,
@@ -9,7 +7,6 @@ import {
   User,
   Settings
 } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
@@ -23,21 +20,17 @@ import { SidebarTrigger } from '@/components/ui/sidebar';
 import { useLanguage } from '@/context/language-context';
 import { useUser } from '@/context/user-context';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-
 export function AppHeader() {
   const { toggleLanguage } = useLanguage();
   const { user, logout } = useUser();
   const router = useRouter();
-
   const handleLogout = () => {
     logout();
     router.push('/login');
   };
-
   const handleProfileClick = () => {
     router.push('/profile');
   };
-
   return (
     <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background/80 px-4 backdrop-blur-sm sm:h-16 sm:px-6">
       <SidebarTrigger className="md:hidden" />
@@ -46,7 +39,6 @@ export function AppHeader() {
         <Languages className="h-[1.2rem] w-[1.2rem]" />
         <span className="sr-only">Toggle language</span>
       </Button>
-
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button variant="ghost" size="icon" className="rounded-full p-0">
@@ -88,5 +80,6 @@ export function AppHeader() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </header>);
+    </header>
+  );
 }
