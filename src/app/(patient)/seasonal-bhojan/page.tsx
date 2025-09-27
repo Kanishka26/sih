@@ -40,7 +40,7 @@ const formSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter'], {
     required_error: 'Please select a season.',
   }),
-  userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha'], {
+  userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha', 'Vata-Pitta', 'Pitta-Kapha', 'Vata-Kapha', 'Tridoshic'], {
     required_error: 'Please select a prakriti.',
   }),
   location: z

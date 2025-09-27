@@ -1,7 +1,7 @@
 
 'use server';
 
-/**
+/*      'The user's prakriti (body constitution) according to Ayurveda (e.g., Vata, Pitta, Kapha, Vata-Pitta, Pitta-Kapha, Vata-Kapha, Tridoshic).'
  * @fileOverview A seasonal food suggestion AI agent based on Ayurvedic principles.
  *
  * - suggestSeasonalFoods - A function that suggests seasonal foods and diet changes.

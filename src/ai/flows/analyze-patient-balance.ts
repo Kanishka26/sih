@@ -13,7 +13,7 @@ import {z} from 'genkit';
 import { foodDatabase } from '@/lib/data';
 
 const AnalyzePatientBalanceInputSchema = z.object({
-  patientPrakriti: z.string().describe("The patient's dominant prakriti (dosha), e.g., Vata, Pitta, Kapha."),
+  patientPrakriti: z.string().describe("The patient's dominant prakriti (dosha), e.g., Vata, Pitta, Kapha, Vata-Pitta, Pitta-Kapha, Vata-Kapha, Tridoshic."),
   currentDiet: z.array(z.string()).describe("A list of food item names or IDs the patient has been consuming, e.g., ['apple', 'chilli', 'ghee']"),
 });
 export type AnalyzePatientBalanceInput = z.infer<

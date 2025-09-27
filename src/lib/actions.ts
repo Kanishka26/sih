@@ -35,7 +35,7 @@ export async function generateAyurvedaDietChartAction(input: GenerateAyurvedaDie
 
 const seasonalFoodsSchema = z.object({
   currentSeason: z.enum(['spring', 'summer', 'fall', 'winter']),
-  userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha']),
+  userPrakriti: z.enum(['Vata', 'Pitta', 'Kapha', 'Vata-Pitta', 'Pitta-Kapha', 'Vata-Kapha', 'Tridoshic']),
   location: z.string().min(2, 'Location must be at least 2 characters.').max(50),
 });
 

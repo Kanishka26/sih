@@ -36,12 +36,12 @@ const initialChartData = {
 
 const chartConfig = {
   value: { label: 'Balance' },
-  'Madhura (Sweet)': { color: 'hsl(var(--chart-1))' },
-  'Amla (Sour)': { color: 'hsl(var(--chart-2))' },
-  'Lavana (Salty)': { color: 'hsl(var(--chart-3))' },
-  'Katu (Pungent)': { color: 'hsl(var(--chart-4))' },
-  'Tikta (Bitter)': { color: 'hsl(var(--chart-5))' },
-  'Kashaya (Astringent)': { color: 'hsl(var(--primary))' },
+  'Madhura (Sweet)': { color: '#FF6B9D' },        // Sweet pink for sweetness
+  'Amla (Sour)': { color: '#FFA500' },           // Orange for sourness (citrus)
+  'Lavana (Salty)': { color: '#4A90E2' },        // Blue for saltiness (ocean)
+  'Katu (Pungent)': { color: '#FF4444' },        // Red for heat/pungency
+  'Tikta (Bitter)': { color: '#8B4513' },        // Brown for bitterness (coffee/chocolate)
+  'Kashaya (Astringent)': { color: '#9B59B6' },  // Purple for astringency
 };
 
 const commonFoods = ['Rice', 'Lentils (Dal)', 'Ghee', 'Apple', 'Spinach', 'Milk', 'Ginger', 'Turmeric'];

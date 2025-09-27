@@ -1,0 +1,1001 @@
+Food,Category,Calories (per serving),Rasa (Taste),Guna (Qualities),Virya (Potency)
+Lentils (Dal),Dairy,207,Bitter,Oily,Hot
+Almonds,Dairy,289,Astringent,Heavy,Hot
+Buttermilk,Nut,39,Sour,Cool,Cold
+Oats,Nut,275,Sour,Dry,Hot
+Cumin,Nut,11,Bitter,Heavy,Cold
+Cauliflower,Legume,81,Pungent,Cool,Cold
+Spinach,Vegetable,116,Sweet,Dry,Cold
+Broccoli,Dairy,148,Astringent,Dry,Hot
+Coriander,Spice,212,Bitter,Oily,Hot
+Mango,Spice,105,Sour,Oily,Hot
+Turmeric,Vegetable,47,Sour,Oily,Hot
+Ginger,Spice,156,Pungent,Warm,Cold
+Pomegranate,Grain,158,Sour,Cool,Cold
+Apple,Fruit,289,Pungent,Dry,Hot
+Spinach,Nut,280,Sour,Light,Cold
+Barley,Spice,196,Bitter,Heavy,Cold
+Almonds,Dairy,190,Sweet,Warm,Cold
+Cauliflower,Spice,220,Sweet,Light,Hot
+Banana,Legume,104,Sour,Light,Cold
+Kidney Beans,Legume,288,Sweet,Warm,Cold
+Walnuts,Fruit,116,Pungent,Dry,Cold
+Mango,Grain,179,Sweet,Oily,Hot
+Broccoli,Fruit,41,Bitter,Light,Cold
+Turmeric,Grain,107,Sweet,Light,Cold
+Cumin,Spice,1,Astringent,Light,Cold
+Brown Rice,Nut,18,Pungent,Warm,Cold
+Cashews,Spice,81,Astringent,Heavy,Cold
+Milk,Grain,47,Sour,Heavy,Hot
+Quinoa,Dairy,251,Sweet,Dry,Cold
+Coriander,Dairy,188,Astringent,Warm,Hot
+Brown Rice,Legume,290,Sweet,Oily,Cold
+Spinach,Legume,69,Pungent,Dry,Cold
+Turmeric,Legume,249,Sour,Cool,Hot
+Lentils (Dal),Fruit,257,Sweet,Light,Cold
+Brown Rice,Spice,167,Sour,Oily,Hot
+Cauliflower,Grain,91,Pungent,Heavy,Hot
+Lentils (Dal),Legume,228,Astringent,Heavy,Hot
+Pomegranate,Grain,260,Astringent,Cool,Cold
+Milk,Legume,145,Sweet,Warm,Hot
+Apple,Nut,128,Bitter,Dry,Cold
+Kidney Beans,Grain,184,Sour,Oily,Hot
+Yogurt,Grain,123,Sweet,Cool,Cold
+Quinoa,Dairy,165,Pungent,Light,Cold
+Quinoa,Legume,106,Bitter,Dry,Cold
+Walnuts,Grain,212,Sour,Oily,Hot
+Pomegranate,Vegetable,261,Sour,Warm,Cold
+Oats,Nut,121,Sweet,Light,Hot
+Oats,Fruit,188,Bitter,Warm,Cold
+Banana,Nut,60,Sour,Oily,Hot
+Quinoa,Legume,97,Astringent,Cool,Cold
+Ghee,Nut,80,Pungent,Warm,Cold
+Pomegranate,Nut,111,Sweet,Cool,Cold
+Apple,Grain,119,Bitter,Heavy,Cold
+Kidney Beans,Vegetable,137,Sour,Warm,Hot
+Ginger,Legume,122,Pungent,Heavy,Hot
+Turmeric,Dairy,182,Sour,Warm,Cold
+Chickpeas,Grain,194,Sour,Dry,Cold
+Buttermilk,Fruit,271,Bitter,Heavy,Cold
+Turmeric,Legume,194,Sweet,Oily,Hot
+Moong Dal,Nut,104,Astringent,Oily,Cold
+Chickpeas,Dairy,261,Astringent,Light,Hot
+Almonds,Dairy,170,Sweet,Heavy,Hot
+Ghee,Nut,299,Pungent,Light,Cold
+Walnuts,Fruit,274,Sour,Dry,Cold
+Quinoa,Legume,41,Bitter,Dry,Hot
+Milk,Spice,289,Astringent,Light,Hot
+Cucumber,Nut,133,Sour,Light,Hot
+Ghee,Vegetable,118,Bitter,Dry,Cold
+Cumin,Nut,224,Astringent,Heavy,Hot
+Quinoa,Legume,160,Bitter,Light,Hot
+Buttermilk,Fruit,289,Pungent,Cool,Cold
+Broccoli,Dairy,291,Pungent,Warm,Cold
+Apple,Fruit,91,Astringent,Oily,Cold
+Barley,Spice,143,Astringent,Warm,Cold
+Moong Dal,Legume,121,Astringent,Light,Hot
+Turmeric,Nut,246,Pungent,Cool,Hot
+Walnuts,Fruit,205,Pungent,Cool,Hot
+Cucumber,Dairy,202,Sour,Cool,Hot
+Ghee,Grain,211,Pungent,Dry,Hot
+Black Beans,Grain,94,Sour,Dry,Cold
+Chickpeas,Fruit,258,Bitter,Warm,Cold
+Buttermilk,Fruit,43,Sweet,Warm,Hot
+Cucumber,Spice,112,Bitter,Cool,Cold
+Cucumber,Fruit,23,Sour,Dry,Cold
+Milk,Dairy,27,Pungent,Dry,Cold
+Mango,Vegetable,58,Sour,Heavy,Hot
+Ginger,Vegetable,231,Sour,Cool,Cold
+Oats,Nut,48,Astringent,Warm,Cold
+Carrot,Legume,58,Bitter,Oily,Cold
+Moong Dal,Spice,61,Pungent,Heavy,Hot
+Oats,Fruit,243,Sweet,Light,Hot
+Almonds,Grain,27,Pungent,Heavy,Hot
+Chickpeas,Spice,296,Pungent,Warm,Cold
+Mango,Fruit,248,Sweet,Light,Cold
+Cumin,Legume,137,Sweet,Warm,Hot
+Cumin,Fruit,156,Pungent,Dry,Cold
+Brown Rice,Fruit,22,Pungent,Cool,Cold
+Yogurt,Spice,5,Pungent,Oily,Cold
+Buttermilk,Spice,263,Bitter,Oily,Cold
+Moong Dal,Legume,198,Sour,Light,Cold
+Black Beans,Nut,182,Bitter,Warm,Cold
+Black Beans,Legume,85,Astringent,Warm,Hot
+Banana,Spice,67,Astringent,Light,Cold
+Yogurt,Grain,270,Sour,Heavy,Cold
+Walnuts,Vegetable,74,Astringent,Oily,Hot
+Lentils (Dal),Legume,145,Sour,Heavy,Cold
+Coriander,Legume,219,Astringent,Light,Hot
+Yogurt,Dairy,161,Bitter,Warm,Cold
+Carrot,Legume,282,Bitter,Warm,Hot
+Cashews,Legume,277,Sweet,Oily,Hot
+Almonds,Spice,26,Astringent,Light,Cold
+Chickpeas,Legume,88,Sour,Light,Hot
+Ginger,Grain,268,Pungent,Cool,Hot
+Barley,Fruit,291,Astringent,Cool,Cold
+Chickpeas,Vegetable,125,Sour,Light,Hot
+Coriander,Dairy,245,Pungent,Dry,Cold
+Pomegranate,Fruit,123,Bitter,Dry,Hot
+Cashews,Fruit,118,Astringent,Oily,Cold
+Turmeric,Nut,228,Bitter,Heavy,Cold
+Buttermilk,Dairy,93,Sour,Heavy,Hot
+Cumin,Nut,148,Sour,Oily,Cold
+Oats,Fruit,181,Sweet,Light,Hot
+Turmeric,Grain,255,Astringent,Dry,Hot
+Oats,Vegetable,294,Sour,Cool,Cold
+Ginger,Vegetable,71,Astringent,Light,Cold
+Apple,Dairy,26,Sour,Cool,Cold
+Cauliflower,Vegetable,122,Pungent,Oily,Hot
+Moong Dal,Vegetable,281,Sour,Dry,Hot
+Yogurt,Nut,238,Astringent,Cool,Cold
+Mango,Fruit,248,Sweet,Oily,Hot
+Banana,Nut,286,Astringent,Dry,Cold
+Cashews,Fruit,61,Sweet,Light,Cold
+Barley,Nut,77,Pungent,Heavy,Hot
+Ginger,Fruit,24,Astringent,Oily,Hot
+Yogurt,Legume,161,Pungent,Warm,Cold
+Mango,Spice,23,Bitter,Warm,Cold
+Cumin,Fruit,129,Sweet,Heavy,Hot
+Chickpeas,Vegetable,121,Astringent,Heavy,Hot
+Milk,Grain,65,Sweet,Heavy,Cold
+Quinoa,Vegetable,216,Sour,Warm,Hot
+Carrot,Grain,34,Bitter,Warm,Hot
+Mango,Vegetable,152,Pungent,Warm,Cold
+Broccoli,Legume,61,Bitter,Heavy,Cold
+Moong Dal,Grain,284,Sweet,Heavy,Cold
+Ghee,Fruit,216,Sour,Light,Hot
+Buttermilk,Vegetable,136,Bitter,Light,Cold
+Turmeric,Legume,36,Pungent,Cool,Cold
+Barley,Nut,136,Sour,Heavy,Cold
+Coriander,Legume,272,Pungent,Cool,Cold
+Ginger,Grain,163,Sweet,Warm,Hot
+Almonds,Fruit,236,Sweet,Light,Cold
+Coriander,Legume,61,Pungent,Heavy,Hot
+Moong Dal,Vegetable,48,Bitter,Heavy,Hot
+Turmeric,Vegetable,284,Pungent,Oily,Cold
+Milk,Dairy,36,Bitter,Heavy,Cold
+Barley,Grain,125,Sweet,Warm,Cold
+Buttermilk,Fruit,81,Astringent,Oily,Hot
+Yogurt,Vegetable,24,Bitter,Warm,Cold
+Cashews,Fruit,225,Pungent,Oily,Cold
+Kidney Beans,Spice,251,Pungent,Heavy,Cold
+Ginger,Legume,4,Bitter,Warm,Cold
+Barley,Fruit,200,Bitter,Cool,Cold
+Moong Dal,Nut,115,Bitter,Dry,Hot
+Cashews,Fruit,123,Sour,Warm,Cold
+Apple,Vegetable,184,Bitter,Warm,Hot
+Ghee,Spice,195,Sour,Oily,Hot
+Lentils (Dal),Dairy,7,Sour,Heavy,Cold
+Carrot,Legume,194,Astringent,Cool,Cold
+Coriander,Dairy,85,Sour,Cool,Cold
+Almonds,Fruit,10,Bitter,Heavy,Cold
+Pomegranate,Fruit,239,Pungent,Oily,Hot
+Lentils (Dal),Spice,157,Astringent,Light,Cold
+Carrot,Nut,227,Sour,Cool,Hot
+Oats,Dairy,4,Sour,Dry,Cold
+Buttermilk,Dairy,234,Pungent,Warm,Cold
+Carrot,Spice,261,Sweet,Light,Cold
+Apple,Legume,127,Bitter,Heavy,Hot
+Barley,Dairy,20,Bitter,Dry,Hot
+Pomegranate,Vegetable,232,Astringent,Dry,Cold
+Moong Dal,Spice,80,Sweet,Cool,Cold
+Buttermilk,Nut,249,Bitter,Cool,Cold
+Spinach,Fruit,13,Astringent,Dry,Hot
+Mango,Spice,227,Bitter,Heavy,Hot
+Pomegranate,Fruit,161,Sweet,Warm,Hot
+Quinoa,Grain,240,Pungent,Light,Cold
+Chickpeas,Dairy,250,Sour,Dry,Cold
+Oats,Grain,13,Astringent,Light,Hot
+Banana,Fruit,5,Sour,Dry,Hot
+Cucumber,Fruit,245,Pungent,Light,Hot
+Cucumber,Vegetable,51,Bitter,Cool,Cold
+Barley,Dairy,82,Bitter,Oily,Cold
+Brown Rice,Spice,27,Sour,Oily,Hot
+Ginger,Nut,140,Sour,Oily,Cold
+Barley,Fruit,25,Pungent,Dry,Hot
+Lentils (Dal),Vegetable,99,Bitter,Dry,Cold
+Ginger,Dairy,45,Sour,Warm,Cold
+Lentils (Dal),Nut,157,Astringent,Warm,Hot
+Banana,Legume,97,Astringent,Heavy,Hot
+Yogurt,Nut,106,Bitter,Warm,Cold
+Quinoa,Vegetable,280,Bitter,Light,Hot
+Chickpeas,Dairy,42,Sour,Oily,Hot
+Coriander,Vegetable,206,Sweet,Heavy,Hot
+Cumin,Fruit,109,Sour,Dry,Hot
+Moong Dal,Spice,67,Pungent,Heavy,Hot
+Almonds,Fruit,255,Sour,Light,Hot
+Oats,Nut,202,Sweet,Cool,Cold
+Apple,Nut,138,Bitter,Warm,Hot
+Buttermilk,Fruit,294,Astringent,Dry,Cold
+Mango,Grain,20,Bitter,Cool,Cold
+Barley,Legume,153,Bitter,Oily,Cold
+Yogurt,Dairy,241,Sweet,Cool,Cold
+Ginger,Fruit,257,Sweet,Cool,Cold
+Oats,Spice,34,Astringent,Warm,Cold
+Buttermilk,Grain,105,Sweet,Light,Hot
+Kidney Beans,Grain,80,Bitter,Warm,Cold
+Lentils (Dal),Legume,205,Sweet,Heavy,Cold
+Apple,Spice,106,Sour,Heavy,Hot
+Spinach,Vegetable,121,Bitter,Heavy,Cold
+Ginger,Dairy,153,Pungent,Cool,Hot
+Cauliflower,Dairy,291,Pungent,Light,Cold
+Oats,Grain,293,Sweet,Dry,Cold
+Oats,Spice,285,Pungent,Warm,Cold
+Broccoli,Legume,269,Pungent,Dry,Hot
+Apple,Grain,73,Bitter,Cool,Hot
+Lentils (Dal),Vegetable,67,Astringent,Dry,Hot
+Ginger,Fruit,211,Sweet,Warm,Cold
+Almonds,Dairy,167,Pungent,Warm,Hot
+Oats,Grain,191,Sweet,Heavy,Hot
+Yogurt,Vegetable,117,Sweet,Oily,Cold
+Cucumber,Nut,167,Bitter,Oily,Cold
+Oats,Spice,86,Pungent,Warm,Hot
+Oats,Fruit,158,Pungent,Oily,Hot
+Banana,Legume,112,Pungent,Warm,Hot
+Ghee,Nut,152,Sour,Dry,Hot
+Pomegranate,Grain,183,Bitter,Oily,Cold
+Black Beans,Dairy,231,Pungent,Heavy,Hot
+Cauliflower,Legume,90,Bitter,Dry,Cold
+Almonds,Spice,8,Astringent,Heavy,Cold
+Coriander,Grain,270,Bitter,Warm,Hot
+Pomegranate,Grain,284,Bitter,Heavy,Hot
+Cauliflower,Nut,129,Sour,Dry,Hot
+Spinach,Grain,254,Astringent,Light,Cold
+Quinoa,Vegetable,285,Pungent,Oily,Hot
+Quinoa,Fruit,253,Sweet,Heavy,Hot
+Turmeric,Legume,128,Sour,Heavy,Cold
+Apple,Dairy,232,Sour,Cool,Cold
+Ginger,Grain,81,Sweet,Heavy,Hot
+Cashews,Fruit,5,Astringent,Dry,Hot
+Buttermilk,Nut,68,Bitter,Heavy,Hot
+Moong Dal,Dairy,147,Astringent,Dry,Hot
+Buttermilk,Legume,168,Pungent,Oily,Cold
+Cashews,Vegetable,87,Pungent,Light,Hot
+Almonds,Grain,126,Sweet,Cool,Cold
+Walnuts,Vegetable,259,Pungent,Light,Hot
+Cauliflower,Fruit,273,Sweet,Cool,Hot
+Kidney Beans,Spice,201,Bitter,Dry,Cold
+Carrot,Fruit,201,Pungent,Light,Hot
+Turmeric,Fruit,239,Pungent,Heavy,Cold
+Oats,Spice,138,Sour,Light,Hot
+Apple,Fruit,21,Sweet,Dry,Hot
+Ghee,Fruit,40,Sour,Heavy,Hot
+Chickpeas,Vegetable,57,Astringent,Cool,Cold
+Yogurt,Grain,95,Astringent,Oily,Hot
+Carrot,Vegetable,12,Sweet,Light,Cold
+Oats,Nut,143,Bitter,Light,Cold
+Buttermilk,Legume,280,Sour,Heavy,Hot
+Barley,Dairy,237,Sweet,Light,Cold
+Yogurt,Legume,236,Bitter,Light,Hot
+Lentils (Dal),Legume,135,Pungent,Oily,Cold
+Black Beans,Fruit,238,Sour,Heavy,Hot
+Buttermilk,Dairy,62,Sour,Light,Hot
+Black Beans,Grain,72,Bitter,Oily,Hot
+Yogurt,Nut,107,Astringent,Heavy,Cold
+Cucumber,Fruit,48,Sweet,Cool,Cold
+Moong Dal,Fruit,151,Sour,Oily,Cold
+Lentils (Dal),Fruit,204,Bitter,Oily,Cold
+Milk,Fruit,297,Sour,Heavy,Hot
+Ginger,Spice,60,Sour,Warm,Hot
+Broccoli,Vegetable,189,Pungent,Warm,Cold
+Chickpeas,Vegetable,220,Sour,Heavy,Hot
+Buttermilk,Grain,273,Sour,Oily,Cold
+Buttermilk,Fruit,119,Sweet,Cool,Cold
+Black Beans,Fruit,82,Sweet,Dry,Cold
+Banana,Grain,287,Pungent,Cool,Cold
+Chickpeas,Grain,288,Sweet,Oily,Hot
+Cumin,Grain,270,Pungent,Oily,Hot
+Cauliflower,Legume,292,Sour,Light,Cold
+Moong Dal,Spice,153,Bitter,Cool,Hot
+Kidney Beans,Legume,75,Sour,Dry,Hot
+Cumin,Grain,151,Sweet,Oily,Hot
+Walnuts,Spice,61,Sweet,Light,Hot
+Ginger,Vegetable,42,Sour,Light,Hot
+Buttermilk,Vegetable,25,Bitter,Heavy,Cold
+Carrot,Vegetable,226,Bitter,Light,Cold
+Pomegranate,Grain,176,Pungent,Dry,Hot
+Barley,Spice,93,Astringent,Warm,Cold
+Kidney Beans,Grain,94,Bitter,Oily,Cold
+Walnuts,Vegetable,204,Sweet,Light,Cold
+Spinach,Nut,120,Pungent,Oily,Cold
+Oats,Dairy,280,Pungent,Oily,Hot
+Cumin,Grain,113,Sour,Heavy,Cold
+Pomegranate,Dairy,118,Sour,Light,Cold
+Spinach,Spice,260,Pungent,Cool,Hot
+Almonds,Dairy,112,Bitter,Heavy,Hot
+Quinoa,Fruit,69,Astringent,Warm,Cold
+Broccoli,Spice,278,Astringent,Cool,Cold
+Apple,Grain,261,Astringent,Dry,Hot
+Cashews,Fruit,294,Bitter,Heavy,Hot
+Milk,Fruit,99,Pungent,Warm,Hot
+Brown Rice,Fruit,272,Bitter,Dry,Hot
+Coriander,Fruit,144,Bitter,Heavy,Cold
+Cashews,Vegetable,261,Sweet,Warm,Cold
+Turmeric,Grain,291,Bitter,Cool,Cold
+Milk,Vegetable,88,Sour,Dry,Cold
+Cashews,Dairy,5,Astringent,Dry,Cold
+Cumin,Legume,185,Sour,Light,Cold
+Buttermilk,Dairy,33,Astringent,Warm,Cold
+Chickpeas,Vegetable,121,Astringent,Heavy,Hot
+Cucumber,Grain,11,Astringent,Cool,Hot
+Milk,Nut,219,Sour,Light,Hot
+Cumin,Nut,211,Bitter,Dry,Cold
+Milk,Grain,216,Astringent,Warm,Cold
+Walnuts,Legume,223,Astringent,Light,Cold
+Broccoli,Nut,222,Bitter,Oily,Hot
+Quinoa,Vegetable,162,Sour,Cool,Cold
+Oats,Spice,252,Pungent,Oily,Cold
+Kidney Beans,Grain,89,Astringent,Oily,Hot
+Apple,Fruit,162,Sour,Dry,Cold
+Turmeric,Fruit,232,Bitter,Cool,Cold
+Almonds,Nut,161,Pungent,Light,Cold
+Broccoli,Fruit,239,Bitter,Heavy,Hot
+Cashews,Spice,178,Astringent,Light,Cold
+Cauliflower,Fruit,14,Pungent,Cool,Cold
+Quinoa,Spice,278,Pungent,Light,Hot
+Almonds,Dairy,222,Sweet,Warm,Cold
+Barley,Spice,276,Sour,Cool,Hot
+Brown Rice,Grain,16,Bitter,Oily,Hot
+Apple,Legume,281,Sweet,Oily,Hot
+Turmeric,Spice,268,Astringent,Oily,Cold
+Milk,Spice,3,Pungent,Heavy,Hot
+Pomegranate,Nut,123,Bitter,Dry,Hot
+Milk,Legume,129,Bitter,Oily,Hot
+Broccoli,Spice,44,Pungent,Warm,Cold
+Oats,Spice,296,Astringent,Oily,Hot
+Chickpeas,Spice,278,Bitter,Dry,Cold
+Pomegranate,Nut,121,Pungent,Cool,Cold
+Cashews,Spice,179,Bitter,Dry,Cold
+Mango,Vegetable,101,Astringent,Heavy,Hot
+Mango,Nut,240,Pungent,Light,Hot
+Ginger,Spice,300,Sour,Warm,Hot
+Buttermilk,Dairy,292,Sweet,Heavy,Cold
+Brown Rice,Spice,16,Sour,Warm,Hot
+Coriander,Nut,214,Sour,Dry,Hot
+Brown Rice,Spice,188,Astringent,Light,Hot
+Quinoa,Vegetable,232,Astringent,Oily,Hot
+Kidney Beans,Grain,98,Bitter,Warm,Hot
+Broccoli,Nut,76,Sweet,Cool,Cold
+Banana,Dairy,37,Sour,Cool,Hot
+Yogurt,Dairy,40,Astringent,Warm,Cold
+Brown Rice,Legume,135,Astringent,Warm,Hot
+Cumin,Dairy,169,Astringent,Oily,Hot
+Spinach,Legume,262,Pungent,Cool,Hot
+Carrot,Vegetable,156,Astringent,Oily,Cold
+Barley,Vegetable,33,Pungent,Dry,Hot
+Broccoli,Dairy,1,Pungent,Warm,Hot
+Yogurt,Vegetable,202,Sweet,Oily,Hot
+Cucumber,Nut,47,Astringent,Dry,Cold
+Banana,Vegetable,77,Bitter,Cool,Cold
+Walnuts,Fruit,101,Astringent,Light,Cold
+Brown Rice,Vegetable,252,Bitter,Warm,Hot
+Ghee,Nut,215,Astringent,Dry,Hot
+Cucumber,Spice,109,Astringent,Heavy,Cold
+Coriander,Legume,64,Bitter,Heavy,Hot
+Ginger,Fruit,139,Bitter,Cool,Cold
+Coriander,Vegetable,11,Sour,Dry,Cold
+Apple,Fruit,28,Pungent,Warm,Hot
+Moong Dal,Nut,47,Bitter,Oily,Cold
+Ghee,Legume,283,Bitter,Oily,Cold
+Chickpeas,Fruit,89,Astringent,Dry,Hot
+Turmeric,Spice,210,Sweet,Warm,Hot
+Coriander,Nut,300,Sour,Warm,Hot
+Kidney Beans,Nut,95,Astringent,Warm,Cold
+Brown Rice,Vegetable,132,Sour,Dry,Cold
+Barley,Nut,239,Astringent,Cool,Hot
+Walnuts,Legume,7,Sour,Dry,Hot
+Walnuts,Fruit,175,Bitter,Cool,Cold
+Apple,Legume,3,Pungent,Light,Cold
+Barley,Grain,41,Sour,Heavy,Hot
+Ginger,Nut,13,Bitter,Light,Hot
+Mango,Vegetable,214,Sour,Light,Cold
+Milk,Legume,73,Pungent,Dry,Cold
+Cashews,Fruit,10,Bitter,Cool,Hot
+Mango,Nut,221,Sweet,Oily,Cold
+Walnuts,Grain,299,Bitter,Light,Cold
+Coriander,Spice,233,Pungent,Oily,Hot
+Cumin,Legume,123,Bitter,Light,Cold
+Almonds,Grain,250,Astringent,Oily,Cold
+Almonds,Nut,143,Pungent,Heavy,Cold
+Lentils (Dal),Legume,79,Astringent,Cool,Hot
+Milk,Nut,38,Pungent,Oily,Cold
+Walnuts,Legume,254,Astringent,Warm,Hot
+Milk,Grain,212,Sweet,Light,Cold
+Milk,Vegetable,202,Astringent,Light,Hot
+Ginger,Dairy,202,Bitter,Heavy,Cold
+Almonds,Dairy,165,Sweet,Heavy,Hot
+Carrot,Fruit,154,Bitter,Warm,Cold
+Oats,Nut,48,Pungent,Warm,Hot
+Carrot,Legume,271,Bitter,Dry,Cold
+Kidney Beans,Fruit,128,Pungent,Heavy,Cold
+Buttermilk,Legume,109,Astringent,Warm,Cold
+Milk,Legume,285,Astringent,Warm,Hot
+Ghee,Fruit,134,Sweet,Warm,Cold
+Pomegranate,Vegetable,93,Bitter,Cool,Hot
+Banana,Grain,61,Astringent,Cool,Cold
+Moong Dal,Nut,15,Bitter,Light,Hot
+Cashews,Fruit,104,Bitter,Oily,Cold
+Cumin,Nut,175,Sour,Light,Cold
+Lentils (Dal),Grain,229,Sour,Heavy,Hot
+Kidney Beans,Spice,216,Bitter,Warm,Cold
+Spinach,Nut,204,Bitter,Dry,Hot
+Lentils (Dal),Grain,138,Sour,Cool,Cold
+Brown Rice,Grain,115,Astringent,Heavy,Cold
+Lentils (Dal),Vegetable,45,Sweet,Dry,Cold
+Broccoli,Grain,237,Bitter,Dry,Cold
+Carrot,Fruit,63,Sweet,Oily,Hot
+Spinach,Fruit,65,Bitter,Cool,Hot
+Buttermilk,Grain,216,Pungent,Heavy,Hot
+Walnuts,Nut,132,Sour,Light,Hot
+Cumin,Dairy,111,Bitter,Dry,Hot
+Oats,Vegetable,159,Pungent,Dry,Hot
+Yogurt,Fruit,200,Astringent,Oily,Hot
+Almonds,Fruit,134,Pungent,Dry,Cold
+Coriander,Vegetable,130,Pungent,Light,Cold
+Milk,Legume,249,Bitter,Oily,Hot
+Chickpeas,Dairy,190,Astringent,Heavy,Hot
+Banana,Fruit,254,Sour,Cool,Hot
+Mango,Nut,5,Bitter,Light,Cold
+Ginger,Nut,300,Sour,Light,Hot
+Brown Rice,Fruit,107,Pungent,Cool,Cold
+Mango,Grain,122,Sweet,Cool,Cold
+Apple,Fruit,15,Bitter,Heavy,Hot
+Barley,Legume,211,Sweet,Cool,Cold
+Cucumber,Nut,99,Bitter,Dry,Cold
+Quinoa,Legume,202,Sweet,Oily,Hot
+Apple,Legume,126,Sweet,Light,Hot
+Buttermilk,Grain,45,Sweet,Light,Hot
+Brown Rice,Grain,241,Sour,Warm,Cold
+Apple,Legume,300,Sweet,Oily,Hot
+Brown Rice,Spice,224,Astringent,Dry,Hot
+Banana,Grain,12,Sweet,Warm,Cold
+Kidney Beans,Fruit,148,Astringent,Light,Hot
+Barley,Dairy,145,Sweet,Light,Hot
+Cucumber,Fruit,180,Bitter,Warm,Cold
+Quinoa,Nut,7,Astringent,Light,Hot
+Coriander,Grain,125,Sweet,Dry,Hot
+Lentils (Dal),Dairy,284,Bitter,Dry,Hot
+Carrot,Legume,271,Bitter,Heavy,Hot
+Brown Rice,Nut,242,Astringent,Oily,Hot
+Brown Rice,Nut,4,Sour,Heavy,Hot
+Coriander,Vegetable,138,Sweet,Heavy,Hot
+Cashews,Spice,161,Pungent,Dry,Cold
+Moong Dal,Dairy,79,Astringent,Dry,Cold
+Kidney Beans,Grain,220,Sweet,Oily,Hot
+Walnuts,Vegetable,67,Bitter,Light,Hot
+Oats,Grain,240,Astringent,Oily,Cold
+Spinach,Dairy,205,Astringent,Light,Cold
+Kidney Beans,Nut,237,Sweet,Heavy,Cold
+Carrot,Spice,121,Sour,Oily,Hot
+Moong Dal,Nut,127,Astringent,Warm,Hot
+Pomegranate,Vegetable,278,Bitter,Heavy,Hot
+Walnuts,Vegetable,283,Bitter,Oily,Hot
+Kidney Beans,Legume,89,Pungent,Cool,Hot
+Ghee,Spice,76,Sweet,Dry,Cold
+Quinoa,Dairy,203,Bitter,Oily,Hot
+Buttermilk,Fruit,49,Sour,Dry,Cold
+Ginger,Nut,217,Bitter,Warm,Cold
+Pomegranate,Fruit,278,Bitter,Oily,Cold
+Spinach,Fruit,162,Bitter,Warm,Hot
+Cashews,Spice,268,Pungent,Heavy,Cold
+Pomegranate,Grain,145,Sweet,Heavy,Hot
+Black Beans,Vegetable,41,Sour,Oily,Hot
+Lentils (Dal),Fruit,278,Sweet,Oily,Hot
+Apple,Legume,63,Sour,Oily,Cold
+Cumin,Vegetable,178,Sour,Cool,Cold
+Yogurt,Nut,62,Sweet,Heavy,Hot
+Spinach,Grain,288,Bitter,Cool,Hot
+Banana,Dairy,182,Sour,Light,Cold
+Oats,Grain,125,Astringent,Light,Hot
+Buttermilk,Fruit,173,Sweet,Warm,Hot
+Milk,Nut,152,Astringent,Cool,Hot
+Ginger,Spice,294,Sour,Heavy,Hot
+Quinoa,Grain,181,Sweet,Warm,Cold
+Quinoa,Vegetable,217,Astringent,Heavy,Cold
+Brown Rice,Legume,272,Pungent,Warm,Hot
+Ghee,Spice,48,Astringent,Light,Cold
+Broccoli,Spice,155,Bitter,Cool,Cold
+Carrot,Grain,35,Sweet,Heavy,Hot
+Barley,Legume,250,Pungent,Light,Hot
+Ginger,Grain,279,Astringent,Oily,Cold
+Ghee,Spice,268,Bitter,Cool,Cold
+Moong Dal,Legume,93,Pungent,Warm,Cold
+Black Beans,Nut,74,Pungent,Light,Hot
+Broccoli,Legume,259,Astringent,Dry,Cold
+Barley,Dairy,89,Bitter,Light,Cold
+Cauliflower,Legume,53,Pungent,Oily,Hot
+Cashews,Legume,231,Bitter,Oily,Cold
+Walnuts,Nut,153,Pungent,Warm,Hot
+Mango,Grain,171,Bitter,Dry,Cold
+Ghee,Dairy,190,Sweet,Cool,Cold
+Milk,Legume,222,Sour,Oily,Hot
+Ginger,Dairy,124,Astringent,Warm,Hot
+Cashews,Legume,293,Pungent,Warm,Hot
+Barley,Fruit,25,Sweet,Oily,Cold
+Walnuts,Fruit,185,Astringent,Oily,Cold
+Carrot,Nut,87,Sweet,Warm,Cold
+Barley,Grain,40,Bitter,Cool,Hot
+Almonds,Fruit,252,Pungent,Light,Cold
+Cashews,Legume,30,Sweet,Light,Hot
+Turmeric,Legume,88,Bitter,Dry,Cold
+Ghee,Legume,72,Sour,Cool,Hot
+Lentils (Dal),Spice,226,Astringent,Oily,Hot
+Milk,Fruit,142,Astringent,Warm,Cold
+Chickpeas,Vegetable,126,Astringent,Heavy,Cold
+Apple,Vegetable,281,Astringent,Dry,Hot
+Pomegranate,Dairy,78,Sour,Dry,Cold
+Lentils (Dal),Dairy,124,Astringent,Heavy,Hot
+Barley,Spice,33,Bitter,Warm,Cold
+Ginger,Dairy,290,Sour,Heavy,Cold
+Moong Dal,Fruit,265,Astringent,Heavy,Cold
+Cumin,Vegetable,257,Sour,Heavy,Cold
+Milk,Dairy,35,Sweet,Dry,Hot
+Quinoa,Grain,273,Astringent,Cool,Cold
+Broccoli,Nut,104,Sweet,Dry,Cold
+Chickpeas,Spice,172,Pungent,Dry,Cold
+Milk,Nut,174,Pungent,Light,Cold
+Yogurt,Nut,57,Sweet,Cool,Cold
+Turmeric,Fruit,166,Astringent,Dry,Cold
+Kidney Beans,Spice,32,Bitter,Cool,Hot
+Turmeric,Spice,68,Astringent,Warm,Hot
+Barley,Grain,6,Pungent,Heavy,Cold
+Cashews,Nut,181,Bitter,Oily,Hot
+Moong Dal,Vegetable,138,Sour,Cool,Hot
+Ghee,Spice,174,Sweet,Dry,Cold
+Quinoa,Nut,155,Astringent,Dry,Hot
+Cumin,Nut,1,Sour,Dry,Cold
+Almonds,Dairy,106,Sour,Dry,Hot
+Broccoli,Fruit,3,Sweet,Oily,Cold
+Yogurt,Fruit,243,Pungent,Cool,Cold
+Spinach,Fruit,194,Sweet,Oily,Hot
+Barley,Nut,142,Pungent,Cool,Hot
+Cauliflower,Dairy,36,Sour,Warm,Cold
+Ginger,Legume,149,Sour,Cool,Cold
+Quinoa,Grain,105,Bitter,Heavy,Hot
+Chickpeas,Grain,68,Astringent,Dry,Cold
+Barley,Vegetable,10,Pungent,Heavy,Hot
+Ginger,Nut,67,Sour,Dry,Hot
+Barley,Dairy,26,Astringent,Light,Hot
+Moong Dal,Dairy,228,Pungent,Warm,Hot
+Yogurt,Legume,74,Pungent,Warm,Hot
+Cashews,Dairy,61,Pungent,Light,Cold
+Ghee,Legume,250,Astringent,Oily,Hot
+Walnuts,Fruit,181,Astringent,Warm,Cold
+Buttermilk,Dairy,29,Sweet,Light,Cold
+Ginger,Dairy,70,Astringent,Warm,Cold
+Oats,Vegetable,282,Bitter,Warm,Cold
+Pomegranate,Fruit,15,Pungent,Heavy,Cold
+Mango,Vegetable,203,Astringent,Cool,Cold
+Moong Dal,Nut,149,Pungent,Dry,Cold
+Ginger,Nut,223,Pungent,Warm,Hot
+Carrot,Grain,194,Bitter,Dry,Hot
+Broccoli,Vegetable,109,Pungent,Heavy,Cold
+Oats,Spice,80,Bitter,Heavy,Cold
+Cauliflower,Grain,79,Sweet,Cool,Hot
+Oats,Nut,53,Bitter,Heavy,Cold
+Ghee,Dairy,136,Astringent,Cool,Hot
+Black Beans,Spice,252,Sour,Cool,Cold
+Mango,Vegetable,20,Bitter,Heavy,Cold
+Buttermilk,Grain,170,Sour,Warm,Hot
+Lentils (Dal),Nut,148,Bitter,Heavy,Cold
+Cucumber,Nut,252,Astringent,Dry,Hot
+Spinach,Fruit,11,Astringent,Dry,Cold
+Kidney Beans,Legume,171,Pungent,Heavy,Hot
+Broccoli,Legume,186,Sweet,Cool,Cold
+Coriander,Dairy,153,Sweet,Light,Hot
+Oats,Spice,255,Sour,Warm,Cold
+Oats,Nut,101,Pungent,Light,Hot
+Buttermilk,Grain,2,Bitter,Dry,Cold
+Cucumber,Legume,229,Sour,Heavy,Cold
+Ginger,Nut,261,Sweet,Dry,Hot
+Walnuts,Dairy,20,Bitter,Oily,Cold
+Barley,Legume,91,Pungent,Light,Cold
+Cumin,Spice,127,Sour,Oily,Hot
+Milk,Legume,6,Astringent,Oily,Hot
+Broccoli,Spice,169,Pungent,Warm,Hot
+Kidney Beans,Nut,265,Astringent,Oily,Hot
+Barley,Fruit,288,Pungent,Light,Cold
+Lentils (Dal),Nut,45,Sour,Warm,Cold
+Ghee,Legume,167,Bitter,Dry,Hot
+Yogurt,Fruit,12,Bitter,Heavy,Hot
+Lentils (Dal),Grain,172,Sour,Light,Cold
+Apple,Nut,7,Pungent,Light,Cold
+Walnuts,Fruit,70,Astringent,Light,Hot
+Apple,Vegetable,37,Sweet,Oily,Cold
+Ginger,Vegetable,67,Astringent,Dry,Hot
+Moong Dal,Grain,234,Sweet,Dry,Cold
+Broccoli,Dairy,109,Sour,Heavy,Hot
+Moong Dal,Vegetable,142,Astringent,Warm,Hot
+Ginger,Spice,264,Bitter,Warm,Hot
+Cucumber,Spice,34,Sour,Warm,Hot
+Oats,Fruit,226,Astringent,Warm,Hot
+Ghee,Fruit,144,Sour,Warm,Cold
+Quinoa,Nut,245,Bitter,Warm,Hot
+Moong Dal,Fruit,192,Sweet,Oily,Cold
+Cashews,Legume,205,Pungent,Warm,Cold
+Moong Dal,Nut,260,Sweet,Light,Hot
+Cauliflower,Nut,234,Astringent,Heavy,Cold
+Moong Dal,Nut,20,Bitter,Warm,Cold
+Brown Rice,Vegetable,185,Sour,Oily,Hot
+Walnuts,Vegetable,285,Bitter,Dry,Hot
+Walnuts,Fruit,221,Pungent,Oily,Cold
+Spinach,Fruit,295,Sour,Warm,Cold
+Oats,Nut,29,Astringent,Dry,Cold
+Moong Dal,Nut,25,Sweet,Dry,Hot
+Cashews,Grain,1,Astringent,Heavy,Hot
+Moong Dal,Dairy,100,Astringent,Heavy,Cold
+Carrot,Dairy,32,Sour,Warm,Hot
+Ginger,Nut,50,Bitter,Dry,Hot
+Ghee,Spice,23,Sour,Heavy,Hot
+Moong Dal,Nut,169,Sour,Warm,Cold
+Barley,Fruit,61,Sweet,Light,Cold
+Walnuts,Vegetable,43,Astringent,Light,Cold
+Spinach,Spice,110,Astringent,Dry,Cold
+Pomegranate,Vegetable,239,Bitter,Light,Cold
+Broccoli,Spice,101,Sweet,Light,Cold
+Spinach,Fruit,21,Sour,Warm,Hot
+Moong Dal,Dairy,90,Sweet,Oily,Hot
+Broccoli,Fruit,95,Pungent,Oily,Hot
+Banana,Nut,79,Sour,Cool,Hot
+Broccoli,Fruit,280,Bitter,Cool,Cold
+Lentils (Dal),Spice,48,Pungent,Oily,Cold
+Chickpeas,Vegetable,113,Pungent,Cool,Cold
+Pomegranate,Fruit,20,Pungent,Cool,Hot
+Cauliflower,Fruit,236,Sour,Warm,Hot
+Black Beans,Grain,108,Pungent,Oily,Cold
+Mango,Nut,31,Astringent,Cool,Hot
+Cashews,Fruit,16,Astringent,Warm,Cold
+Kidney Beans,Nut,177,Bitter,Cool,Hot
+Oats,Nut,15,Sweet,Warm,Hot
+Oats,Dairy,64,Bitter,Oily,Hot
+Banana,Nut,262,Pungent,Cool,Cold
+Cashews,Fruit,156,Astringent,Cool,Hot
+Coriander,Grain,69,Bitter,Warm,Cold
+Cashews,Vegetable,227,Pungent,Dry,Hot
+Milk,Fruit,155,Pungent,Heavy,Hot
+Apple,Nut,93,Bitter,Warm,Hot
+Oats,Nut,12,Bitter,Light,Hot
+Ginger,Grain,61,Astringent,Light,Cold
+Apple,Nut,295,Sour,Light,Cold
+Cauliflower,Legume,12,Astringent,Cool,Cold
+Turmeric,Vegetable,115,Sour,Dry,Cold
+Black Beans,Dairy,42,Bitter,Dry,Cold
+Oats,Legume,250,Pungent,Warm,Hot
+Kidney Beans,Legume,60,Sweet,Cool,Hot
+Black Beans,Legume,125,Bitter,Oily,Cold
+Barley,Nut,97,Astringent,Cool,Cold
+Ghee,Spice,163,Bitter,Cool,Cold
+Ghee,Fruit,17,Bitter,Warm,Cold
+Lentils (Dal),Fruit,236,Sweet,Dry,Hot
+Lentils (Dal),Grain,28,Sour,Cool,Cold
+Apple,Vegetable,203,Sour,Dry,Cold
+Carrot,Legume,243,Pungent,Light,Cold
+Milk,Fruit,164,Sweet,Heavy,Hot
+Cumin,Dairy,17,Astringent,Cool,Hot
+Carrot,Vegetable,215,Astringent,Cool,Hot
+Banana,Grain,276,Bitter,Light,Hot
+Almonds,Spice,168,Astringent,Light,Hot
+Cashews,Vegetable,300,Sweet,Oily,Cold
+Cauliflower,Grain,49,Astringent,Cool,Cold
+Yogurt,Fruit,72,Pungent,Dry,Hot
+Chickpeas,Vegetable,115,Sour,Dry,Hot
+Moong Dal,Vegetable,217,Astringent,Dry,Hot
+Lentils (Dal),Nut,164,Sour,Dry,Cold
+Cumin,Legume,22,Sweet,Warm,Hot
+Quinoa,Vegetable,159,Sour,Cool,Cold
+Cucumber,Vegetable,96,Pungent,Oily,Cold
+Lentils (Dal),Legume,38,Sweet,Oily,Cold
+Walnuts,Dairy,228,Sweet,Heavy,Hot
+Spinach,Spice,240,Bitter,Warm,Cold
+Spinach,Legume,137,Astringent,Heavy,Cold
+Pomegranate,Legume,18,Sweet,Oily,Cold
+Milk,Legume,172,Sour,Warm,Hot
+Apple,Nut,282,Sweet,Light,Cold
+Cauliflower,Dairy,154,Sour,Warm,Cold
+Almonds,Vegetable,119,Sour,Warm,Hot
+Walnuts,Dairy,117,Pungent,Oily,Hot
+Ginger,Grain,205,Sour,Light,Hot
+Oats,Grain,191,Bitter,Oily,Hot
+Walnuts,Spice,250,Pungent,Cool,Cold
+Quinoa,Spice,147,Astringent,Warm,Cold
+Milk,Dairy,31,Sour,Dry,Cold
+Kidney Beans,Legume,273,Sweet,Heavy,Cold
+Quinoa,Vegetable,273,Bitter,Dry,Cold
+Cashews,Spice,59,Sweet,Oily,Cold
+Chickpeas,Vegetable,57,Astringent,Oily,Cold
+Cauliflower,Nut,166,Pungent,Dry,Hot
+Ghee,Spice,284,Bitter,Cool,Cold
+Cumin,Vegetable,260,Sweet,Dry,Cold
+Cauliflower,Grain,174,Pungent,Oily,Cold
+Carrot,Legume,129,Bitter,Warm,Cold
+Broccoli,Legume,34,Sweet,Oily,Hot
+Walnuts,Nut,48,Bitter,Warm,Cold
+Carrot,Vegetable,258,Sour,Light,Hot
+Yogurt,Legume,92,Sour,Warm,Hot
+Pomegranate,Dairy,120,Pungent,Heavy,Hot
+Turmeric,Legume,157,Pungent,Heavy,Hot
+Mango,Vegetable,83,Sweet,Light,Cold
+Yogurt,Grain,146,Sweet,Oily,Hot
+Mango,Vegetable,18,Bitter,Heavy,Cold
+Spinach,Dairy,261,Sour,Light,Cold
+Broccoli,Grain,163,Sweet,Heavy,Hot
+Cauliflower,Vegetable,32,Pungent,Heavy,Hot
+Ghee,Grain,224,Astringent,Heavy,Cold
+Moong Dal,Fruit,4,Sweet,Light,Cold
+Cauliflower,Nut,298,Sour,Oily,Cold
+Apple,Fruit,200,Sour,Oily,Hot
+Cashews,Nut,266,Astringent,Oily,Cold
+Spinach,Legume,20,Pungent,Light,Hot
+Mango,Legume,23,Pungent,Warm,Hot
+Pomegranate,Dairy,114,Pungent,Dry,Cold
+Quinoa,Spice,100,Sweet,Oily,Cold
+Cauliflower,Vegetable,233,Pungent,Oily,Hot
+Turmeric,Vegetable,199,Bitter,Light,Cold
+Carrot,Legume,273,Bitter,Cool,Hot
+Milk,Dairy,103,Astringent,Cool,Hot
+Oats,Nut,265,Pungent,Light,Hot
+Ginger,Grain,166,Pungent,Oily,Cold
+Ghee,Nut,14,Astringent,Warm,Cold
+Cucumber,Vegetable,93,Astringent,Oily,Cold
+Almonds,Spice,279,Pungent,Dry,Cold
+Ginger,Spice,255,Bitter,Light,Hot
+Cashews,Nut,138,Astringent,Oily,Cold
+Carrot,Fruit,205,Astringent,Light,Hot
+Turmeric,Fruit,68,Bitter,Cool,Cold
+Cumin,Spice,192,Sour,Warm,Hot
+Kidney Beans,Nut,278,Bitter,Dry,Hot
+Banana,Fruit,237,Sweet,Cool,Hot
+Carrot,Legume,59,Pungent,Warm,Hot
+Mango,Grain,77,Sweet,Warm,Hot
+Almonds,Dairy,183,Bitter,Heavy,Hot
+Milk,Grain,42,Sweet,Oily,Hot
+Spinach,Vegetable,115,Sour,Warm,Hot
+Black Beans,Vegetable,97,Sour,Heavy,Cold
+Coriander,Fruit,249,Bitter,Cool,Cold
+Barley,Legume,48,Bitter,Oily,Hot
+Turmeric,Dairy,183,Sweet,Oily,Hot
+Quinoa,Legume,236,Pungent,Light,Cold
+Pomegranate,Nut,127,Bitter,Cool,Hot
+Almonds,Vegetable,61,Bitter,Heavy,Hot
+Turmeric,Vegetable,166,Bitter,Dry,Hot
+Kidney Beans,Legume,254,Bitter,Light,Cold
+Broccoli,Grain,121,Pungent,Cool,Hot
+Walnuts,Legume,197,Bitter,Cool,Cold
+Cumin,Nut,250,Astringent,Light,Cold
+Kidney Beans,Grain,264,Sour,Light,Hot
+Broccoli,Legume,299,Sour,Oily,Cold
+Cumin,Fruit,196,Astringent,Heavy,Cold
+Chickpeas,Nut,261,Sour,Oily,Hot
+Apple,Vegetable,142,Astringent,Oily,Hot
+Buttermilk,Legume,148,Astringent,Light,Hot
+Buttermilk,Dairy,55,Sweet,Warm,Cold
+Coriander,Nut,171,Astringent,Warm,Cold
+Kidney Beans,Fruit,202,Bitter,Cool,Cold
+Turmeric,Vegetable,263,Bitter,Light,Hot
+Lentils (Dal),Spice,196,Bitter,Cool,Cold
+Oats,Dairy,6,Astringent,Cool,Hot
+Ginger,Legume,148,Pungent,Dry,Hot
+Cashews,Fruit,232,Sweet,Light,Cold
+Ghee,Vegetable,28,Sweet,Oily,Cold
+Spinach,Spice,154,Sweet,Warm,Cold
+Banana,Nut,200,Astringent,Warm,Hot
+Ghee,Fruit,222,Astringent,Heavy,Cold
+Banana,Nut,248,Pungent,Cool,Hot
+Banana,Fruit,63,Astringent,Heavy,Hot
+Ginger,Fruit,170,Sour,Light,Hot
+Yogurt,Vegetable,168,Sour,Cool,Cold
+Quinoa,Spice,173,Pungent,Light,Cold
+Cauliflower,Grain,118,Sweet,Heavy,Hot
+Coriander,Grain,191,Pungent,Cool,Cold
+Carrot,Grain,73,Pungent,Cool,Cold
+Moong Dal,Grain,277,Sweet,Light,Cold
+Cashews,Spice,49,Pungent,Dry,Cold
+Apple,Grain,285,Sour,Dry,Cold
+Ginger,Nut,236,Sweet,Heavy,Hot
+Ghee,Vegetable,15,Bitter,Oily,Hot
+Ghee,Nut,115,Sweet,Warm,Hot
+Walnuts,Vegetable,50,Pungent,Heavy,Hot
+Milk,Spice,45,Astringent,Warm,Cold
+Oats,Spice,208,Sweet,Heavy,Cold
+Lentils (Dal),Fruit,249,Astringent,Cool,Cold
+Walnuts,Grain,35,Astringent,Light,Cold
+Banana,Dairy,205,Sweet,Heavy,Hot
+Banana,Grain,226,Sour,Oily,Hot
+Almonds,Fruit,223,Sour,Heavy,Hot
+Lentils (Dal),Spice,134,Bitter,Cool,Cold
+Barley,Nut,106,Astringent,Oily,Cold
+Cumin,Legume,290,Astringent,Heavy,Hot
+Ghee,Dairy,254,Sweet,Light,Hot
+Broccoli,Grain,198,Astringent,Light,Cold
+Cauliflower,Nut,195,Pungent,Cool,Hot
+Moong Dal,Dairy,239,Bitter,Dry,Hot
+Spinach,Fruit,255,Astringent,Oily,Cold
+Turmeric,Legume,207,Sweet,Dry,Cold
+Oats,Spice,136,Pungent,Light,Cold
+Pomegranate,Spice,213,Astringent,Oily,Cold
+Broccoli,Nut,7,Bitter,Light,Hot
+Turmeric,Fruit,72,Sour,Cool,Hot
+Cumin,Spice,20,Sweet,Cool,Hot
+Yogurt,Spice,105,Sour,Cool,Hot
+Cashews,Legume,85,Astringent,Oily,Hot
+Carrot,Spice,275,Sour,Heavy,Cold
+Lentils (Dal),Grain,281,Pungent,Warm,Cold
+Banana,Dairy,245,Pungent,Warm,Hot
+Quinoa,Grain,142,Astringent,Oily,Cold
+Quinoa,Vegetable,71,Pungent,Warm,Hot
+Broccoli,Dairy,29,Pungent,Cool,Hot
+Ginger,Grain,75,Sweet,Warm,Cold
+Carrot,Dairy,48,Pungent,Warm,Hot
+Broccoli,Dairy,2,Sweet,Oily,Hot
+Cashews,Grain,224,Sour,Cool,Cold
+Pomegranate,Grain,173,Sweet,Oily,Cold
+Cashews,Legume,243,Sweet,Dry,Cold
+Cumin,Nut,254,Sour,Warm,Cold
+Banana,Legume,101,Bitter,Warm,Hot
+Barley,Spice,110,Sweet,Cool,Hot
+Ghee,Legume,55,Sweet,Oily,Hot
+Buttermilk,Vegetable,95,Sour,Dry,Cold
+Yogurt,Fruit,240,Sour,Dry,Hot
+Moong Dal,Grain,151,Sour,Dry,Cold
+Oats,Vegetable,270,Sweet,Dry,Hot
+Pomegranate,Grain,140,Pungent,Light,Cold
+Turmeric,Fruit,192,Pungent,Light,Hot
+Oats,Vegetable,137,Astringent,Warm,Hot
+Cauliflower,Fruit,280,Bitter,Dry,Hot
+Milk,Nut,293,Sweet,Light,Cold
+Moong Dal,Fruit,28,Astringent,Heavy,Cold
+Cauliflower,Fruit,201,Pungent,Warm,Cold
+Quinoa,Nut,57,Sweet,Heavy,Cold
+Coriander,Grain,89,Pungent,Heavy,Hot
+Chickpeas,Vegetable,210,Sweet,Oily,Hot
+Mango,Grain,238,Sour,Cool,Hot
+Banana,Dairy,266,Pungent,Light,Cold
+Broccoli,Legume,155,Sweet,Light,Cold
+Lentils (Dal),Nut,112,Astringent,Light,Hot
+Almonds,Fruit,184,Sweet,Oily,Hot
+Barley,Vegetable,255,Sour,Light,Cold
+Mango,Dairy,16,Bitter,Oily,Hot
+Cumin,Legume,61,Sour,Oily,Cold
+Turmeric,Dairy,84,Sweet,Light,Cold
+Coriander,Grain,98,Astringent,Light,Cold
+Walnuts,Spice,176,Astringent,Oily,Cold
+Carrot,Vegetable,248,Sour,Oily,Hot
+Cashews,Fruit,207,Pungent,Light,Cold
+Walnuts,Grain,194,Sweet,Warm,Hot
+Lentils (Dal),Grain,213,Astringent,Oily,Hot
+Lentils (Dal),Legume,209,Sweet,Warm,Cold
+Spinach,Vegetable,85,Bitter,Warm,Cold
+Cauliflower,Vegetable,149,Bitter,Heavy,Cold
+Coriander,Nut,210,Pungent,Cool,Hot
+Walnuts,Dairy,79,Sour,Heavy,Hot
+Chickpeas,Grain,21,Sweet,Cool,Cold
+Kidney Beans,Dairy,119,Astringent,Cool,Hot
+Ghee,Vegetable,179,Sweet,Oily,Hot
+Kidney Beans,Vegetable,189,Sour,Cool,Cold
+Apple,Vegetable,198,Bitter,Dry,Cold
+Chickpeas,Fruit,221,Pungent,Dry,Cold
+Chickpeas,Fruit,38,Sweet,Heavy,Hot
+Spinach,Vegetable,143,Bitter,Oily,Cold
+Ghee,Fruit,142,Sour,Warm,Hot
+Lentils (Dal),Dairy,166,Bitter,Heavy,Cold
+Black Beans,Dairy,103,Pungent,Light,Hot
+Pomegranate,Nut,232,Pungent,Cool,Cold
+Kidney Beans,Spice,186,Pungent,Warm,Cold
+Kidney Beans,Fruit,227,Bitter,Light,Hot
+Brown Rice,Grain,115,Astringent,Light,Cold
+Walnuts,Grain,174,Sour,Heavy,Cold
+Carrot,Vegetable,67,Sour,Light,Cold
+Banana,Dairy,129,Bitter,Dry,Cold
+Chickpeas,Dairy,286,Astringent,Light,Hot
+Milk,Legume,138,Pungent,Light,Hot
+Brown Rice,Legume,72,Sour,Light,Hot
+Spinach,Grain,293,Bitter,Oily,Hot
+Lentils (Dal),Grain,43,Sweet,Oily,Hot
+Buttermilk,Spice,147,Astringent,Cool,Hot
+Cumin,Nut,146,Sour,Heavy,Hot
+Cumin,Grain,112,Astringent,Light,Cold
+Pomegranate,Spice,195,Bitter,Dry,Cold
+Brown Rice,Spice,215,Sweet,Oily,Hot
+Almonds,Nut,49,Astringent,Light,Cold
+Banana,Nut,207,Astringent,Light,Hot
+Brown Rice,Legume,250,Astringent,Oily,Cold
+Cashews,Vegetable,117,Sweet,Oily,Hot
+Almonds,Nut,56,Astringent,Dry,Hot
+Brown Rice,Vegetable,162,Pungent,Light,Hot
+Lentils (Dal),Vegetable,128,Astringent,Oily,Cold
+Lentils (Dal),Spice,93,Pungent,Light,Cold
+Brown Rice,Dairy,107,Sour,Dry,Cold
+Cauliflower,Dairy,95,Pungent,Oily,Cold
+Cashews,Nut,52,Astringent,Dry,Cold
+Cashews,Dairy,113,Astringent,Heavy,Hot
+Milk,Grain,148,Astringent,Oily,Cold
+Kidney Beans,Legume,225,Astringent,Heavy,Cold
+Carrot,Legume,69,Pungent,Light,Cold
+Mango,Legume,54,Sweet,Cool,Cold
+Lentils (Dal),Fruit,243,Astringent,Cool,Hot
+Quinoa,Dairy,279,Sour,Warm,Cold
+Moong Dal,Legume,64,Astringent,Cool,Cold
+Pomegranate,Legume,29,Astringent,Cool,Cold
+Turmeric,Spice,18,Pungent,Warm,Cold
+Ginger,Fruit,270,Pungent,Cool,Hot
+Pomegranate,Spice,266,Astringent,Heavy,Cold
+Quinoa,Fruit,0,Pungent,Heavy,Hot
+Cauliflower,Legume,148,Sour,Oily,Hot
+Walnuts,Spice,23,Sweet,Cool,Cold
+Ginger,Fruit,191,Bitter,Light,Cold
+Apple,Legume,194,Bitter,Oily,Cold
+Cauliflower,Legume,250,Astringent,Oily,Hot
+Banana,Vegetable,297,Bitter,Light,Cold
+Turmeric,Legume,239,Sweet,Warm,Hot
+Pomegranate,Legume,282,Pungent,Heavy,Cold
+Cumin,Legume,125,Pungent,Cool,Cold
+Moong Dal,Grain,172,Bitter,Cool,Hot
+Cucumber,Nut,206,Sweet,Cool,Cold
+Oats,Grain,95,Astringent,Warm,Hot
+Cucumber,Nut,41,Sour,Dry,Cold
+Cashews,Grain,186,Astringent,Cool,Cold
+Turmeric,Nut,34,Sweet,Warm,Hot
+Ghee,Fruit,237,Sweet,Cool,Cold
+Ghee,Spice,58,Bitter,Warm,Cold
+Walnuts,Nut,57,Astringent,Light,Hot
+Cucumber,Spice,68,Astringent,Light,Cold
+Cauliflower,Grain,34,Sweet,Dry,Hot
+Pomegranate,Fruit,140,Bitter,Dry,Cold
+Turmeric,Legume,144,Sour,Dry,Hot
+Ginger,Dairy,273,Bitter,Light,Hot
+Banana,Spice,30,Astringent,Cool,Cold
+Ghee,Grain,272,Astringent,Light,Hot
+Oats,Dairy,69,Astringent,Cool,Hot
+Pomegranate,Fruit,83,Sour,Warm,Cold
+Lentils (Dal),Legume,266,Pungent,Cool,Cold
+Oats,Vegetable,68,Sour,Oily,Cold
+Milk,Grain,167,Bitter,Oily,Hot
+Pomegranate,Grain,138,Bitter,Dry,Hot
+Barley,Nut,124,Astringent,Light,Hot
+Oats,Dairy,151,Bitter,Warm,Hot
+Kidney Beans,Fruit,288,Pungent,Dry,Cold
+Turmeric,Grain,110,Bitter,Light,Hot
+Mango,Legume,177,Sour,Heavy,Hot
+Banana,Legume,181,Sweet,Heavy,Cold
+Carrot,Spice,118,Sweet,Dry,Cold
+Barley,Fruit,0,Astringent,Light,Cold
+Chickpeas,Grain,294,Sour,Dry,Cold
+Buttermilk,Spice,114,Astringent,Heavy,Hot
+Lentils (Dal),Grain,143,Astringent,Heavy,Hot
+Walnuts,Spice,258,Sweet,Dry,Cold
+Ginger,Fruit,127,Sour,Oily,Cold
+Cucumber,Fruit,112,Bitter,Dry,Cold
+Apple,Legume,129,Bitter,Light,Cold
+Barley,Legume,85,Bitter,Dry,Cold
+Ghee,Spice,121,Sour,Cool,Cold
+Broccoli,Vegetable,138,Pungent,Light,Cold
+Spinach,Vegetable,176,Sour,Warm,Cold
+Quinoa,Spice,107,Sour,Cool,Cold
+Turmeric,Legume,132,Sour,Light,Hot
+Black Beans,Nut,192,Astringent,Light,Cold
+Buttermilk,Fruit,278,Sweet,Cool,Hot
+Buttermilk,Spice,14,Pungent,Oily,Hot
+Kidney Beans,Vegetable,11,Sour,Light,Cold
+Barley,Dairy,156,Sweet,Dry,Hot
+Quinoa,Legume,34,Sweet,Dry,Hot
+Turmeric,Vegetable,22,Bitter,Cool,Hot
+Cauliflower,Fruit,224,Bitter,Heavy,Hot
+Quinoa,Grain,147,Bitter,Light,Hot
+Almonds,Legume,95,Sour,Light,Cold
+Ghee,Dairy,240,Sour,Oily,Cold
+Almonds,Fruit,25,Pungent,Oily,Hot
+Turmeric,Legume,266,Sweet,Dry,Cold
+Coriander,Grain,290,Bitter,Cool,Hot
+Quinoa,Dairy,25,Sour,Heavy,Hot
+Milk,Dairy,281,Sweet,Light,Hot
+Mango,Nut,105,Pungent,Dry,Hot
+Oats,Spice,125,Bitter,Heavy,Hot
+Yogurt,Fruit,12,Sweet,Oily,Hot
+Carrot,Vegetable,268,Sour,Warm,Hot
+Barley,Spice,14,Pungent,Cool,Hot
+Banana,Fruit,2,Astringent,Heavy,Hot
+Spinach,Vegetable,154,Sour,Warm,Cold
+Lentils (Dal),Dairy,161,Sour,Warm,Hot
+Chickpeas,Grain,145,Astringent,Dry,Cold
+Cucumber,Grain,278,Pungent,Heavy,Cold
+Carrot,Vegetable,284,Bitter,Oily,Cold

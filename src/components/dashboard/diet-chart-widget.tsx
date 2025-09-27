@@ -50,9 +50,19 @@ export function DietChartWidget() {
   useEffect(() => {
     // In a real app, you'd fetch the specific chart. Here we mock it based on a default.
     const prakriti: string = 'Pitta'; 
-    if (prakriti === 'Vata') setDietPlan(vataDietPlan);
-    else if (prakriti === 'Kapha') setDietPlan(kaphaDietPlan);
-    else setDietPlan(pittaDietPlan);
+    
+    // Handle combination doshas by using the primary dosha's plan
+    if (prakriti === 'Vata' || prakriti === 'Vata-Pitta' || prakriti === 'Vata-Kapha') {
+      setDietPlan(vataDietPlan);
+    } else if (prakriti === 'Kapha' || prakriti === 'Pitta-Kapha') {
+      setDietPlan(kaphaDietPlan);
+    } else if (prakriti === 'Tridoshic') {
+      // For Tridoshic, use a balanced approach (Pitta plan as baseline)
+      setDietPlan(pittaDietPlan);
+    } else {
+      // Default to Pitta plan for Pitta and unknown types
+      setDietPlan(pittaDietPlan);
+    }
   }, []);
 
 

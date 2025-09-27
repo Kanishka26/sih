@@ -17,7 +17,7 @@ const GenerateAyurvedaDietChartInputSchema = z.object({
   prakriti: z
     .enum(['Vata', 'Pitta', 'Kapha', 'Vata-Pitta', 'Pitta-Kapha', 'Vata-Kapha', 'Tridoshic'])
     .describe(
-      'The prakriti (body constitution) of the user, e.g., Vata, Pitta, Kapha, Vata-Pitta.'
+      'The prakriti (body constitution) of the user, e.g., Vata, Pitta, Kapha, Vata-Pitta, Pitta-Kapha, Vata-Kapha, Tridoshic.'
     ),
 });
 export type GenerateAyurvedaDietChartInput = z.infer<

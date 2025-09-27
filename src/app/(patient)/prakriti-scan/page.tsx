@@ -381,8 +381,8 @@ export default function PrakritiScanPage() {
     if (diff13 <= 5) {
         finalResult = 'Tridoshic';
     } else if (diff12 <= 5) {
-        const dualDosha = [d1, d2].sort().join('-') as keyof typeof prakritiInfo;
-        finalResult = dualDosha;
+        // Create dual dosha name based on Ayurvedic convention (higher score first)
+        finalResult = `${d1}-${d2}`;
     } else {
         finalResult = d1;
     }
