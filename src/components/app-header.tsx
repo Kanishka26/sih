@@ -88,6 +88,5 @@ export function AppHeader() {
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-    </header>
-  );
+    </header>);
 }

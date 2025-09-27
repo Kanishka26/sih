@@ -2,31 +2,34 @@
 
 import { useState } from 'react';
 import { useUser } from '@/context/user-context';
-import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
+  CardDescription,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Separator } from '@/components/ui/separator';
-import { 
-  User, 
-  Mail, 
-  Phone, 
-  Calendar, 
-  Scale, 
-  Ruler, 
-  Heart, 
-  AlertTriangle, 
-  Utensils,
-  Edit3,
-  Camera
+import {
+  User,
+  Mail,
+  Phone,
+  MapPin,
+  Heart,
+  Scale,
+  Ruler,
+  Activity,
+  Target,
+  AlertCircle,
+  Edit,
+  Check,
+  X,
+  Camera,
+  Utensils
 } from 'lucide-react';
 import Image from 'next/image';
-import { ProfileEditForm } from '@/components/profile-edit-form';
+import { ProfileEditForm } from '@/components/ui/profile-edit-form';
 
 export default function ProfilePage() {
   const { user } = useUser();
@@ -34,227 +37,273 @@ export default function ProfilePage() {
 
   if (!user) {
     return (
-      <div className="flex items-center justify-center min-h-96">
-        <p className="text-muted-foreground">Please log in to view your profile.</p>
+      <div className="flex items-center justify-center min-h-[400px]">
+        <div className="text-center">
+          <User className="mx-auto h-16 w-16 text-muted-foreground mb-4" />
+          <h3 className="text-lg font-semibold text-muted-foreground">Please log in to view your profile</h3>
+        </div>
       </div>
     );
   }
 
   if (isEditing) {
     return (
-      <div className="container mx-auto p-6 max-w-4xl">
+      <div className="space-y-6">
+        <div className="flex items-center justify-between">
+          <h1 className="text-3xl font-bold">Edit Profile</h1>
+          <Button
+            variant="outline"
+            onClick={() => setIsEditing(false)}
+            className="flex items-center gap-2"
+          >
+            <X className="h-4 w-4" />
+            Cancel
+          </Button>
+        </div>
         <ProfileEditForm onClose={() => setIsEditing(false)} />
       </div>
     );
   }
 
+  const getPrakritiColor = (prakriti: string | undefined) => {
+    if (!prakriti) return 'bg-gray-100 text-gray-800';
+    if (prakriti.includes('Vata')) return 'bg-blue-100 text-blue-800';
+    if (prakriti.includes('Pitta')) return 'bg-red-100 text-red-800';
+    if (prakriti.includes('Kapha')) return 'bg-green-100 text-green-800';
+    return 'bg-gray-100 text-gray-800';
+  };
+
+  const getActivityLevelColor = (level: string | undefined) => {
+    switch (level) {
+      case 'sedentary': return 'bg-red-100 text-red-800';
+      case 'light': return 'bg-yellow-100 text-yellow-800';
+      case 'moderate': return 'bg-blue-100 text-blue-800';
+      case 'active': return 'bg-green-100 text-green-800';
+      case 'very-active': return 'bg-purple-100 text-purple-800';
+      default: return 'bg-gray-100 text-gray-800';
+    }
+  };
+
   return (
-    <div className="container mx-auto p-6 max-w-4xl space-y-6">
-      {/* Header Section */}
+    <div className="space-y-6">
+      {/* Header */}
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold text-foreground">My Profile</h1>
-        <Button onClick={() => setIsEditing(true)} className="gap-2">
-          <Edit3 className="h-4 w-4" />
+        <h1 className="text-3xl font-bold">Profile</h1>
+        <Button
+          onClick={() => setIsEditing(true)}
+          className="flex items-center gap-2"
+        >
+          <Edit className="h-4 w-4" />
           Edit Profile
         </Button>
       </div>
 
-      {/* Profile Overview Card */}
+      {/* Profile Overview */}
       <Card>
-        <CardHeader className="pb-6">
-          <div className="flex flex-col sm:flex-row items-center gap-6">
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <User className="h-5 w-5" />
+            Personal Information
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          {/* Profile Picture and Basic Info */}
+          <div className="flex flex-col sm:flex-row gap-6">
             <div className="relative">
-              <Avatar className="h-32 w-32">
-                <AvatarImage src={user.profilePicture} alt={user.name} />
-                <AvatarFallback className="text-2xl bg-primary/10">
-                  {user.name.split(' ').map(n => n[0]).join('').toUpperCase()}
-                </AvatarFallback>
-              </Avatar>
+              {user.profilePicture ? (
+                <Image
+                  src={user.profilePicture}
+                  alt={user.name}
+                  width={120}
+                  height={120}
+                  className="rounded-full object-cover border-4 border-primary/10"
+                />
+              ) : (
+                <div className="w-30 h-30 bg-muted rounded-full flex items-center justify-center border-4 border-primary/10">
+                  <User className="h-12 w-12 text-muted-foreground" />
+                </div>
+              )}
               <Button
-                size="icon"
+                size="sm"
                 variant="secondary"
-                className="absolute -bottom-2 -right-2 h-8 w-8 rounded-full"
-                onClick={() => {
-                  // TODO: Implement profile picture upload
-                  console.log('Profile picture upload');
-                }}
+                className="absolute -bottom-2 -right-2 rounded-full h-10 w-10 p-0"
               >
                 <Camera className="h-4 w-4" />
               </Button>
             </div>
-            <div className="text-center sm:text-left space-y-2">
-              <h2 className="text-2xl font-semibold">{user.name}</h2>
-              <div className="flex items-center gap-2 text-muted-foreground">
-                <Mail className="h-4 w-4" />
-                <span>{user.email}</span>
-              </div>
-              {user.phoneNumber && (
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Phone className="h-4 w-4" />
-                  <span>{user.phoneNumber}</span>
+            
+            <div className="flex-1 space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-muted-foreground">Name</p>
+                  <p className="text-lg font-semibold">{user.name}</p>
                 </div>
-              )}
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-muted-foreground">Age</p>
+                  <p className="text-lg">{user.age} years</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-muted-foreground">Gender</p>
+                  <p className="text-lg capitalize">{user.gender}</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-sm font-medium text-muted-foreground">Prakriti</p>
+                  {user.prakriti ? (
+                    <Badge className={getPrakritiColor(user.prakriti)}>
+                      {user.prakriti}
+                    </Badge>
+                  ) : (
+                    <p className="text-muted-foreground">Not determined</p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-        </CardHeader>
+        </CardContent>
       </Card>
 
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Basic Information */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <User className="h-5 w-5" />
-              Basic Information
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
+      {/* Contact Information */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Mail className="h-5 w-5" />
+            Contact Information
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="flex items-center gap-3">
+              <Mail className="h-4 w-4 text-muted-foreground" />
               <div>
-                <label className="text-sm font-medium text-muted-foreground">Age</label>
-                <div className="flex items-center gap-2 mt-1">
-                  <Calendar className="h-4 w-4 text-muted-foreground" />
-                  <span className="font-medium">{user.age} years</span>
+                <p className="text-sm font-medium text-muted-foreground">Email</p>
+                <p>{user.email}</p>
+              </div>
+            </div>
+            {user.phoneNumber && (
+              <div className="flex items-center gap-3">
+                <Phone className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Phone</p>
+                  <p>{user.phoneNumber}</p>
                 </div>
               </div>
-              <div>
-                <label className="text-sm font-medium text-muted-foreground">Gender</label>
-                <div className="mt-1">
-                  <Badge variant="secondary" className="capitalize">
-                    {user.gender}
+            )}
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Health Metrics */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <Heart className="h-5 w-5" />
+            Health Metrics
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {user.height && (
+              <div className="flex items-center gap-3">
+                <Ruler className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Height</p>
+                  <p className="text-lg font-semibold">{user.height} cm</p>
+                </div>
+              </div>
+            )}
+            {user.weight && (
+              <div className="flex items-center gap-3">
+                <Scale className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Weight</p>
+                  <p className="text-lg font-semibold">{user.weight} kg</p>
+                </div>
+              </div>
+            )}
+            {user.activityLevel && (
+              <div className="flex items-center gap-3">
+                <Activity className="h-4 w-4 text-muted-foreground" />
+                <div>
+                  <p className="text-sm font-medium text-muted-foreground">Activity Level</p>
+                  <Badge className={getActivityLevelColor(user.activityLevel)}>
+                    {user.activityLevel.charAt(0).toUpperCase() + user.activityLevel.slice(1)}
                   </Badge>
                 </div>
               </div>
-            </div>
-            
-            {(user.height || user.weight) && (
-              <>
-                <Separator />
-                <div className="grid grid-cols-2 gap-4">
-                  {user.height && (
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Height</label>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Ruler className="h-4 w-4 text-muted-foreground" />
-                        <span className="font-medium">{user.height} cm</span>
-                      </div>
-                    </div>
-                  )}
-                  {user.weight && (
-                    <div>
-                      <label className="text-sm font-medium text-muted-foreground">Weight</label>
-                      <div className="flex items-center gap-2 mt-1">
-                        <Scale className="h-4 w-4 text-muted-foreground" />
-                        <span className="font-medium">{user.weight} kg</span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </>
             )}
+          </div>
+        </CardContent>
+      </Card>
 
-            {user.prakriti && (
-              <>
-                <Separator />
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Prakriti (Body Constitution)</label>
-                  <div className="mt-1">
-                    <Badge variant="outline" className="bg-primary/5 text-primary border-primary/20">
-                      {user.prakriti}
-                    </Badge>
-                  </div>
-                </div>
-              </>
-            )}
-
-            {user.activityLevel && (
-              <>
-                <Separator />
-                <div>
-                  <label className="text-sm font-medium text-muted-foreground">Activity Level</label>
-                  <div className="mt-1">
-                    <Badge variant="secondary" className="capitalize">
-                      {user.activityLevel.replace('-', ' ')}
-                    </Badge>
-                  </div>
-                </div>
-              </>
+      {/* Dietary Information */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* Dietary Habits */}
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Utensils className="h-5 w-5" />
+              Dietary Habits
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {user.dietaryHabits && user.dietaryHabits.length > 0 ? (
+              <div className="flex flex-wrap gap-2">
+                {user.dietaryHabits.map((habit, index) => (
+                  <Badge key={index} variant="secondary">
+                    {habit}
+                  </Badge>
+                ))}
+              </div>
+            ) : (
+              <p className="text-muted-foreground">No dietary habits specified</p>
             )}
           </CardContent>
         </Card>
 
-        {/* Health Goals */}
-        {user.healthGoals && user.healthGoals.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Heart className="h-5 w-5" />
-                Health Goals
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-wrap gap-2">
-                {user.healthGoals.map((goal, index) => (
-                  <Badge key={index} variant="outline" className="bg-green-50 text-green-700 border-green-200">
-                    {goal}
-                  </Badge>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-      </div>
-
-      {/* Dietary Information */}
-      <div className="grid gap-6 md:grid-cols-2">
-        {/* Dietary Habits */}
-        {user.dietaryHabits && user.dietaryHabits.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2">
-                <Utensils className="h-5 w-5" />
-                Dietary Habits
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                {user.dietaryHabits.map((habit, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <div className="w-2 h-2 rounded-full bg-primary mt-2 flex-shrink-0" />
-                    <span className="text-sm">{habit}</span>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
         {/* Allergies */}
-        {user.allergies && user.allergies.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle className="flex items-center gap-2 text-red-600">
-                <AlertTriangle className="h-5 w-5" />
-                Allergies & Restrictions
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <AlertCircle className="h-5 w-5" />
+              Allergies & Restrictions
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            {user.allergies && user.allergies.length > 0 ? (
               <div className="flex flex-wrap gap-2">
                 {user.allergies.map((allergy, index) => (
-                  <Badge 
-                    key={index} 
-                    variant="destructive" 
-                    className="bg-red-50 text-red-700 border-red-200 hover:bg-red-100"
-                  >
-                    <AlertTriangle className="h-3 w-3 mr-1" />
+                  <Badge key={index} variant="destructive">
                     {allergy}
                   </Badge>
                 ))}
               </div>
-            </CardContent>
-          </Card>
-        )}
+            ) : (
+              <p className="text-muted-foreground">No allergies specified</p>
+            )}
+          </CardContent>
+        </Card>
       </div>
+
+      {/* Health Goals */}
+      {user.healthGoals && user.healthGoals.length > 0 && (
+        <Card>
+          <CardHeader>
+            <CardTitle className="flex items-center gap-2">
+              <Target className="h-5 w-5" />
+              Health Goals
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-wrap gap-2">
+              {user.healthGoals.map((goal, index) => (
+                <Badge key={index} className="bg-primary/10 text-primary hover:bg-primary/20">
+                  {goal}
+                </Badge>
+              ))}
+            </div>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 }
